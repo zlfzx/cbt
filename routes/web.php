@@ -15,6 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/template', function () {
+    return view('layouts.global');
+});
+// Route::get('/template/login', function () {
+//     return view('auth._login');
+// });
+// Route::get('/template/register', function () {
+//     return view('auth._register');
+// });
+
 Auth::routes();
+Route::match(['get', 'post'], '/register', function () {
+    return redirect('/login');
+})->name('register');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
