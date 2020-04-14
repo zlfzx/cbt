@@ -4,14 +4,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="{{ asset('admin/img/icon.ico') }}" type="image/x-icon"/>
+	<link rel="icon" href="{{ asset('assets/img/icon.ico') }}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="{{ asset('admin/js/plugin/webfont/webfont.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Open+Sans:300,400,600,700"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset("admin/css/fonts.css") }}']},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset("assets/css/fonts.css") }}']},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -19,8 +19,8 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('admin/css/azzara.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
 </head>
 <body data-background-color="bg1">
 	<div class="wrapper">
@@ -73,7 +73,7 @@
 										<div class="notif-center">
 											<a href="#">
 												<div class="notif-img">
-													<img src="{{ asset('admin/img/jm_denis.jpg') }}" alt="Img Profile">
+													<img src="{{ asset('assets/img/jm_denis.jpg') }}" alt="Img Profile">
 												</div>
 												<div class="notif-content">
 													<span class="subject">Jimmy Denis</span>
@@ -85,7 +85,7 @@
 											</a>
 											<a href="#">
 												<div class="notif-img">
-													<img src="{{ asset('admin/img/chadengle.jpg') }}" alt="Img Profile">
+													<img src="{{ asset('assets/img/chadengle.jpg') }}" alt="Img Profile">
 												</div>
 												<div class="notif-content">
 													<span class="subject">Chad</span>
@@ -97,7 +97,7 @@
 											</a>
 											<a href="#">
 												<div class="notif-img">
-													<img src="{{ asset('admin/img/mlane.jpg') }}" alt="Img Profile">
+													<img src="{{ asset('assets/img/mlane.jpg') }}" alt="Img Profile">
 												</div>
 												<div class="notif-content">
 													<span class="subject">Jhon Doe</span>
@@ -109,7 +109,7 @@
 											</a>
 											<a href="#">
 												<div class="notif-img">
-													<img src="{{ asset('admin/img/talha.jpg') }}" alt="Img Profile">
+													<img src="{{ asset('assets/img/talha.jpg') }}" alt="Img Profile">
 												</div>
 												<div class="notif-content">
 													<span class="subject">Talha</span>
@@ -158,7 +158,7 @@
 										</a>
 										<a href="#">
 											<div class="notif-img">
-												<img src="{{ asset('admin/img/profile2.jpg') }}" alt="Img Profile">
+												<img src="{{ asset('assets/img/profile2.jpg') }}" alt="Img Profile">
 											</div>
 											<div class="notif-content">
 												<span class="block">
@@ -186,13 +186,13 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="{{ asset('admin/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
+									<img src="{{ asset('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<li>
 									<div class="user-box">
-										<div class="avatar-lg"><img src="{{ asset('admin/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
+										<div class="avatar-lg"><img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
 										<div class="u-text">
 											<h4>{{ Auth::user()->name }}</h4>
 											<p class="text-muted">{{ Auth::user()->email }}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
@@ -240,43 +240,43 @@
 
 	</div>
 	<!--   Core JS Files   -->
-	<script src="{{ asset('admin/js/core/jquery.3.2.1.min.js') }}"></script>
-	<script src="{{ asset('admin/js/core/popper.min.js') }}"></script>
-	<script src="{{ asset('admin/js/core/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
+	<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+	<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
 	<!-- jQuery UI -->
-	<script src="{{ asset('admin/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
-	<script src="{{ asset('admin/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
 
 	<!-- jQuery Scrollbar -->
-	<script src="{{ asset('admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
 	<!-- Moment JS -->
-	<script src="{{ asset('admin/js/plugin/moment/moment.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/moment/moment.min.js') }}"></script>
 
 	<!-- Chart JS -->
-	<script src="{{ asset('admin/js/plugin/chart.js/chart.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
 	<!-- jQuery Sparkline -->
-	<script src="{{ asset('admin/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
 	<!-- Chart Circle -->
-	<script src="{{ asset('admin/js/plugin/chart-circle/circles.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
 	<!-- Datatables -->
-	<script src="{{ asset('admin/js/plugin/datatables/datatables.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
 	<!-- Bootstrap Notify -->
-	<script src="{{ asset('admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
 	<!-- Bootstrap Toggle -->
-	<script src="{{ asset('admin/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
 
 	<!-- Sweet Alert -->
-	<script src="{{ asset('admin/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+	<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
 	<!-- Azzara JS -->
-	<script src="{{ asset('admin/js/ready.min.js') }}"></script>
+	<script src="{{ asset('assets/js/ready.min.js') }}"></script>
 	@yield('script')
 </body>
 </html>
