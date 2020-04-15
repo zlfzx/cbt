@@ -30,8 +30,8 @@
 		<div class="main-header" data-background-color="blue">
 			<!-- Logo Header -->
 			<div class="logo-header">
-				<a href="{{ url('/') }}" class="logo navbar-brand text-white">
-          TEMPLATE
+				<a href="{{ route('home') }}" class="logo navbar-brand text-white">
+          ZedCBT
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">

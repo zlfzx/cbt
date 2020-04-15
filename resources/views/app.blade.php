@@ -1,20 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <title>Laravel Vue SPA - SantriKoding.com</title>
-</head>
-<body style="background-color: #edf2f7;">
-
-<main id="app">
-    <navigation></navigation>
-    <router-view></router-view>
-</main>
-
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script src="{{ mix('js/app.js') }}"></script>
-</body>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <title>Laravel Vue</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but CBT doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+  </body>
 </html>

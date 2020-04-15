@@ -15,6 +15,21 @@ Route::get('/template', function () {
     return view('layouts.global');
 });
 
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return redirect('/admin/login');
+    });
+    Auth::routes();
+    Route::get('/', 'HomeController@index')->name('home');
+    
+    Route::resource('mapel', 'Admin\MapelController');
+    Route::resource('kelas', 'Admin\KelasController');
+    Route::resource('siswa', 'Admin\SiswaController');
+    Route::resource('soal', 'Admin\SoalController');
+    Route::resource('paket-soal', 'Admin\PaketSoalController');
+    Route::resource('ujian', 'Admin\UjianController');
+});
+
 Route::get('/', function () {
     return view('app');
 });
@@ -25,14 +40,3 @@ Route::view('/{any}', 'app')->where('any', '.*');
 // Route::match(['get', 'post'], '/register', function () {
 //     return redirect('/login');
 // })->name('register');
-
-// Route::get('/admin/login', 'Auth\LoginController@showLoginForm');
-
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return redirect('/admin/login');
-    });
-    Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
-});
-
