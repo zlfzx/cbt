@@ -11,24 +11,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/template', function () {
     return view('layouts.global');
 });
-// Route::get('/template/login', function () {
-//     return view('auth._login');
-// });
-// Route::get('/template/register', function () {
-//     return view('auth._register');
-// });
 
-Auth::routes();
-Route::match(['get', 'post'], '/register', function () {
-    return redirect('/login');
-})->name('register');
+Route::get('/', function () {
+    return view('app');
+});
 
+Route::view('/{any}', 'app')->where('any', '.*');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+// Route::match(['get', 'post'], '/register', function () {
+//     return redirect('/login');
+// })->name('register');
+
+// Route::get('/admin/login', 'Auth\LoginController@showLoginForm');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return redirect('/admin/login');
+    });
+    Auth::routes();
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
