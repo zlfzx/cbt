@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin\Pengaturan;
+use App\Pengaturan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

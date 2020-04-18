@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Admin\Mapel;
+use App\Mapel;
 use Illuminate\Http\Request;
 
 class MapelController extends Controller

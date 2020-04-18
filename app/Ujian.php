@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Admin;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Soal extends Model
+class Ujian extends Model
 {
     //
 }

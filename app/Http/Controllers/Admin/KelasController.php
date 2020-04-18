@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin\Kelas;
+use App\Kelas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
