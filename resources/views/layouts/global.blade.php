@@ -19,10 +19,12 @@
 	</script>
 
 	<!-- CSS Files -->
+	<link rel="stylesheet" href="{{ asset('assets/select2/dist/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style-admin.css') }}">
 </head>
-<body data-background-color="bg1">
+<body data-background-color="bg3">
 	<div class="wrapper">
 		<!--
 				Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
@@ -222,7 +224,7 @@
 		</div>
 
 		<!-- Sidebar -->
-		@extends('layouts._sidebar')
+		@include('layouts._sidebar')
 		<!-- End Sidebar -->
 
 		<div class="main-panel">
@@ -277,6 +279,9 @@
 
 	<!-- Azzara JS -->
 	<script src="{{ asset('assets/js/ready.min.js') }}"></script>
+
+	<!-- Select2 -->
+	<script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
 	@yield('script')
 </body>
 </html>

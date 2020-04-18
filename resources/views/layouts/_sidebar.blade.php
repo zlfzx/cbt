@@ -43,7 +43,6 @@
 							<a href="{{ route('home') }}">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 						<li class="nav-section">
@@ -86,6 +85,18 @@
 							<a href="{{ route('ujian.index') }}">
 								<i class="fas fa-puzzle-piece"></i>
 								<p>Ujian</p>
+							</a>
+						</li>
+						<li class="nav-item {{ Route::is('ujian.riwayat') ? 'active' : '' }}">
+							<a href="{{ route('ujian.riwayat') }}">
+								<i class="fas fa-archive"></i>
+								<p>Riwayat Ujian</p>
+							</a>
+						</li>
+						<li class="nav-item {{ Route::is('pengaturan.index') ? 'active' : '' }}">
+							<a href="{{ route('pengaturan.index') }}">
+								<i class="fas fa-cog"></i>
+								<p>Pengaturan</p>
 							</a>
 						</li>
 					</ul>

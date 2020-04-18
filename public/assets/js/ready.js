@@ -259,38 +259,38 @@ $('.show-password').on('click', function(){
 })
 
 // Sign In & Sign Up
-var containerSignIn = $('.container-login'),
-containerSignUp = $('.container-signup'),
-showSignIn = true,
-showSignUp = false;
+// var containerSignIn = $('.container-login'),
+// containerSignUp = $('.container-signup'),
+// showSignIn = true,
+// showSignUp = false;
 
-function changeContainer(){
-	if(showSignIn == true){
-		containerSignIn.css('display', 'block')
-	} else {
-		containerSignIn.css('display', 'none')
-	}
+// function changeContainer(){
+// 	if(showSignIn == true){
+// 		containerSignIn.css('display', 'block')
+// 	} else {
+// 		containerSignIn.css('display', 'none')
+// 	}
 
-	if(showSignUp == true){
-		containerSignUp.css('display', 'block')
-	} else {
-		containerSignUp.css('display', 'none')
-	}
-}
+// 	if(showSignUp == true){
+// 		containerSignUp.css('display', 'block')
+// 	} else {
+// 		containerSignUp.css('display', 'none')
+// 	}
+// }
 
-$('#show-signup').on('click', function(){ 
-	showSignUp = true;
-	showSignIn = false;
-	changeContainer();
-})
+// $('#show-signup').on('click', function(){ 
+// 	showSignUp = true;
+// 	showSignIn = false;
+// 	changeContainer();
+// })
 
-$('#show-signin').on('click', function(){ 
-	showSignUp = false;
-	showSignIn = true;
-	changeContainer();
-})
+// $('#show-signin').on('click', function(){ 
+// 	showSignUp = false;
+// 	showSignIn = true;
+// 	changeContainer();
+// })
 
-changeContainer();
+// changeContainer();
 
 //Input with Floating Label
 

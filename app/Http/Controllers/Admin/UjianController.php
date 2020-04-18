@@ -83,4 +83,9 @@ class UjianController extends Controller
     {
         //
     }
+
+    // tambahan
+    public function riwayat() {
+        return view('ujian_riwayat');
+    }
 }

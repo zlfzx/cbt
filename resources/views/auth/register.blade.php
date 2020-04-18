@@ -63,10 +63,19 @@
             <label for="confirmpassword" class="placeholder">Confirm Password</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">            
           </div>
-          <div class="row form-sub m-0">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" name="agree" id="agree">
-              <label class="custom-control-label" for="agree">I Agree the terms and conditions.</label>
+          <div class="form-group">
+            <label for="roles">Roles</label><br>
+            <div class="custom-control custom-checkbox mr-3">
+              <input type="checkbox" name="roles[]" value="admin" id="role-admin" class="custom-control-input">
+              <label for="role-admin" class="custom-control-label">Admin</label>
+            </div>
+            <div class="custom-control custom-checkbox mr-3">
+              <input type="checkbox" name="roles[]" value="petugas_soal" id="role-petugas-soal" class="custom-control-input">
+              <label for="role-petugas-soal" class="custom-control-label">Petugas Soal</label>
+            </div>
+            <div class="custom-control custom-checkbox mr-3">
+              <input type="checkbox" name="roles[]" value="petugas_ujian" id="role-petugas-ujian" class="custom-control-input">
+              <label for="role-petugas-ujian" class="custom-control-label">Petugas Ujian</label>
             </div>
           </div>
           <div class="form-action">

@@ -27,7 +27,11 @@ Route::prefix('admin')->group(function () {
     Route::resource('siswa', 'Admin\SiswaController');
     Route::resource('soal', 'Admin\SoalController');
     Route::resource('paket-soal', 'Admin\PaketSoalController');
+
+    Route::get('/ujian/riwayat', 'Admin\UjianController@riwayat')->name('ujian.riwayat');
     Route::resource('ujian', 'Admin\UjianController');
+
+    Route::resource('pengaturan', 'Admin\PengaturanController');
 });
 
 Route::get('/', function () {
