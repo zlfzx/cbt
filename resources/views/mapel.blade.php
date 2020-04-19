@@ -7,10 +7,15 @@
       <div class="col-8">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Daftar Mata Pelajaran</h4>
+            <div class="card-head-row">
+              <h4 class="card-title">Daftar Mata Pelajaran</h4>
+              <div class="card-tools">
+                <button type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-sm btn-round btn-success"><i class="fas fa-plus"></i> Tambah Mapel</button>
+              </div>
+            </div>
           </div>
           <div class="card-body">
-            <table class="table table-hover table-striped" id="table-mapel">
+            <table class="table table-hover table-striped text-center" id="table-mapel">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -52,12 +57,16 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Tambah Mata Pelajaran</h4>
+    </div>
+    <!-- Modal tambah mapel -->
+    <div class="modal fade" id="modal-tambah">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Tambah Mata Pelajaran</h4>
+            <button class="close" data-toggle="modal" data-dismiss="modal">&times;</button>
           </div>
-          <div class="card-body">
+          <div class="modal-body">
             <form>
               <div class="form-group">
                 <label for="form-mapel">Nama Mapel</label>

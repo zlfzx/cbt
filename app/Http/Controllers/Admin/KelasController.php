@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Kelas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DataTables;
 
 class KelasController extends Controller
 {
@@ -16,6 +17,13 @@ class KelasController extends Controller
     public function index()
     {
         return view('kelas');
+    }
+
+    // DataTables
+    public function dataKelas(Request $request) {
+        return DataTables::of(Kelas::select('id', 'nama')->get())
+                ->addIndexColumn()
+                ->make(true);
     }
 
     /**
@@ -36,7 +44,14 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kelas = new Kelas;
+        $kelas->nama = $request->kelas;
+
+        $kelas->save();
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Kelas berhasil ditambahkan'
+        ], 200);
     }
 
     /**
@@ -56,9 +71,10 @@ class KelasController extends Controller
      * @param  \App\Admin\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelas $kelas)
+    public function edit($id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+        return response()->json($kelas);
     }
 
     /**
@@ -68,9 +84,17 @@ class KelasController extends Controller
      * @param  \App\Admin\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+
+        $kelas->nama = $request->kelas;
+        $kelas->save();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Kelas berhasil diubah'
+        ], 200);
     }
 
     /**
@@ -79,8 +103,14 @@ class KelasController extends Controller
      * @param  \App\Admin\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy($id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+        $kelas->delete();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Kelas dan data terkait berhasil dihapus'
+        ], 200);
     }
 }

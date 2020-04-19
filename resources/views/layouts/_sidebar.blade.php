@@ -51,16 +51,16 @@
 							</span>
 							<h4 class="text-section">Menu</h4>
 						</li>
-						<li class="nav-item {{ Route::is('mapel.index') ? 'active' : '' }}">
-							<a href="{{ route('mapel.index') }}">
-								<i class="fas fa-tags"></i>
-								<p>Mata Pelajaran</p>
-							</a>
-						</li>
 						<li class="nav-item {{ Route::is('kelas.index') ? 'active' : '' }}">
 							<a href="{{ route('kelas.index') }}">
 								<i class="fas fa-columns"></i>
 								<p>Kelas</p>
+							</a>
+						</li>
+						<li class="nav-item {{ Route::is('mapel.index') ? 'active' : '' }}">
+							<a href="{{ route('mapel.index') }}">
+								<i class="fas fa-tags"></i>
+								<p>Mata Pelajaran</p>
 							</a>
 						</li>
 						<li class="nav-item {{ Route::is('siswa.index') ? 'active' : '' }}">

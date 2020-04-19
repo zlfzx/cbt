@@ -23,7 +23,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     
     Route::resource('mapel', 'Admin\MapelController');
+
+    Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable
     Route::resource('kelas', 'Admin\KelasController');
+    
     Route::resource('siswa', 'Admin\SiswaController');
     Route::resource('soal', 'Admin\SoalController');
     Route::resource('paket-soal', 'Admin\PaketSoalController');

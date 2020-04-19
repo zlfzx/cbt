@@ -4,6 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title')</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="icon" href="{{ asset('assets/img/icon.ico') }}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
@@ -242,7 +243,7 @@
 
 	</div>
 	<!--   Core JS Files   -->
-	<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
+	<script src="{{ asset('assets/js/core/jquery-3.5.0.min.js') }}"></script>
 	<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
