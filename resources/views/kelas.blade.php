@@ -143,7 +143,7 @@
         var id = $(this).attr('data-id')
         swal({
           title: 'Hapus Kelas?',
-          text: 'Semua data yang terkait ada ikut terhapus!',
+          text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
           buttons: {
             confirm: {

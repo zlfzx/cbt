@@ -22,6 +22,7 @@ Route::prefix('admin')->group(function () {
     Auth::routes();
     Route::get('/', 'HomeController@index')->name('home');
     
+    Route::post('/mapel/data', 'Admin\MapelController@dataMapel')->name('mapel.data');
     Route::resource('mapel', 'Admin\MapelController');
 
     Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable

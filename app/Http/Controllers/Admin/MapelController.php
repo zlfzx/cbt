@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mapel;
 use Illuminate\Http\Request;
+use DataTables;
 
 class MapelController extends Controller
 {
@@ -16,6 +17,14 @@ class MapelController extends Controller
     public function index()
     {
         return view('mapel');
+    }
+
+    // datatable
+    public function dataMapel() {
+        $mapel = Mapel::select('id', 'nama')->get();
+        return DataTables::of($mapel)
+                ->addIndexColumn()
+                ->make(true);
     }
 
     /**
@@ -36,7 +45,14 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mapel = new Mapel;
+        $mapel->nama = $request->mapel;
+        $mapel->save();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Mata Pelajaran berhasil ditambahkan'
+        ], 200);
     }
 
     /**
@@ -56,9 +72,10 @@ class MapelController extends Controller
      * @param  \App\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mapel $mapel)
+    public function edit($id)
     {
-        //
+        $mapel = Mapel::select('id', 'nama')->findOrFail($id);
+        return response()->json($mapel, 200);
     }
 
     /**
@@ -68,9 +85,16 @@ class MapelController extends Controller
      * @param  \App\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request, $id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        $mapel->nama = $request->mapel;
+        $mapel->save();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Mata Pelajaran berhasil diubah'
+        ], 200);
     }
 
     /**
@@ -79,8 +103,14 @@ class MapelController extends Controller
      * @param  \App\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        $mapel->delete();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Mata Pelajaran dan data terkait berhasil dihapus'
+        ], 200);
     }
 }

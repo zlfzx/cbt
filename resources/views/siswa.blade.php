@@ -55,24 +55,24 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="form-nama">Nama</label>
-                <input type="text" class="form-control">
+                <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Siswa">
               </div>
               <div class="form-group">
                 <label for="form-nis">NIS</label>
-                <input type="text" class="form-control">
+                <input type="text" name="nis" class="form-control" placeholder="Masukkan NIS Siswa">
               </div>
               <div class="form-group">
                 <label for="form-kelas">Kelas</label>
-                <select name="" id="" class="form-control"></select>
+                <select name="kelas" id="select-kelas" class="form-control"></select>
               </div>
               <div class="form-group">
                 <label for="form-password">Password</label>
-                <input type="text" class="form-control" placeholder="Kosongkan untuk menggenerate password default">
+                <input type="text" name="password" class="form-control" placeholder="Kosongkan untuk menggenerate password default">
               </div>
             </div>
             <div class="modal-footer">
               <button class="btn btn-sm btn-danger" data-toggle="modal" data-dismiss="modal">Batal</button>
-              <button class="btn btn-sm btn-success">Simpan</button>
+              <button type="submit" class="btn btn-sm btn-success">Simpan</button>
             </div>
           </form>
         </div>
@@ -82,6 +82,8 @@
 
 @section('script')
     <script>
-      $('#table-siswa').DataTable()
+      var table = $('#table-siswa').DataTable()
+
+      $('#select-kelas').select2()
     </script>
 @endsection

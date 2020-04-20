@@ -73,7 +73,7 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::select('id', 'nama')->findOrFail($id);
         return response()->json($kelas);
     }
 
@@ -112,5 +112,13 @@ class KelasController extends Controller
             'status' => TRUE,
             'message' => 'Kelas dan data terkait berhasil dihapus'
         ], 200);
+    }
+
+    // select2
+    public function select(Request $request) {
+        $search = $request->search;
+
+        $data = Kelas::where('nama', 'LIKE', "%$search%")->get();
+        return $data;
     }
 }
