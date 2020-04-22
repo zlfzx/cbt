@@ -26,9 +26,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('mapel', 'Admin\MapelController');
 
     Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable
+    Route::get('/kelas/select', 'Admin\KelasController@select')->name('kelas.select'); // select2
     Route::resource('kelas', 'Admin\KelasController');
     
+    Route::post('/siswa/data', 'Admin\SiswaController@dataSiswa')->name('siswa.data');
+    Route::post('/siswa/lihat_password', 'Admin\SiswaController@lihat_password')->name('siswa.lihat_password');
+    Route::post('/siswa/reset_password', 'Admin\SiswaController@reset_password')->name('siswa.reset_password');
     Route::resource('siswa', 'Admin\SiswaController');
+
     Route::resource('soal', 'Admin\SoalController');
     Route::resource('paket-soal', 'Admin\PaketSoalController');
 

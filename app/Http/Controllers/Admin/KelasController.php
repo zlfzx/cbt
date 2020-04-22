@@ -116,9 +116,9 @@ class KelasController extends Controller
 
     // select2
     public function select(Request $request) {
-        $search = $request->search;
+        $search = $request->get('q');
 
-        $data = Kelas::where('nama', 'LIKE', "%$search%")->get();
-        return $data;
+        $data = Kelas::select('id', 'nama')->where('nama', 'LIKE', "%$search%")->get();
+        return response()->json($data, 200);
     }
 }
