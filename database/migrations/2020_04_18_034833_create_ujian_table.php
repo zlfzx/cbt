@@ -15,8 +15,8 @@ class CreateUjianTable extends Migration
     {
         Schema::create('ujian', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('kelas_id')->unsigned();
-            $table->bigInteger('paket_soal_id')->unsigned();
+            $table->bigInteger('kelas_id')->unsigned()->nullable();
+            $table->bigInteger('paket_soal_id')->unsigned()->nullable();
             $table->string('nama')->default('text');
             $table->string('keterangan')->nullable()->default('keterangan');
             $table->timestamp('waktu_mulai');
@@ -25,8 +25,8 @@ class CreateUjianTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
-            $table->foreign('paket_soal_id')->references('id')->on('paket_soal')->onDelete('cascade');
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('set null');
+            $table->foreign('paket_soal_id')->references('id')->on('paket_soal')->onDelete('set null');
         });
     }
 
