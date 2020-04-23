@@ -15,8 +15,9 @@ class CreatePaketSoalTable extends Migration
     {
         Schema::create('paket_soal', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode_paket', 5)->unique()->nullable()->default('text');
             $table->string('nama');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->bigInteger('kelas_id')->unsigned();
             $table->bigInteger('mapel_id')->unsigned();
             $table->timestamps();

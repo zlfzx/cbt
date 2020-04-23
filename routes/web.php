@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     
     Route::post('/mapel/data', 'Admin\MapelController@dataMapel')->name('mapel.data');
+    Route::get('/mapel/select', 'Admin\MapelController@select')->name('mapel.select');
     Route::resource('mapel', 'Admin\MapelController');
 
     Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable
@@ -35,6 +36,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('siswa', 'Admin\SiswaController');
 
     Route::resource('soal', 'Admin\SoalController');
+
+    Route::post('/paket-soal/data', 'Admin\PaketSoalController@dataPaketSoal')->name('paket-soal.data');
     Route::resource('paket-soal', 'Admin\PaketSoalController');
 
     Route::get('/ujian/riwayat', 'Admin\UjianController@riwayat')->name('ujian.riwayat');

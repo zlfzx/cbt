@@ -113,4 +113,12 @@ class MapelController extends Controller
             'message' => 'Mata Pelajaran dan data terkait berhasil dihapus'
         ], 200);
     }
+
+    // select2
+    public function select(Request $request) {
+        $search = $request->get('q');
+
+        $data = Mapel::select('id', 'nama')->where('nama', 'LIKE', "%$search%")->get();
+        return response()->json($data, 200);
+    }
 }

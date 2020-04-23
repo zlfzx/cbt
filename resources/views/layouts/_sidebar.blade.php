@@ -69,16 +69,16 @@
 								<p>Siswa</p>
 							</a>
 						</li>
-						<li class="nav-item {{ Route::is('soal.index') ? 'active' : '' }}">
-							<a href="{{ route('soal.index') }}">
-								<i class="fas fa-file-alt"></i>
-								<p>Soal</p>
-							</a>
-						</li>
 						<li class="nav-item {{ Route::is('paket-soal.index') ? 'active' : '' }}">
 							<a href="{{ route('paket-soal.index') }}">
 								<i class="fas fa-folder"></i>
 								<p>Paket Soal</p>
+							</a>
+						</li>
+						<li class="nav-item {{ Route::is('soal.index') ? 'active' : '' }}">
+							<a href="{{ route('soal.index') }}">
+								<i class="fas fa-file-alt"></i>
+								<p>Soal</p>
 							</a>
 						</li>
 						<li class="nav-item {{ Route::is('ujian.index') ? 'active' : '' }}">
