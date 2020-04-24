@@ -243,7 +243,7 @@
 
 	</div>
 	<!--   Core JS Files   -->
-	<script src="{{ asset('assets/js/core/jquery-3.5.0.min.js') }}"></script>
+	<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
 	<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
 	<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
