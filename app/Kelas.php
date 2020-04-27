@@ -17,4 +17,8 @@ class Kelas extends Model
     public function paket_soal() {
         return $this->hasMany('App\PaketSoal');
     }
+
+    public function soal() {
+        return $this->hasMany('App\Soal');
+    }
 }

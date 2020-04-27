@@ -17,4 +17,8 @@ class PaketSoal extends Model
     public function mapel() {
         return $this->belongsTo('App\Mapel');
     }
+
+    public function soal() {
+        return $this->hasMany('App\Soal');
+    }
 }
