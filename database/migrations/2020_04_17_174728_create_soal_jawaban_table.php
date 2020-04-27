@@ -17,7 +17,7 @@ class CreateSoalJawabanTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('soal_id')->unsigned();
             $table->text('jawaban')->default('text');
-            $table->string('jawaban_media')->nullable();
+            $table->string('media')->nullable();
             $table->enum('status', ['1', '0'])->default('0');
             $table->timestamps();
 

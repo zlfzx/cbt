@@ -19,7 +19,7 @@ class CreateSoalTable extends Migration
             $table->enum('jenis', ['pilihan_ganda', 'essai']);
             $table->string('nama')->nullable();
             $table->text('soal');
-            $table->string('soal_media')->nullable();
+            $table->string('media')->nullable();
             $table->bigInteger('kelas_id')->unsigned();
             $table->bigInteger('mapel_id')->unsigned();
             $table->timestamps();
