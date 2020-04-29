@@ -98,6 +98,42 @@
         </div>
       </div>
     </div>
+
+    <!-- modal detail paket -->
+    <div class="modal fade" id="modal-detail">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Detail Paket Soal</h4>
+            <button class="close" data-toggle="modal" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <table class="table">
+              <tr>
+                <th>Nama Paket Soal</th>
+                <td id="detail-nama"></td>
+              </tr>
+              <tr>
+                <th>Kode Paket Soal</th>
+                <td id="detail-kode"></td>
+              </tr>
+              <tr>
+                <th>Mata Pelajaran</th>
+                <td id="detail-mapel"></td>
+              </tr>
+              <tr>
+                <th>Kelas</th>
+                <td id="detail-kelas"></td>
+              </tr>
+            </table>
+            <ol id="detail-soal"></ol>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-toggle="modal" data-dismiss="modal">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('script')
@@ -111,6 +147,7 @@
       var table = $('#table-paket').DataTable({
         processing: true,
         serverSide: true,
+        scrollX: true,
         ajax: {
           type: 'POST',
           url: "{{ route('paket-soal.data') }}"
@@ -277,7 +314,7 @@
               className: 'btn border'
             },
             cancel: {
-              visible: 'true',
+              visible: true,
               text: 'Batal',
               className: 'btn btn-danger'
             }
@@ -297,6 +334,40 @@
             })
           } else {
             swal.close()
+          }
+        })
+      })
+
+      // detail paket soal
+      table.on('click', '.btn-detail', function() {
+        var id = $(this).attr('data-id')
+        $.ajax({
+          type: 'GET',
+          url: "{{ route('paket-soal.index') }}/"+id,
+          success: function(data) {
+            if (data.status) {
+              var d = data.message
+              $('#detail-nama').html(d.nama)
+              $('#detail-kode').html(d.kode_paket)
+              $('#detail-mapel').html(d.mapel.nama)
+              $('#detail-kelas').html(d.kelas.nama)
+              var s = ''
+              d.soal.forEach(function(soal) {
+                console.log(soal)
+                s += `<li class="list-soal">${soal.soal}
+                  <ul>`
+                soal.soal_jawaban.forEach(function(j) {
+                  // console.log(j)
+                  var benar = ''
+                  if (j.status == 1) benar = " text-danger"
+                  s += `<li class="list-jawaban ${benar}">${j.jawaban}</li>`
+                })
+                s += '</ul></li>'
+              })
+              $('#detail-soal').html(s)
+
+              $('#modal-detail').modal()
+            }
           }
         })
       })

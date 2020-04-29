@@ -81,9 +81,15 @@ class PaketSoalController extends Controller
      * @param  \App\Admin\PaketSoal  $paketSoal
      * @return \Illuminate\Http\Response
      */
-    public function show(PaketSoal $paketSoal)
+    public function show($id)
     {
-        //
+        $paket = PaketSoal::select('id', 'nama', 'kode_paket', 'kelas_id', 'mapel_id')
+                          ->with(['kelas:id,nama', 'mapel:id,nama', 'soal', 'soal.soal_jawaban'])->findOrFail($id);
+        // $paket['soal'] = \App\Soal::with(['soal_jawaban'])->where('paket_soal_id', '=', $id)->get();
+        return response()->json([
+            'status' => TRUE,
+            'message' => $paket
+        ], 200);
     }
 
     /**
@@ -138,5 +144,17 @@ class PaketSoalController extends Controller
             'status' => TRUE,
             'message' => 'Paket Soal dan data terkait berhasil dihapus'
         ], 200);
+    }
+
+    // select2
+    public function select(Request $request) {
+        $search = $request->get('q');
+        $kelas = $request->get('kelas');
+        $mapel = $request->get('mapel');
+
+        $data = PaketSoal::select('id', 'nama')->where('nama', 'LIKE', "%$search%")
+                                               ->where('kelas_id', $kelas)
+                                               ->where('mapel_id', $mapel)->get();
+        return response()->json($data, 200);
     }
 }

@@ -4,3 +4,11 @@
 .select2{
   width: 100% !important;
 }
+
+.list-soal {
+  margin-bottom: 15px;
+}
+.list-soal > p,
+.list-jawaban > p {
+  margin-bottom: 0 !important;
+}

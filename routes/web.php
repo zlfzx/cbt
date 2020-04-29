@@ -35,9 +35,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/siswa/reset_password', 'Admin\SiswaController@reset_password')->name('siswa.reset_password');
     Route::resource('siswa', 'Admin\SiswaController');
 
+    Route::post('/soal/data', 'Admin\SoalController@dataSoal')->name('soal.data');
     Route::resource('soal', 'Admin\SoalController');
 
     Route::post('/paket-soal/data', 'Admin\PaketSoalController@dataPaketSoal')->name('paket-soal.data');
+    Route::get('/paket-soal/select', 'Admin\PaketSoalController@select')->name('paket-soal.select');
     Route::resource('paket-soal', 'Admin\PaketSoalController');
 
     Route::get('/ujian/riwayat', 'Admin\UjianController@riwayat')->name('ujian.riwayat');
