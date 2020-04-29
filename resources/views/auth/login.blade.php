@@ -51,7 +51,7 @@
           </div>
           <div class="row form-sub m-0">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="rememberme" {{ old('remember') ? 'checked' : '' }}>
+              <input type="checkbox" name="remember" class="custom-control-input" id="rememberme" {{ old('remember') ? 'checked' : '' }}>
               <label class="custom-control-label" for="rememberme">Remember Me</label>
             </div>
             
