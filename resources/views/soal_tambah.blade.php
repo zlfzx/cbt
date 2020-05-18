@@ -109,6 +109,7 @@
 
     // cari kelas (select2)
     $('.select-kelas').select2({
+      theme: 'bootstrap4',
       placeholder: 'Cari kelas...',
       ajax: {
         delay: 250,
@@ -133,6 +134,7 @@
 
     // cari mapel (select2)
     $('.select-mapel').select2({
+      theme: 'bootstrap4',
       placeholder: 'Cari Mata Pelajaran...',
       ajax: {
         delay: 250,
@@ -157,6 +159,7 @@
 
     // cari paket soal (select2)
     $('.select-paket').select2({
+      theme: 'bootstrap4',
       placeholder: 'Cari Paket Soal...',
       ajax: {
         delay: 250,
@@ -186,6 +189,7 @@
     })
 
     $('#form-jenis').select2({
+      theme: 'bootstrap4',
       placeholder: 'Pilih Jenis Soal',
       data: [
         {

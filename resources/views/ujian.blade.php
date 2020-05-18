@@ -2,10 +2,6 @@
 
 @section('title', 'Ujian')
 
-@section('style')
-<link rel="stylesheet" href="{{ asset('assets/css/tempusdominus-bootstrap-4.css') }}">
-@endsection
-
 @section('content')
     <div class="card">
       <div class="card-header">
@@ -48,24 +44,27 @@
               </div>
               <div class="form-group">
                 <label for="kelas">Kelas</label>
-                <select name="kelas" id="kelas" class="form-control"></select>
+                <select name="kelas" id="kelas" class="form-control select-kelas" style="width: 100%;"></select>
               </div>
               <div class="form-group">
                 <label for="mapel">Mata Pelajaran</label>
-                <select name="mapel" id="mapel" class="form-control"></select>
+                <select name="mapel" id="mapel" class="form-control select-mapel"></select>
               </div>
               <div class="form-group">
                 <label for="paket">Paket Soal</label>
-                <select name="paket" id="paket" class="form-control"></select>
+                <select name="paket" id="paket" class="form-control select-paket"></select>
               </div>
               <div class="form-group">
                 <label for="mulai">Waktu Mulai</label>
-                <input type="text" class="form-control datetimepicker-input" id="waktu-mulai" data-toggle="datetimepicker" data-target="#waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
+                <input type="text" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
               </div>
               <div class="form-group">
                 <label for="waktu">Waktu Ujian</label>
                 <input type="number" class="form-control" placeholder="Masukkan Waktu Ujian">
               </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm btn-success">Simpan</button>
             </div>
           </form>
         </div>
@@ -94,13 +93,99 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/js/tempusdominus-bootstrap-4.js') }}"></script>
     <script>
       $('#table-ujian').DataTable()
 
       $('#table-ujian-terlaksana').DataTable()
 
+      // cari kelas (select2)
+      $('.select-kelas').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Cari kelas...',
+        ajax: {
+          delay: 250,
+          url: "{{ route('kelas.select') }}",
+          processResults: function(data, params) {
+            params.page = params.page || 1
+            // console.log(data)
+            return {
+              results: $.map(data, function(item) {
+                return {
+                  id: item.id,
+                  text: item.nama
+                }
+              }),
+              pagination: {
+                more: (params.page * 10) < data.length
+              }
+            }
+          }
+        }
+      })
+
+      // cari mapel (select2)
+      $('.select-mapel').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Cari Mata Pelajaran...',
+        ajax: {
+          delay: 250,
+          url: "{{ route('mapel.select') }}",
+          processResults: function(data, params) {
+            params.page = params.page || 1
+            // console.log(data)
+            return {
+              results: $.map(data, function(item) {
+                return {
+                  id: item.id,
+                  text: item.nama
+                }
+              }),
+              pagination: {
+                more: (params.page * 10) < data.length
+              }
+            }
+          }
+        }
+      })
+
+      // cari paket soal (select2)
+      $('.select-paket').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Cari Paket Soal...',
+        ajax: {
+          delay: 250,
+          url: "{{ route('paket-soal.select') }}",
+          data: function(params) {
+            return {
+              kelas: $('.select-kelas').val(),
+              mapel: $('.select-mapel').val()
+            }
+          },
+          processResults: function(data, params) {
+            params.page = params.page || 1
+            // console.log(data)
+            return {
+              results: $.map(data, function(item) {
+                return {
+                  id: item.id,
+                  text: item.nama
+                }
+              }),
+              pagination: {
+                more: (params.page * 10) < data.length
+              }
+            }
+          }
+        }
+      })
+
       // waktu mulai ujian
-      $('#waktu-mulai').datetimepicker()
+      $('#waktu-mulai').daterangepicker({
+        timePicker: true,
+        singleDatePicker: true,
+        locale: {
+          format: 'YYYY-MM-DD hh:mm:ss'
+        }
+      })
     </script>
 @endsection

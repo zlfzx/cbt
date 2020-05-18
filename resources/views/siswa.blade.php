@@ -167,6 +167,7 @@
 
       // cari kelas (select2)
       $('.select-kelas').select2({
+        theme: 'bootstrap4',
         placeholder: 'Cari kelas...',
         ajax: {
           delay: 250,

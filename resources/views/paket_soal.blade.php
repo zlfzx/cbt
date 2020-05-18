@@ -179,6 +179,7 @@
 
       // cari kelas (select2)
       $('.select-kelas').select2({
+        theme: 'bootstrap4',
         placeholder: 'Cari kelas...',
         ajax: {
           delay: 250,
@@ -203,6 +204,7 @@
 
       // cari mapel (select2)
       $('.select-mapel').select2({
+        theme: 'bootstrap4',
         placeholder: 'Cari Mata Pelajaran...',
         ajax: {
           delay: 250,

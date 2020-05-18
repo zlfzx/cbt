@@ -1,122 +1,90 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Login</title>
-	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="{{ asset('assets/img/icon.ico') }}" type="image/x-icon"/>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Fonts and icons -->
-	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
-	<script>
-		WebFont.load({
-			google: {"families":["Open+Sans:300,400,600,700"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{ asset("assets/css/fonts.css") }}']},
-			active: function() {
-				sessionStorage.fonts = true;
-			}
-		});
-	</script>
-	
-	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="login">
-	<div class="wrapper wrapper-login">
-		<div class="container container-login animated fadeIn">
-			<h3 class="text-center">Sign In To Admin</h3>
-			<div class="login-form">
-        <form method="POST" action="{{ route('login') }}">
-          @csrf
-          <div class="form-group">
-            <label for="username" class="placeholder">Username</label>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
 
-            @error('email')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
-          </div>
-          <div class="form-group">
-            <label for="password" class="placeholder">Password</label>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-            @error('password')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
-          </div>
-          <div class="row form-sub m-0">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" name="remember" class="custom-control-input" id="rememberme" {{ old('remember') ? 'checked' : '' }}>
-              <label class="custom-control-label" for="rememberme">Remember Me</label>
+      <form action="{{ route('login') }}" method="POST">
+        @csrf
+        <div class="input-group mb-3">
+          <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
-            
-						@if (Route::has('password.request'))
-								<a class="link float-right" href="{{ route('password.request') }}">
-										{{ __('Forgot Your Password?') }}
-								</a>
-						@endif
           </div>
-          <div class="form-action mb-3">
-            <button type="submit" class="btn btn-primary btn-rounded btn-login">Sign In</button>
+          @error('email')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
           </div>
-        </form>
-        
-				{{-- @if (Route::has('register')) --}}
-					{{-- <div class="login-account">
-						<span class="msg">Don't have an account yet ?</span>
-						<a href="{{ route('register') }}" id="show-signup" class="link">Sign Up</a>
-					</div> --}}
-				{{-- @endif --}}
-			</div>
-		</div>
+          @error('password')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
 
-		<!-- <div class="container container-signup animated fadeIn">
-			<h3 class="text-center">Sign Up</h3>
-			<div class="login-form">
-				<div class="form-group form-floating-label">
-					<input  id="fullname" name="fullname" type="text" class="form-control input-border-bottom" required>
-					<label for="fullname" class="placeholder">Fullname</label>
-				</div>
-				<div class="form-group form-floating-label">
-					<input  id="email" name="email" type="email" class="form-control input-border-bottom" required>
-					<label for="email" class="placeholder">Email</label>
-				</div>
-				<div class="form-group form-floating-label">
-					<input  id="passwordsignin" name="passwordsignin" type="password" class="form-control input-border-bottom" required>
-					<label for="passwordsignin" class="placeholder">Password</label>
-					<div class="show-password">
-						<i class="flaticon-interface"></i>
-					</div>
-				</div>
-				<div class="form-group form-floating-label">
-					<input  id="confirmpassword" name="confirmpassword" type="password" class="form-control input-border-bottom" required>
-					<label for="confirmpassword" class="placeholder">Confirm Password</label>
-					<div class="show-password">
-						<i class="flaticon-interface"></i>
-					</div>
-				</div>
-				<div class="row form-sub m-0">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" name="agree" id="agree">
-						<label class="custom-control-label" for="agree">I Agree the terms and conditions.</label>
-					</div>
-				</div>
-				<div class="form-action">
-					<a href="#" id="show-signin" class="btn btn-danger btn-rounded btn-login mr-3">Cancel</a>
-					<a href="#" class="btn btn-primary btn-rounded btn-login">Sign Up</a>
-				</div>
-			</div>
-		</div> -->
-	</div>
-	<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
-	<script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
-	<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-	<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('assets/js/ready.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
 </body>
 </html>
