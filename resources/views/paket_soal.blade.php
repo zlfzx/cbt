@@ -5,11 +5,9 @@
 @section('content')
     <div class="card">
       <div class="card-header">
-        <div class="card-head-row">
-          <h4 class="card-title">Daftar Paket Soal</h4>
-          <div class="card-tools">
-            <button class="btn btn-round btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus"></i> Tambah Paket Soal</button>
-          </div>
+        <h4 class="card-title">Daftar Paket Soal</h4>
+        <div class="card-tools">
+          <button class="btn btn-round btn-sm btn-success" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus"></i> Tambah Paket Soal</button>
         </div>
       </div>
       <div class="card-body">
@@ -241,14 +239,14 @@
             if (data.status) {
               $(this).trigger('reset')
               table.draw()
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               $('#modal-tambah').modal('hide')
             } else {
               var errors = ''
               data.message.forEach(function(e) {
                 errors += e + "\n"
               })
-              swal('Gagal', errors, 'error')
+              swal.fire('Gagal', errors, 'error')
             }
           }
         })
@@ -288,14 +286,14 @@
           success: function(data) {
             if (data.status) {
               table.draw()
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               $('#modal-edit').modal('hide')
             } else {
               var errors = ''
               data.message.forEach(function(e) {
                 errors += e + "\n"
               })
-              swal('Gagal', errors, 'error')
+              swal.fire('Gagal', errors, 'error')
             }
           }
         })
@@ -304,7 +302,7 @@
       // hapus paket soal
       table.on('click', '.btn-hapus', function() {
         var id = $(this).attr('data-id')
-        swal({
+        swal.fire({
           title: 'Hapus Paket Soal?',
           text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
@@ -320,20 +318,20 @@
             }
           }
         }).then((hapus) => {
-          if (hapus) {
+          if (hapus.value) {
             console.log('hapus')
             $.ajax({
               type: 'DELETE',
               url: "{{ route('paket-soal.index') }}/"+id,
               success: function(data) {
                 if (data.status) {
-                  swal('Berhasil', data.message, 'success')
+                  swal.fire('Berhasil', data.message, 'success')
                   table.draw()
                 }
               }
             })
           } else {
-            swal.close()
+            swal.fire.close()
           }
         })
       })

@@ -5,12 +5,10 @@
 @section('content')
     <div class="card">
       <div class="card-header">
-        <div class="card-head-row">
-          <h4 class="card-title">Daftar Siswa</h4>
-          <div class="card-tools">
-            <button data-toggle="modal" data-target="#modal-tambah" class="btn btn-sm btn-round btn-success"><i class="fas fa-plus"></i> Tambah Siswa</button>
-            <button class="btn btn-sm btn-round btn-info"><i class="fas fa-cloud-upload-alt"></i> Import Siswa</button>
-          </div>
+        <h4 class="card-title">Daftar Siswa</h4>
+        <div class="card-tools">
+          <button data-toggle="modal" data-target="#modal-tambah" class="btn btn-sm btn-round btn-success"><i class="fas fa-plus"></i> Tambah Siswa</button>
+          <button class="btn btn-sm btn-round btn-info"><i class="fas fa-cloud-upload-alt"></i> Import Siswa</button>
         </div>
       </div>
       <div class="card-body">
@@ -203,7 +201,7 @@
           url: "{{ route('siswa.store') }}",
           success: function(data) {
             if (data.status) {
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               table.draw()
               $('#form-tambah').trigger('reset')
               $('#modal-tambah').modal('hide')
@@ -212,7 +210,7 @@
               data.message.forEach(function(d) {
                 errors += d + '\n'
               })
-              swal('Gagal', errors, 'error')
+              swal.fire('Gagal', errors, 'error')
             }
           }
         })
@@ -248,7 +246,7 @@
           url: "{{ route('siswa.index') }}/"+id,
           success: function(data) {
             if (data.status) {
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               table.draw()
               $('#modal-edit').modal('hide')
             } else {
@@ -256,7 +254,7 @@
               data.message.forEach(function(d) {
                 errors += d + '\n'
               })
-              swal('Gagal', errors, 'error')
+              swal.fire('Gagal', errors, 'error')
             }
           }
         })
@@ -265,7 +263,7 @@
       // hapus siswa
       table.on('click', '.btn-hapus', function() {
         var id = $(this).attr('data-id')
-        swal({
+        swal.fire({
           title: 'Hapus Siswa?',
           text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
@@ -281,14 +279,14 @@
             }
           }
         }).then((hapus) => {
-          if (hapus) {
+          if (hapus.value) {
             console.log('hapus')
             $.ajax({
               type: 'DELETE',
               url: "{{ route('siswa.index') }}/"+id,
               success: function(data) {
                 if (data.status) {
-                  swal({
+                  swal.fire({
                     title: 'Berhasil',
                     text: data.message,
                     icon: 'success'
@@ -298,7 +296,7 @@
               }
             })
           } else {
-            swal.close()
+            swal.fire.close()
           }
         })
       })
@@ -325,7 +323,7 @@
       // reset password
       table.on('click', '.reset-password', function() {
         var id = $(this).attr('data-id')
-        swal({
+        swal.fire({
           title: 'Reset Password?',
           icon: 'warning',
           buttons: {
@@ -338,21 +336,21 @@
             }
           }
         }).then((reset) => {
-          if (reset) {
+          if (reset.value) {
             $.ajax({
               type: 'POST',
               data: {id: id},
               url: "{{ route('siswa.reset_password') }}",
               success: function(data) {
                 if (data.status) {
-                  swal('Berhasil', data.message, 'success')
+                  swal.fire('Berhasil', data.message, 'success')
                 } else {
-                  swal('Gagal', data.message, 'error')
+                  swal.fire('Gagal', data.message, 'error')
                 }
               }
             })
           } else {
-            swal.close()
+            swal.fire.close()
           }
         })
       })

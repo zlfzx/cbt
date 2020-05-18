@@ -7,11 +7,9 @@
       <div class="col-lg-8 col-sm-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-head-row">
-              <h4 class="card-title">Daftar Kelas</h4>
-              <div class="card-tools">
-                <button:button class="btn btn-sm btn-round btn-success" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus"></i> Tambah Kelas</button:button>
-              </div>
+            <h4 class="card-title">Daftar Kelas</h4>
+            <div class="card-tools">
+              <button:button class="btn btn-sm btn-round btn-success" data-toggle="modal" data-target="#modal-tambah"><i class="fas fa-plus"></i> Tambah Kelas</button:button>
             </div>
           </div>
           <div class="card-body">
@@ -125,7 +123,7 @@
           success: function(data) {
             // var d = JSON.parse(res)
             if (data.status) {
-              swal({
+              swal.fire({
                 title: 'Berhasil',
                 text: data.message,
                 icon: 'success'
@@ -141,7 +139,7 @@
       // hapus kelas
       table.on('click', '.btn-hapus', function() {
         var id = $(this).attr('data-id')
-        swal({
+        swal.fire({
           title: 'Hapus Kelas?',
           text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
@@ -157,14 +155,14 @@
             }
           }
         }).then((hapus) => {
-          if (hapus) {
+          if (hapus.value) {
             console.log('hapus')
             $.ajax({
               type: 'DELETE',
               url: "{{ route('kelas.index') }}/"+id,
               success: function(data) {
                 if (data.status) {
-                  swal({
+                  swal.fire({
                     title: 'Berhasil',
                     text: data.message,
                     icon: 'success'
@@ -174,7 +172,7 @@
               }
             })
           } else {
-            swal.close()
+            swal.fire.close()
           }
         })
       })
@@ -204,7 +202,7 @@
           url: "{{ route('kelas.index') }}/"+id,
           success: function(data) {
             if (data.status) {
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               $('#modal-edit').modal('hide')
               table.draw()
             }

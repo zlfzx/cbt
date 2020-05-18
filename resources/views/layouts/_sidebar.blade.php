@@ -1,105 +1,77 @@
-<div class="sidebar">
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="{{ route('home') }}" class="brand-link pl-4">
+    <span class="brand-text font-weight-light">Ujian Online</span>
+  </a>
 
-			<div class="sidebar-background"></div>
-			<div class="sidebar-wrapper scrollbar-inner">
-				<div class="sidebar-content">
-					<div class="user">
-						<div class="avatar-sm float-left mr-2">
-							<img src="{{ asset('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
-						</div>
-						<div class="info">
-							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-								<span>
-									{{ Auth::user()->name }}
-									<span class="user-level">Administrator</span>
-									<span class="caret"></span>
-								</span>
-							</a>
-							<div class="clearfix"></div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{{ asset('dist/img/avatar04.png') }}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+      </div>
+    </div>
 
-							<div class="collapse in" id="collapseExample">
-								<ul class="nav">
-									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<ul class="nav">
-						<li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
-							<a href="{{ route('home') }}">
-								<i class="fas fa-home"></i>
-								<p>Dashboard</p>
-							</a>
-						</li>
-						<li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-							<h4 class="text-section">Menu</h4>
-						</li>
-						<li class="nav-item {{ Route::is('kelas.index') ? 'active' : '' }}">
-							<a href="{{ route('kelas.index') }}">
-								<i class="fas fa-columns"></i>
-								<p>Kelas</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('mapel.index') ? 'active' : '' }}">
-							<a href="{{ route('mapel.index') }}">
-								<i class="fas fa-tags"></i>
-								<p>Mata Pelajaran</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('siswa.index') ? 'active' : '' }}">
-							<a href="{{ route('siswa.index') }}">
-								<i class="fas fa-users"></i>
-								<p>Siswa</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('paket-soal.index') ? 'active' : '' }}">
-							<a href="{{ route('paket-soal.index') }}">
-								<i class="fas fa-folder"></i>
-								<p>Paket Soal</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('soal.index') ? 'active' : '' }}">
-							<a href="{{ route('soal.index') }}">
-								<i class="fas fa-file-alt"></i>
-								<p>Soal</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('ujian.index') ? 'active' : '' }}">
-							<a href="{{ route('ujian.index') }}">
-								<i class="fas fa-puzzle-piece"></i>
-								<p>Ujian</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('ujian.riwayat') ? 'active' : '' }}">
-							<a href="{{ route('ujian.riwayat') }}">
-								<i class="fas fa-archive"></i>
-								<p>Riwayat Ujian</p>
-							</a>
-						</li>
-						<li class="nav-item {{ Route::is('pengaturan.index') ? 'active' : '' }}">
-							<a href="{{ route('pengaturan.index') }}">
-								<i class="fas fa-cog"></i>
-								<p>Pengaturan</p>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a href="{{ route('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-home"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('kelas.index') }}" class="nav-link {{ Route::is('kelas.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-columns"></i>
+            <p>Kelas</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('mapel.index') }}" class="nav-link {{ Route::is('mapel.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-tags"></i>
+            <p>Mata Pelajaran</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('siswa.index') }}" class="nav-link {{ Route::is('siswa.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Siswa</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('paket-soal.index') }}" class="nav-link {{ Route::is('paket-soal.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-folder"></i>
+            <p>Paket Soal</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('soal.index') }}" class="nav-link {{ Route::is('soal.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>Soal</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('ujian.index') }}" class="nav-link {{ Route::is('ujian.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-puzzle-piece"></i>
+            <p>Ujian</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('pengaturan.index') }}" class="nav-link {{ Route::is('pengaturan.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>Pengaturan</p>
+          </a>
+        </li> 
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

@@ -99,7 +99,7 @@
 @endsection
 
 @section('script')
-  <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+  <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
   <script>
     $.ajaxSetup({
       headers: {
@@ -318,7 +318,7 @@
             data.message.forEach(function(e) {
               errors += e + "\n"
             })
-            swal('Gagal', errors, 'error')
+            swal.fire('Gagal', errors, 'error')
           }
         }
       })

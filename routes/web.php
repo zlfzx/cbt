@@ -12,7 +12,7 @@
 */
 
 Route::get('/template', function () {
-    return view('layouts.global');
+    return view('layouts.admin');
 });
 
 Route::prefix('admin')->group(function () {

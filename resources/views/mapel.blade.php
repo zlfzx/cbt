@@ -7,11 +7,9 @@
       <div class="col-lg-8 col-sm-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-head-row">
-              <h4 class="card-title">Daftar Mata Pelajaran</h4>
-              <div class="card-tools">
-                <button type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-sm btn-round btn-success"><i class="fas fa-plus"></i> Tambah Mapel</button>
-              </div>
+            <h4 class="card-title">Daftar Mata Pelajaran</h4>
+            <div class="card-tools">
+              <button type="button" data-toggle="modal" data-target="#modal-tambah" class="btn btn-sm btn-round btn-success"><i class="fas fa-plus"></i> Tambah Mapel</button>
             </div>
           </div>
           <div class="card-body">
@@ -120,7 +118,7 @@
           url: "{{ route('mapel.store') }}",
           success: function(data) {
             if (data.status) {
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               table.draw()
               $('#form-tambah').trigger('reset')
               $('#modal-tambah').modal('hide')
@@ -132,7 +130,7 @@
       // hapus mapel
       table.on('click', '.btn-hapus', function() {
         var id = $(this).attr('data-id')
-        swal({
+        swal.fire({
           title: 'Hapus Mata Pelajaran?',
           text: 'Semua data terkait akan ikut terhapus!',
           icon: 'warning',
@@ -148,20 +146,20 @@
             }
           }
         }).then((hapus) => {
-          if (hapus) {
+          if (hapus.value) {
             // hapus
             $.ajax({
               type: 'DELETE',
               url: "{{ route('mapel.index') }}/"+id,
               success: function(data) {
                 if (data.status) {
-                  swal('Berhasil', data.message, 'success')
+                  swal.fire('Berhasil', data.message, 'success')
                   table.draw()
                 }
               }
             })
           } else {
-            swal.close()
+            swal.fire.close()
           }
         })
       })
@@ -191,7 +189,7 @@
           url: "{{ route('mapel.index') }}/"+id,
           success: function(data) {
             if (data.status) {
-              swal('Berhasil', data.message, 'success')
+              swal.fire('Berhasil', data.message, 'success')
               table.draw()
               $('#modal-edit').modal('hide')
             }
