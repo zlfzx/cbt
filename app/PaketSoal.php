@@ -21,4 +21,8 @@ class PaketSoal extends Model
     public function soal() {
         return $this->hasMany('App\Soal');
     }
+
+    public function ujian() {
+        return $this->hasMany('App\Ujian');
+    }
 }

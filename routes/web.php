@@ -42,7 +42,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/paket-soal/select', 'Admin\PaketSoalController@select')->name('paket-soal.select');
     Route::resource('paket-soal', 'Admin\PaketSoalController');
 
-    Route::get('/ujian/riwayat', 'Admin\UjianController@riwayat')->name('ujian.riwayat');
+    Route::get('/ujian/aktif', 'Admin\UjianController@aktif')->name('ujian.aktif');
+    Route::post('/ujian/data', 'Admin\UjianController@dataUjian')->name('ujian.data');
     Route::resource('ujian', 'Admin\UjianController');
 
     Route::resource('pengaturan', 'Admin\PengaturanController');

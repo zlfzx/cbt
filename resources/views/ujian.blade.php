@@ -11,17 +11,17 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table table-striped table-hover text-center" id="table-ujian">
+        <table class="table table-striped table-hover text-center display nowrap w-100" id="table-ujian">
           <thead>
             <tr>
               <th>No.</th>
               <th>Nama Ujian</th>
               <th>Kelas</th>
-              <th>Mata Pelajaran</th>
               <th>Paket Soal</th>
               <th>Waktu Mulai</th>
               <th>Waktu Ujian</th>
               <th>Token</th>
+              <th>#</th>
             </tr>
           </thead>
         </table>
@@ -36,11 +36,11 @@
             <h4 class="modal-title">Tambah Ujian</h4>
             <button class="close" data-toggle="modal" data-dismiss="modal">&times;</button>
           </div>
-          <form action="">
+          <form id="tambah-ujian">
             <div class="modal-body">
               <div class="form-group">
                 <label for="nama">Nama Ujian</label>
-                <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Ujian">
+                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Ujian">
               </div>
               <div class="form-group">
                 <label for="kelas">Kelas</label>
@@ -56,11 +56,11 @@
               </div>
               <div class="form-group">
                 <label for="mulai">Waktu Mulai</label>
-                <input type="text" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
+                <input type="text" name="mulai" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
               </div>
               <div class="form-group">
                 <label for="waktu">Waktu Ujian</label>
-                <input type="number" class="form-control" placeholder="Masukkan Waktu Ujian">
+                <input type="number" name="waktu" min="0" class="form-control" placeholder="Masukkan Waktu Ujian">
               </div>
             </div>
             <div class="modal-footer">
@@ -94,7 +94,40 @@
 
 @section('script')
     <script>
-      $('#table-ujian').DataTable()
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      })
+
+      var table = $('#table-ujian').DataTable({
+        responsive: true,
+        scrollX: true,
+        processing: true, 
+        serverSide: true, 
+        ajax: {
+          type: 'POST',
+          url: "{{ route('ujian.data') }}"
+        },
+        columns: [
+          {data: 'DT_RowIndex', searchable: false},
+          {data: 'nama'},
+          {data: 'kelas.nama'},
+          {data: 'paket_soal.nama'},
+          {data: 'waktu_mulai'},
+          {data: 'waktu_ujian', render: function(data) {
+            return data + ' Menit'
+          }},
+          {data: 'token'},
+          {
+            data: 'id', searchable: false,
+            render: function(data) {
+              var html = `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
+              return html
+            }
+          }
+        ]
+      })
 
       $('#table-ujian-terlaksana').DataTable()
 
@@ -186,6 +219,36 @@
         locale: {
           format: 'YYYY-MM-DD hh:mm:ss'
         }
+      })
+
+      $('#tambah-ujian').on('submit', function(e) {
+        e.preventDefault();
+        var data = new FormData(this)
+        console.log(data)
+        $.ajax({
+          processData: false, 
+          contentType: false,
+          type: 'POST',
+          data: data,
+          url: "{{ route('ujian.store') }}",
+          success: function(data) {
+            if (data.status) {
+              swal.fire('Berhasil', data.message, 'success')
+              $('.select-mapel').select2('val', '')
+              $('.select-kelas').select2('val', '')
+              $('.select-paket').select2('val', '')
+              $('#tambah-ujian').trigger('reset')
+              table.draw();
+              $('#modal-tambah').modal('hide')
+            } else {
+              var errors = ''
+              data.message.forEach(function(d) {
+                errors += d + '\n'
+              })
+              swal.fire('Gagal', errors, 'error')
+            }
+          }
+        })
       })
     </script>
 @endsection

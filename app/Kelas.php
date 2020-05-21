@@ -21,4 +21,8 @@ class Kelas extends Model
     public function soal() {
         return $this->hasMany('App\Soal');
     }
+
+    public function ujian() {
+        return hasMany('App\Ujian');
+    }
 }
