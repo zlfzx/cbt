@@ -204,7 +204,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
     <script>
       var table_admin = $('#table-admin').DataTable()
 
