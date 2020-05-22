@@ -129,7 +129,11 @@ class UjianController extends Controller
         return view('ujian_aktif');
     }
 
-    // public function dataAktif() {
-    //     $data
-    // }
+    public function dataAktif() {
+        $data = UjianSiswa::select('id', 'siswa_id', 'ujian_id', 'waktu_mulai', 'waktu_selesai')
+                          ->with('siswa', 'ujian')->get();
+        return DataTables::of($data)
+                         ->AddIndexColumn()
+                         ->make(true);
+    }
 }

@@ -43,7 +43,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button class="nav-link btn btn-warning">Keluar</button>
+        <form action="{{ route('logout') }}" method="post">
+          @csrf
+          <button class="nav-link btn btn-warning">Keluar</button>
+        </form>
       </li>
     </ul>
   </nav>

@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('paket-soal', 'Admin\PaketSoalController');
 
     Route::get('/ujian/aktif', 'Admin\UjianController@aktif')->name('ujian.aktif');
+    Route::post('/ujian/data-aktif', 'Admin\UjianController@dataAktif')->name('ujian.data-aktif');
     Route::post('/ujian/data', 'Admin\UjianController@dataUjian')->name('ujian.data');
     Route::resource('ujian', 'Admin\UjianController');
 

@@ -64,6 +64,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('ujian.aktif') }}" class="nav-link {{ Route::is('ujian.aktif') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-diagnoses"></i>
+            <p>Ujian Aktif</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('pengaturan.index') }}" class="nav-link {{ Route::is('pengaturan.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>Pengaturan</p>

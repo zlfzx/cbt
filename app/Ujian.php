@@ -15,4 +15,8 @@ class Ujian extends Model
     public function paket_soal() {
         return $this->belongsTo('App\PaketSoal');
     }
+
+    public function ujian_siswa() {
+        return $this->hasMany('App\UjianSiswa');
+    }
 }

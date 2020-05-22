@@ -17,10 +17,10 @@ class CreateUjianSiswaTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('ujian_id')->unsigned();
             $table->bigInteger('siswa_id')->unsigned();
-            $table->text('soal')->nullable()->default('soal ujian');
+            $table->text('soal')->nullable()->comment('soal ujian');
             $table->timestamp('waktu_mulai')->useCurrent();
             $table->timestamp('waktu_selesai')->nullable();
-            $table->text('hasil')->nullable()->default('hasil ujian');
+            $table->text('hasil')->nullable()->comment('hasil ujian');
             $table->double('nilai', 5, 2)->nullable()->default(0.00);
             $table->timestamps();
 

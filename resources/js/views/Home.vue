@@ -14,7 +14,7 @@
       <v-list dense nav>
         <v-list-item two-line :class="'px-0'">
           <v-list-item-avatar>
-            <img src="http://cbt.local/assets/img/profile.jpg">
+            <img src="http://cbt.local/dist/img/avatar04.png">
           </v-list-item-avatar>
 
           <v-list-item-content>

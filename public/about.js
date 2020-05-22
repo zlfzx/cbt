@@ -209,7 +209,7 @@ var render = function() {
                 [
                   _c("v-list-item-avatar", [
                     _c("img", {
-                      attrs: { src: "http://cbt.local/assets/img/profile.jpg" }
+                      attrs: { src: "http://cbt.local/dist/img/avatar04.png" }
                     })
                   ]),
                   _vm._v(" "),
