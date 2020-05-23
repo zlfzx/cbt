@@ -1,15 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 
-// import module auth
-// import auth from './auth'
+// import module
+import alert from './alert'
+
+const vuexPersist = new VuexPersistence({
+  key: 'my-app',
+  storage: localStorage
+})
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // modules: {
-  //   auth
-  // },
+  plugins: [vuexPersist.plugin],
+  modules: {
+    alert
+  },
   state: {
     token: localStorage.getItem('token') || null,
     errors: null
@@ -30,6 +37,11 @@ export default new Vuex.Store({
     },
     CLEAR_ERRORS(state, payload) {
       state.errors = null
+    }
+  },
+  actions: {
+    coba: ({commit}, payload) => {
+      commit('SET_ERRORS', payload)
     }
   }
 })

@@ -18,9 +18,9 @@
           >
             <v-card class="elevation-12 pa-5">
               <div align="center" justify="center">
-                <v-img src="/dist/img/caps-lock.svg" width="100px" contain></v-img>
+                <v-img src="/dist/img/caps-lock.svg" class="mb-4" width="100px" contain></v-img>
               </div>
-              <!-- <h1 class="display-1 text-center grey--text">LOGIN CBT</h1> -->
+              <h1 class="headline text-center">SELAMAT DATANG</h1>
               <v-card-text>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field
@@ -46,9 +46,11 @@
               <v-card-actions>
                 <v-btn :disabled="!valid" @click="submit" color="yellow" block rounded>Login</v-btn>
               </v-card-actions>
+              <h1 class="caption text-center mt-3">{{ author }}</h1>
             </v-card>
           </v-col>
         </v-row>
+        <Alert></Alert>
       </v-container>
     </v-content>
   </v-app>
@@ -57,10 +59,15 @@
 <script>
 import store from '../store'
 import axios from 'axios'
+import Alert from '../components/Alert'
 export default {
   name: 'Login',
+  components: {
+    Alert
+  },
   data() {
     return {
+      author: 'Muhammad Zulfi',
       valid: true,
       nis: '',
       nisRules: [
@@ -69,7 +76,7 @@ export default {
       password: '',
       passwordRules: [
         v => !!v || 'Masukkan Password'
-      ]
+      ],
     }
   },
   methods: {
@@ -95,6 +102,11 @@ export default {
           let res = error.response.data
           store.commit('SET_ERRORS', res.message)
           console.log(store.state.errors)
+          store.dispatch('alert/set', {
+            status: true,
+            color: 'error',
+            text: res.message
+          })
         })
       }
     }

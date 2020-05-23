@@ -11,10 +11,10 @@
           <div class="card-header">
             <h4 class="card-title">Informasi Aplikasi</h4>
           </div>
-          <div class="card-body">
-            <form action="">
+          <form action="">
+            <div class="card-body">
               <div class="form-group">
-                <label for="form-judul">Title</label>
+                <label for="form-judul">Title <small>(Judul Aplikasi)</small></label>
                 <input type="text" class="form-control" placeholder="Masukkan Title Aplikasi">
               </div>
               <div class="form-group">
@@ -30,11 +30,11 @@
                 </div>
                 <input type="file" name="" id="" class="form-control">
               </div>
-              <div class="form-group">
-                <button class="btn btn-sm btn-success">Simpan</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-sm btn-success">Simpan</button>
+            </div>
+          </form>
         </div>
       </div>
       <div class="col-md-8">
@@ -209,7 +209,7 @@
       var table_admin = $('#table-admin').DataTable()
 
       CKEDITOR.replace('info-ujian', {
-        height: '259px',
+        height: '283',
         filebrowserImageBrowseUrl: '{{ url("/filemanager?type=Images") }}',
         filebrowserImageUploadUrl: '{{ url("/filemanager/upload?type=Images&_token=") }}',
         filebrowserBrowseUrl: '{{ url("/filemanager?type=Files") }}',
