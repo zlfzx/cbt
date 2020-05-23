@@ -43,7 +43,8 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            // 'provider' => 'users',
+            'provider' => 'siswa',
             'hash' => false,
         ],
     ],
@@ -70,6 +71,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'siswa' => [
+            'driver' => 'eloquent',
+            'model' => App\Siswa::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
