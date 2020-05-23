@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-btn to="/login" small color="red" block rounded>LOGOUT</v-btn>
+          <v-btn @click="logout" small color="red" block rounded>LOGOUT</v-btn>
         </v-list-item>
 
         <v-divider></v-divider>
@@ -103,6 +103,8 @@
 </template>
 
 <script>
+  import store from '../store'
+  import axios from 'axios'
   export default {
     props: {
       source: String,
@@ -132,6 +134,26 @@
         } else {
           cancelFullScreen.call(doc)
         }
+      },
+      logout() {
+        let token = store.state.token
+        axios.post('/api/logout', {}, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+          console.log(response)
+          let res = response.data
+          if (res.status === 'success') {
+            store.commit('SET_TOKEN', null)
+            if(!store.getters.isAuth) {
+              this.$router.push('/login')
+            }
+          }
+        }).catch((error) => {
+          console.log(error.response)
+        })
       }
     }
   }
