@@ -119,7 +119,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/js/qrcode.min.js') }}"></script>
+    <script src="{{ asset('dist/js/qrcode.min.js') }}"></script>
     <script>
       $.ajaxSetup({
         headers: {
@@ -268,17 +268,10 @@
           title: 'Hapus Siswa?',
           text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
-          buttons: {
-            confirm: {
-              text: 'Ya',
-              className: 'btn border'
-            },
-            cancel: {
-              visible: 'true',
-              text: 'Batal',
-              className: 'btn btn-danger'
-            }
-          }
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          confirmButtonColor: '#d33',
+          cancelButtonText: 'Tidak'
         }).then((hapus) => {
           if (hapus.value) {
             console.log('hapus')
@@ -312,7 +305,7 @@
           success: function(data) {
             $('#password-user').html(data.nama)
             $('#passwd').empty()
-            var qrcode = new QRCode('passwd')
+            var qrcode = new QRCode(document.getElementById('passwd'))
             // qrcode.clear()
             qrcode.makeCode(data.password)
           }

@@ -134,17 +134,10 @@
           title: 'Hapus Mata Pelajaran?',
           text: 'Semua data terkait akan ikut terhapus!',
           icon: 'warning',
-          buttons: {
-            confirm: {
-              text: 'Ya',
-              className: " btn border"
-            },
-            cancel: {
-              visible: true,
-              text: 'Batal',
-              className: "btn btn-danger"
-            }
-          }
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          confirmButtonColor: '#d33',
+          cancelButtonText: 'Tidak'
         }).then((hapus) => {
           if (hapus.value) {
             // hapus
