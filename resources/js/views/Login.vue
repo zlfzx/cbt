@@ -92,8 +92,17 @@ export default {
           console.log(response)
           let res = response.data
           if (res.status === 'success') {
-            store.commit('SET_TOKEN', res.data.api_token)
-            if(store.getters.isAuth) {
+            // store.commit('SET_TOKEN', res.data.api_token)
+            
+            let user = res.data
+            store.dispatch('auth/set', {
+              nama: user.nama,
+              nis: user.nis,
+              kelas: user.kelas.nama,
+              token: user.api_token
+            })
+
+            if(store.getters['auth/isAuth']) {
               this.$router.push('/')
             }
           }

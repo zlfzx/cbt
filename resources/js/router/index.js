@@ -19,7 +19,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
     meta: {
       requiresAuth: true
-    }
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('../views/Home/Beranda.vue')
+      },
+      {
+        path: 'pengaturan',
+        name: 'pengaturan',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home/Pengaturan.vue'),
+      }
+    ]
   },
   {
     path: '/ujian',
@@ -38,7 +49,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let auth = store.getters.isAuth
+  // let auth = store.getters.isAuth
+  let auth = store.getters['auth/isAuth']
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (!auth && requiresAuth) {

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        $siswa = \App\Siswa::where('nis', '=', $request->nis)->first();
+        $siswa = \App\Siswa::where('nis', '=', $request->nis)->with('kelas:id,nama')->first();
         $status = 'error';
         $message = '';
         $data = null;
@@ -23,15 +23,15 @@ class AuthController extends Controller
                 $data = $siswa->toArray();
                 $code = 200;
             } else {
-                $message = 'Login gagal, password salah';
+                $message = 'Login gagal, password salah!';
             }
         } else {
-            $message = 'Login gagal, nis tidak ditemukan';
+            $message = 'Login gagal, NIS tidak ditemukan!';
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => Auth::user()
+            'data' => $data
         ], $code);
     }
 

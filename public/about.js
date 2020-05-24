@@ -197,33 +197,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
+ // import { mapState } from 'vuex'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    source: String
-  },
   data: function data() {
     return {
-      drawer: null,
-      headers: [{
-        text: 'Nama Ujian',
-        align: 'center'
-      }, {
-        text: 'Mata Pelajaran',
-        align: 'center'
-      }, {
-        text: 'Waktu',
-        align: 'center'
-      }, {
-        text: 'Jumlah Soal',
-        align: 'center'
-      }, {
-        text: 'Status',
-        align: 'center'
-      }]
+      drawer: null
     };
   },
+  computed: {
+    nama: function nama() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.nama;
+    },
+    nis: function nis() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.nis;
+    },
+    kelas: function kelas() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.kelas;
+    }
+  },
+  // computed: mapState({
+  //   nama: state => state.auth.nama,
+  //   nis: state => state.auth.nis,
+  //   kelas: state => state.auth.kelas
+  // }),
   methods: {
     toggleFullScreen: function toggleFullScreen() {
       var doc = window.document;
@@ -240,20 +239,28 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
 
-      var token = _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.token;
+      var token = _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.token;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/logout', {}, {
         headers: {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json'
         }
       }).then(function (response) {
-        console.log(response);
         var res = response.data;
+        console.log(res);
 
         if (res.status === 'success') {
-          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_TOKEN', null);
+          // store.commit('SET_TOKEN', null)
+          // console.log('logout')
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('auth/logout', null);
 
-          if (!_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.isAuth) {
+          if (!_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/isAuth']) {
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+              status: true,
+              color: 'success',
+              text: res.message
+            });
+
             _this.$router.push('/login');
           }
         }
@@ -374,9 +381,16 @@ __webpack_require__.r(__webpack_exports__);
           var res = response.data;
 
           if (res.status === 'success') {
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_TOKEN', res.data.api_token);
+            // store.commit('SET_TOKEN', res.data.api_token)
+            var user = res.data;
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('auth/set', {
+              nama: user.nama,
+              nis: user.nis,
+              kelas: user.kelas.nama,
+              token: user.api_token
+            });
 
-            if (_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters.isAuth) {
+            if (_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/isAuth']) {
               _this.$router.push('/');
             }
           }
@@ -503,11 +517,11 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [
-                      _c("v-list-item-title", [
-                        _vm._v("Muhammad Zulfi Izzulhaq")
-                      ]),
+                      _c("v-list-item-title", [_vm._v(_vm._s(_vm.nama))]),
                       _vm._v(" "),
-                      _c("v-list-item-subtitle", [_vm._v("Web Developer")])
+                      _c("v-list-item-subtitle", [
+                        _vm._v(_vm._s(_vm.nis) + " | " + _vm._s(_vm.kelas))
+                      ])
                     ],
                     1
                   )
@@ -529,7 +543,13 @@ var render = function() {
                       },
                       on: { click: _vm.logout }
                     },
-                    [_vm._v("LOGOUT")]
+                    [
+                      _vm._v("KELUAR "),
+                      _c("v-icon", { attrs: { small: "" } }, [
+                        _vm._v("mdi-logout")
+                      ])
+                    ],
+                    1
                   )
                 ],
                 1
@@ -539,7 +559,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
-                { attrs: { link: "" } },
+                { attrs: { link: "", to: "/" } },
                 [
                   _c(
                     "v-list-item-action",
@@ -558,7 +578,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
-                { attrs: { link: "" } },
+                { attrs: { link: "", to: "pengaturan" } },
                 [
                   _c(
                     "v-list-item-action",
@@ -616,71 +636,85 @@ var render = function() {
       _c(
         "v-content",
         { staticClass: "grey lighten-4" },
+        [_c("v-container", { attrs: { fluid: "" } }, [_c("router-view")], 1)],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    [
+      _c(
+        "v-col",
+        { attrs: { cols: "12", sm: "12", md: "6" } },
         [
           _c(
-            "v-container",
-            { attrs: { fluid: "" } },
+            "v-card",
             [
               _c(
-                "v-row",
+                "v-card-title",
                 [
-                  _c(
-                    "v-col",
-                    { attrs: { cols: "12", sm: "12", md: "8" } },
-                    [
-                      _c(
-                        "v-alert",
-                        { attrs: { prominent: "", type: "error" } },
-                        [
-                          _c(
-                            "v-row",
-                            { attrs: { align: "center" } },
-                            [
-                              _c("v-col", { staticClass: "grow" }, [
-                                _vm._v(
-                                  "Sebelum memulai ujian harap mengganti kata sandi terlebih dahulu."
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "v-col",
-                                { staticClass: "shrink" },
-                                [_c("v-btn", [_vm._v("Ganti Kata Sandi")])],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-card",
-                        [
-                          _c(
-                            "v-toolbar",
-                            {
-                              attrs: {
-                                dense: "",
-                                flat: "",
-                                color: "blue",
-                                dark: ""
-                              }
-                            },
-                            [_c("v-toolbar-title", [_vm._v("Daftar Ujian")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-data-table", {
-                            attrs: { headers: _vm.headers }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
+                  _c("v-icon", [_vm._v("mdi-lock")]),
+                  _vm._v(" Ganti Kata Sandi")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                { staticClass: "pa-5" },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Password Lama", outlined: "" },
+                    model: {
+                      value: _vm.password_lama,
+                      callback: function($$v) {
+                        _vm.password_lama = $$v
+                      },
+                      expression: "password_lama"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { label: "Password Baru", outlined: "" },
+                    model: {
+                      value: _vm.password_baru,
+                      callback: function($$v) {
+                        _vm.password_baru = $$v
+                      },
+                      expression: "password_baru"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-btn", { attrs: { color: "success" } }, [
+                    _vm._v("\n          Simpan\n        ")
+                  ])
                 ],
                 1
               )
@@ -1003,6 +1037,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_63cd6604___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_63cd6604___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/Home/Pengaturan.vue":
+/*!************************************************!*\
+  !*** ./resources/js/views/Home/Pengaturan.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=template&id=fad7f1a8& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/Home/Pengaturan.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Pengaturan.vue?vue&type=template&id=fad7f1a8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -61694,7 +61694,19 @@ var routes = [{
   },
   meta: {
     requiresAuth: true
-  }
+  },
+  children: [{
+    path: '',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Home/Beranda.vue */ "./resources/js/views/Home/Beranda.vue"));
+    }
+  }, {
+    path: 'pengaturan',
+    name: 'pengaturan',
+    component: function component() {
+      return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home/Pengaturan.vue */ "./resources/js/views/Home/Pengaturan.vue"));
+    }
+  }]
 }, {
   path: '/ujian',
   name: 'Ujian',
@@ -61711,7 +61723,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes
 });
 router.beforeEach(function (to, from, next) {
-  var auth = _store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isAuth;
+  // let auth = store.getters.isAuth
+  var auth = _store__WEBPACK_IMPORTED_MODULE_2__["default"].getters['auth/isAuth'];
   var requiresAuth = to.matched.some(function (record) {
     return record.meta.requiresAuth;
   });
@@ -61775,6 +61788,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/auth.js":
+/*!************************************!*\
+  !*** ./resources/js/store/auth.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    nama: '',
+    nis: '',
+    kelas: '',
+    token: localStorage.getItem('token') || null
+  },
+  getters: {
+    isAuth: function isAuth(state) {
+      return state.token !== 'null' && state.token !== null;
+    }
+  },
+  mutations: {
+    set: function set(state, payload) {
+      localStorage.setItem('token', payload.token);
+      state.nama = payload.nama, state.nis = payload.nis, state.kelas = payload.kelas, state.token = payload.token;
+    },
+    logout: function logout(state, payload) {
+      localStorage.setItem('token', payload);
+      state.nama = payload;
+      state.nis = payload;
+      state.kelas = payload;
+      state.token = payload;
+    }
+  },
+  actions: {
+    set: function set(_ref, payload) {
+      var commit = _ref.commit;
+      commit('set', payload);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -61788,10 +61846,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vuex_persist__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-persist */ "./node_modules/vuex-persist/dist/esm/index.js");
-/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./alert */ "./resources/js/store/alert.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
+/* harmony import */ var _alert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./alert */ "./resources/js/store/alert.js");
 
 
  // import module
+
 
 
 var vuexPersist = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -61802,7 +61862,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   plugins: [vuexPersist.plugin],
   modules: {
-    alert: _alert__WEBPACK_IMPORTED_MODULE_3__["default"]
+    auth: _auth__WEBPACK_IMPORTED_MODULE_3__["default"],
+    alert: _alert__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   state: {
     token: localStorage.getItem('token') || null,
