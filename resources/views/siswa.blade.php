@@ -269,7 +269,7 @@
           text: 'Semua data yang terkait akan ikut terhapus!',
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Yes',
+          confirmButtonText: 'Ya',
           confirmButtonColor: '#d33',
           cancelButtonText: 'Tidak'
         }).then((hapus) => {
