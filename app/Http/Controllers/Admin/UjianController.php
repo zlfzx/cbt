@@ -9,9 +9,19 @@ use Illuminate\Http\Request;
 use DataTables;
 use Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class UjianController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-ujian')) {
+                return $next($request);
+            }
+            abort(403, 'Access Forbidden');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *

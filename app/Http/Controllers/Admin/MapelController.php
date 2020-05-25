@@ -6,9 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Mapel;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Gate;
 
 class MapelController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-mapel')) {
+                return $next($request);
+            }
+            abort(403, 'Access Forbidden');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *

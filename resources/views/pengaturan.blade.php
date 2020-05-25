@@ -53,15 +53,13 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-head-row">
-              <h4 class="card-title">Daftar Admin</h4>
-              <div class="card-tools">
-                <button data-toggle="modal" data-target="#modal-tambah-admin" class="btn btn-sm btn-success btn-round"><i class="fas fa-plus"></i> Tambah Admin</button>
-              </div>
+            <h4 class="card-title">Daftar Admin</h4>
+            <div class="card-tools">
+              <button data-toggle="modal" data-target="#modal-tambah-admin" class="btn btn-sm btn-success btn-round"><i class="fas fa-plus"></i> Tambah Admin</button>
             </div>
           </div>
           <div class="card-body">
-            <table class="table table-striped table-hover text-center" id="table-admin">
+            <table class="table table-striped table-hover text-center display nowrap w-100" id="table-admin">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -71,86 +69,6 @@
                   <th>#</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Muhammad Zulfi Izzulhaq</td>
-                  <th>zulfi.izzulhaq@gmail.com</th>
-                  <th>
-                    <span class="badge badge-danger">Admin</span>
-                    <span class="badge badge-warning">Petugas Soal</span>
-                    <span class="badge badge-info">Petugas Ujian</span>
-                  </th>
-                  <th>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </th>
-                </tr>
-              </tbody>
             </table>
           </div>
         </div>
@@ -164,19 +82,19 @@
             <h4 class="modal-title">Tambah Admin</h4>
             <button class="close" data-toggle="modal" data-dismiss="modal">&times;</button>
           </div>
-          <form action="">
+          <form id="form-tambah-admin">
             <div class="modal-body">
               <div class="form-group">
                 <label for="form-nama">Nama</label>
-                <input type="text" class="form-control">
+                <input type="text" name="name" id="tambah_nama" class="form-control" placeholder="Masukkan Nama Admin">
               </div>
               <div class="form-group">
                 <label for="form-email">Email</label>
-                <input type="email" name="" id="" class="form-control">
+                <input type="email" name="email" id="tambah_email" class="form-control" placeholder="Masukkan Email Admin">
               </div>
               <div class="form-group">
                 <label for="form-password">Password</label>
-                <input type="password" name="" id="" class="form-control">
+                <input type="password" name="password" id="tambah_password" class="form-control" placeholder="Masukkan Password Admin">
               </div>
               <div class="form-group">
                 <label for="roles">Roles</label><br>
@@ -195,7 +113,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-sm btn-success">Simpan</button>
+              <button type="submit" class="btn btn-sm btn-success">Simpan</button>
             </div>
           </form>
         </div>
@@ -206,7 +124,69 @@
 @section('script')
     <script src="{{ asset('dist/plugins/ckeditor/ckeditor.js') }}"></script>
     <script>
-      var table_admin = $('#table-admin').DataTable()
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      })
+
+      var table_admin = $('#table-admin').DataTable({
+        processing: true, 
+        serverSide: true,
+        ajax: {
+          type: 'POST',
+          url: "{{ route('pengaturan.data-admin') }}"
+        },
+        columns: [
+          {data: 'DT_RowIndex'},
+          {data: 'name'},
+          {data: 'email'},
+          {data: 'roles', render: function(data) {
+            var html = ''
+            data.forEach(function(d) {
+              if (d == 'admin') {
+                html += `<span class="badge badge-danger">Admin</span> `
+              } else if (d == 'petugas_soal') {
+                html += `<span class="badge badge-warning">Petugas Soal</span> `
+              } else if (d == 'petugas_ujian') {
+                html += `<span class="badge badge-info">Petugas Ujian</span>`
+              }
+            })
+            return html
+          }, searchable: false, orderable: false},
+          {data: 'id', render: function(data) {
+            var html = `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
+
+            return html
+          }}
+        ]
+      })
+
+      $('#form-tambah-admin').on('submit', function(e) {
+        e.preventDefault()
+        var data = new FormData(this)
+        $.ajax({
+          processData: false, 
+          contentType: false, 
+          type: 'POST',
+          data: data,
+          url: "{{ route('pengaturan.tambah-admin') }}",
+          success: function(res) {
+            if (res.status) {
+              swal.fire('Berhasil', res.message, 'success')
+              table_admin.draw()
+              $('#form-tambah-admin').trigger('reset')
+              $('#modal-tambah-admin').modal('hide')
+            } else {
+              var  errors = ''
+              res.message.forEach(function(e) {
+                errors += e + '<br>'
+              })
+              swal.fire('Gagal', errors, 'error')
+            }
+          }
+        })
+      })
 
       CKEDITOR.replace('info-ujian', {
         height: '283',

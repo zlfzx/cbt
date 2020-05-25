@@ -25,6 +25,32 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('manage-kelas', function($user) {
+            return count(array_intersect(['admin'], $user->roles));
+        });
+
+        Gate::define('manage-mapel', function($user) {
+            return count(array_intersect(['admin'], $user->roles));
+        });
+
+        Gate::define('manage-siswa', function($user) {
+            return count(array_intersect(['admin'], $user->roles));
+        });
+
+        Gate::define('manage-paket', function($user) {
+            return count(array_intersect(['admin', 'petugas_soal'], $user->roles));
+        });
+
+        Gate::define('manage-soal', function($user) {
+            return count(array_intersect(['admin', 'petugas_soal'], $user->roles));
+        });
+
+        Gate::define('manage-ujian', function($user) {
+            return count(array_intersect(['admin', 'petugas_ujian'], $user->roles));
+        });
+
+        Gate::define('manage-pengaturan', function($user) {
+            return count(array_intersect(['admin'], $user->roles));
+        });
     }
 }

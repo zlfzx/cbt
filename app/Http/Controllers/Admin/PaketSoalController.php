@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Str;
 use DataTables;
+use Illuminate\Support\Facades\Gate;
 
 class PaketSoalController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-paket')) {
+                return $next($request);
+            }
+            abort(403, 'Access Forbidden');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *

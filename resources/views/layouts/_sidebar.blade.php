@@ -27,6 +27,7 @@
             <p>Dashboard</p>
           </a>
         </li>
+        @role_menu('admin')
         <li class="nav-item">
           <a href="{{ route('kelas.index') }}" class="nav-link {{ Route::is('kelas.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-columns"></i>
@@ -45,6 +46,8 @@
             <p>Siswa</p>
           </a>
         </li>
+        @endrole_menu
+        @role_menu('admin,petugas_soal')
         <li class="nav-item">
           <a href="{{ route('paket-soal.index') }}" class="nav-link {{ Route::is('paket-soal.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-folder"></i>
@@ -57,6 +60,8 @@
             <p>Soal</p>
           </a>
         </li>
+        @endrole_menu
+        @role_menu('admin,petugas_ujian')
         <li class="nav-item">
           <a href="{{ route('ujian.index') }}" class="nav-link {{ Route::is('ujian.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-puzzle-piece"></i>
@@ -69,12 +74,15 @@
             <p>Ujian Aktif</p>
           </a>
         </li>
+        @endrole_menu
+        @role_menu('admin')
         <li class="nav-item">
           <a href="{{ route('pengaturan.index') }}" class="nav-link {{ Route::is('pengaturan.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>Pengaturan</p>
           </a>
-        </li> 
+        </li>
+        @endrole_menu
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

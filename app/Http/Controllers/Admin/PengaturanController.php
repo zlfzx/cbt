@@ -3,11 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Pengaturan;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DataTables;
+use Illuminate\Support\Facades\Hash;
+use Validator;
+use Illuminate\Support\Facades\Gate;
 
 class PengaturanController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-pengaturan')) {
+                return $next($request);
+            }
+            abort(403, 'Access Forbidden');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +30,42 @@ class PengaturanController extends Controller
     public function index()
     {
         return view('pengaturan');
+    }
+
+    public function dataAdmin() {
+        $data = User::get();
+        $data = json_decode($data, true);
+        return DataTables::of($data)
+                         ->addIndexColumn()
+                         ->make(true);
+    }
+
+    public function tambah_admin(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'roles' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => FALSE,
+                'message' => $validator->errors()->all()
+            ]);
+        }
+
+        $admin = new User;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
+        $admin->roles = $request->roles;
+        $admin->save();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Admin berhasil ditambah'
+        ], 200);
     }
 
     /**

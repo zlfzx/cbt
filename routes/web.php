@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/ujian/data', 'Admin\UjianController@dataUjian')->name('ujian.data');
     Route::resource('ujian', 'Admin\UjianController');
 
+    Route::post('/pengaturan/data-admin', 'Admin\PengaturanController@dataAdmin')->name('pengaturan.data-admin');
+    Route::post('/pengaturan/tambah-admin', 'Admin\PengaturanController@tambah_admin')->name('pengaturan.tambah-admin');
     Route::resource('pengaturan', 'Admin\PengaturanController');
 });
 

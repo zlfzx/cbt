@@ -6,9 +6,19 @@ use App\Kelas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Gate;
 
 class KelasController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-kelas')) {
+                return $next($request);
+            }
+            abort(403, 'Access Forbidden');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
