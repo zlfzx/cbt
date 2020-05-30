@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"vendors~about":"vendors~about","about":"about"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"about":"about"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -217,7 +217,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App'
+  name: 'App',
+  watch: {
+    '$route': function $route(to) {
+      document.title = to.meta.title || 'Computer Based Test';
+    }
+  }
 });
 
 /***/ }),
@@ -61684,13 +61689,13 @@ var routes = [{
   path: '/login',
   name: 'Login',
   component: function component() {
-    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
+    return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
   }
 }, {
   path: '/',
   name: 'Home',
   component: function component() {
-    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home.vue */ "./resources/js/views/Home.vue"));
+    return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home.vue */ "./resources/js/views/Home.vue"));
   },
   meta: {
     requiresAuth: true
@@ -61698,13 +61703,19 @@ var routes = [{
   children: [{
     path: '',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Home/Beranda.vue */ "./resources/js/views/Home/Beranda.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Home/Beranda.vue */ "./resources/js/views/Home/Beranda.vue"));
+    },
+    meta: {
+      title: 'Beranda'
     }
   }, {
     path: 'pengaturan',
     name: 'pengaturan',
     component: function component() {
-      return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home/Pengaturan.vue */ "./resources/js/views/Home/Pengaturan.vue"));
+      return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home/Pengaturan.vue */ "./resources/js/views/Home/Pengaturan.vue"));
+    },
+    meta: {
+      title: 'Pengaturan'
     }
   }]
 }, {
@@ -61866,7 +61877,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     alert: _alert__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   state: {
-    token: localStorage.getItem('token') || null,
+    check_password: true,
     errors: null
   },
   getters: {
@@ -61876,9 +61887,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   mutations: {
-    SET_TOKEN: function SET_TOKEN(state, payload) {
-      localStorage.setItem('token', payload);
-      state.token = payload;
+    SET_CHECK_PASSWORD: function SET_CHECK_PASSWORD(state, payload) {
+      state.check_password = payload;
     },
     SET_ERRORS: function SET_ERRORS(state, payload) {
       state.errors = payload;

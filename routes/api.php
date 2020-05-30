@@ -19,6 +19,24 @@ Route::middleware('auth:api')->group(function() {
     Route::get('user', function() {
         return Auth::user();
     });
+
+    // check password siswa
+    Route::get('password/check', function() {
+        $passwd = \App\Siswa::select('id', 'nis', 'password')->find(Auth::user()->id);
+        if ($passwd['nis'] == $passwd['password']) {
+            return response()->json([
+                'status' => TRUE,
+                'message' => 'Password belum diubah'
+            ], 200);
+        }
+        return response()->json([
+            'status' => FALSE
+        ], 200);
+    });
+
+    // change password
+    Route::post('password/change', 'AuthController@changePassword');
+
     // logout
     Route::post('logout', 'AuthController@logout');
 });

@@ -155,56 +155,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
  // import { mapState } from 'vuex'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      drawer: null
+      drawer: null,
+      checkPassword: true
     };
   },
   computed: {
@@ -216,6 +174,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     kelas: function kelas() {
       return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.kelas;
+    },
+    token: function token() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.token;
     }
   },
   // computed: mapState({
@@ -223,6 +184,9 @@ __webpack_require__.r(__webpack_exports__);
   //   nis: state => state.auth.nis,
   //   kelas: state => state.auth.kelas
   // }),
+  mounted: function mounted() {
+    console.log('home');
+  },
   methods: {
     toggleFullScreen: function toggleFullScreen() {
       var doc = window.document;
@@ -239,10 +203,10 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
 
-      var token = _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.token;
+      // let token = store.state.auth.token
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/logout', {}, {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + this.token,
           'Content-Type': 'application/json'
         }
       }).then(function (response) {
@@ -267,6 +231,117 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.response);
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../store */ "./resources/js/store/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/Alert */ "./resources/js/components/Alert.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Pengaturan',
+  components: {
+    Alert: _components_Alert__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      password_lama: '',
+      password_baru: ''
+    };
+  },
+  computed: {
+    token: function token() {
+      return _store__WEBPACK_IMPORTED_MODULE_0__["default"].state.auth.token;
+    }
+  },
+  methods: {
+    change_password: function change_password() {
+      var _this = this;
+
+      if (this.password_lama !== '' && this.password_baru !== '') {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/password/change', {
+          'password_lama': this.password_lama,
+          'password_baru': this.password_baru
+        }, {
+          headers: {
+            Authorization: 'Bearer ' + this.token,
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+          var res = response.data; // console.log(res)
+
+          if (res.status) {
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("SET_CHECK_PASSWORD", res.check);
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+              status: true,
+              color: 'success',
+              text: res.message
+            });
+            _this.password_lama = '';
+            _this.password_baru = '';
+          } else {
+            var errors = '';
+            res.message.forEach(function (e) {
+              errors += e + "\n";
+            });
+            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+              status: true,
+              color: 'error',
+              text: errors
+            });
+          }
+        });
+      } else {
+        _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+          status: true,
+          color: 'error',
+          text: 'Form harus diisi'
+        });
+      }
     }
   }
 });
@@ -569,7 +644,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-list-item-content",
-                    [_c("v-list-item-title", [_vm._v("Home")])],
+                    [_c("v-list-item-title", [_vm._v("Beranda")])],
                     1
                   )
                 ],
@@ -670,7 +745,7 @@ var render = function() {
     [
       _c(
         "v-col",
-        { attrs: { cols: "12", sm: "12", md: "6" } },
+        { attrs: { cols: "12", sm: "12", md: "4" } },
         [
           _c(
             "v-card",
@@ -691,7 +766,7 @@ var render = function() {
                 { staticClass: "pa-5" },
                 [
                   _c("v-text-field", {
-                    attrs: { label: "Password Lama", outlined: "" },
+                    attrs: { label: "Password Lama", outlined: "", dense: "" },
                     model: {
                       value: _vm.password_lama,
                       callback: function($$v) {
@@ -702,7 +777,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("v-text-field", {
-                    attrs: { label: "Password Baru", outlined: "" },
+                    attrs: { label: "Password Baru", outlined: "", dense: "" },
                     model: {
                       value: _vm.password_baru,
                       callback: function($$v) {
@@ -712,9 +787,14 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("v-btn", { attrs: { color: "success" } }, [
-                    _vm._v("\n          Simpan\n        ")
-                  ])
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "success" },
+                      on: { click: _vm.change_password }
+                    },
+                    [_vm._v("\n          Simpan\n        ")]
+                  )
                 ],
                 1
               )
@@ -723,7 +803,9 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("Alert")
     ],
     1
   )
@@ -1052,15 +1134,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=template&id=fad7f1a8& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=script&lang=js& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -1074,6 +1158,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/views/Home/Pengaturan.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Pengaturan.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

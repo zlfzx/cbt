@@ -20,7 +20,7 @@ export default new Vuex.Store({
     alert
   },
   state: {
-    token: localStorage.getItem('token') || null,
+    check_password: true,
     errors: null
   },
   getters: {
@@ -30,9 +30,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_TOKEN (state, payload) {
-      localStorage.setItem('token', payload)
-      state.token = payload
+    SET_CHECK_PASSWORD (state, payload) {
+      state.check_password = payload
     },
     SET_ERRORS(state, payload) {
       state.errors = payload

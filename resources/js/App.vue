@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+    '$route' (to) {
+      document.title = to.meta.title || 'Computer Based Test'
+    }
+  },
 }
 </script>
 

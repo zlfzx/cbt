@@ -23,12 +23,18 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('../views/Home/Beranda.vue')
+        component: () => import('../views/Home/Beranda.vue'),
+        meta: {
+          title: 'Beranda'
+        }
       },
       {
         path: 'pengaturan',
         name: 'pengaturan',
         component: () => import(/* webpackChunkName: "about" */ '../views/Home/Pengaturan.vue'),
+        meta: {
+          title: 'Pengaturan'
+        }
       }
     ]
   },

@@ -47,4 +47,28 @@ class AuthController extends Controller
             'data' => null
         ], 200);
     }
+
+    public function changePassword(Request $request) {
+        $validator = \Validator::make($request->all(), [
+            'password_lama' => 'required|exists:siswa,password',
+            'password_baru' => 'required|different:password_lama'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => FALSE,
+                'message' => $validator->errors()->all()
+            ], 200);
+        }
+
+        $passwd = \App\Siswa::find(Auth::user()->id);
+        $passwd->password = $request->password_baru;
+        $passwd->save();
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Kata Sandi berhasil diubah',
+            'check' => FALSE
+        ], 200);
+    }
 }
