@@ -115,7 +115,7 @@ class PengaturanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\Pengaturan  $pengaturan
+     * @param Pengaturan $pengaturan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pengaturan $pengaturan)
@@ -126,7 +126,7 @@ class PengaturanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\Pengaturan  $pengaturan
+     * @param Pengaturan $pengaturan
      * @return \Illuminate\Http\Response
      */
     public function destroy(Pengaturan $pengaturan)

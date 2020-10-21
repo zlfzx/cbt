@@ -67,7 +67,7 @@ class KelasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\Kelas  $kelas
+     * @param Kelas $kelas
      * @return \Illuminate\Http\Response
      */
     public function show(Kelas $kelas)
@@ -78,7 +78,7 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\Kelas  $kelas
+     * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function edit($id)
@@ -91,7 +91,7 @@ class KelasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kelas  $kelas
+     * @param Kelas $kelas
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -110,8 +110,9 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
