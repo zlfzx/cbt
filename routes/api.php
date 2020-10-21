@@ -17,23 +17,10 @@ use Illuminate\Http\Request;
 Route::post('login', 'AuthController@login');
 
 Route::middleware('auth:api')->group(function() {
-    Route::get('user', function() {
-        return Auth::user();
-    });
+    Route::get('user', 'UserController@index');
 
     // check password siswa
-    Route::get('password/check', function() {
-        $passwd = Siswa::select('id', 'nis', 'password')->find(Auth::user()->id);
-        if ($passwd['nis'] == $passwd['password']) {
-            return response()->json([
-                'status' => TRUE,
-                'message' => 'Password belum diubah'
-            ], 200);
-        }
-        return response()->json([
-            'status' => FALSE
-        ], 200);
-    });
+    Route::get('password/check', 'UserController@checkPassword');
 
     // change password
     Route::post('password/change', 'AuthController@changePassword');

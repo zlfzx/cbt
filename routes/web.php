@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/template', function () {
-    return view('layouts.admin');
-});
+//Route::get('/template', function () {
+//    return view('layouts.admin');
+//});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
@@ -21,7 +21,7 @@ Route::prefix('admin')->group(function () {
     });
     Auth::routes();
     Route::get('/', 'HomeController@index')->name('home');
-    
+
     Route::post('/mapel/data', 'Admin\MapelController@dataMapel')->name('mapel.data');
     Route::get('/mapel/select', 'Admin\MapelController@select')->name('mapel.select');
     Route::resource('mapel', 'Admin\MapelController');
@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable
     Route::get('/kelas/select', 'Admin\KelasController@select')->name('kelas.select'); // select2
     Route::resource('kelas', 'Admin\KelasController');
-    
+
     Route::post('/siswa/data', 'Admin\SiswaController@dataSiswa')->name('siswa.data');
     Route::post('/siswa/lihat_password', 'Admin\SiswaController@lihat_password')->name('siswa.lihat_password');
     Route::post('/siswa/reset_password', 'Admin\SiswaController@reset_password')->name('siswa.reset_password');
@@ -50,10 +50,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/pengaturan/data-admin', 'Admin\PengaturanController@dataAdmin')->name('pengaturan.data-admin');
     Route::post('/pengaturan/tambah-admin', 'Admin\PengaturanController@tambah_admin')->name('pengaturan.tambah-admin');
     Route::resource('pengaturan', 'Admin\PengaturanController');
-});
-
-Route::get('/', function () {
-    return view('app');
 });
 
 Route::view('/{any}', 'app')->where('any', '.*');
