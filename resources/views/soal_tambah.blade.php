@@ -99,7 +99,7 @@
 @endsection
 
 @section('script')
-  <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+  <script src="{{ asset('dist/plugins/ckeditor/ckeditor.js') }}"></script>
   <script>
     $.ajaxSetup({
       headers: {
@@ -253,7 +253,7 @@
         option += `<option value="${id}">${pilihan}</option>`
       }
       $('#list-pg').html(list)
-      
+
       // CKEditor form jawaban
       $('.jawaban-pilgan').each(function() {
         CKEDITOR.replace($(this).attr('id'), {
@@ -269,7 +269,7 @@
       $('#jawaban-benar').html(option)
     })
 
-    // simpan 
+    // simpan
     $('#form-tambah').on('submit', function(e) {
       e.preventDefault();
       var data = new FormData(this)
@@ -289,33 +289,17 @@
         url: "{{ route('soal.store') }}",
         success: function(data) {
           if (data.status) {
-            swal({
+            swal.fire({
               title: 'Berhasil',
               text: data.message,
-              icon: 'success',
-              buttons: {
-                confirm: {
-                  text: 'Tambah Soal Lagi',
-                  className: 'btn btn-success'
-                },
-                cancel: {
-                  visible: true,
-                  text: 'Kembali',
-                  className: 'btn btn-warning'
-                }
-              }
-            }).then((tambah) => {
-              if (tambah) {
-                $('.select-kelas').val('').trigger('change')
-                $('.select-mapel').val('').trigger('change')
-                $('.select-paket').val('').trigger('change')
-                $('#form-jenis').val('').trigger('change')
-                $('#form-tambah').trigger('reset')
-                CKEDITOR.instances['form-soal'].setData('')
-              } else {
-                window.location("{{ route('soal.index') }}")
-              }
+              icon: 'success'
             })
+            // $('.select-kelas').val('').trigger('change')
+            // $('.select-mapel').val('').trigger('change')
+            // $('.select-paket').val('').trigger('change')
+            // $('#form-jenis').val('').trigger('change')
+            $('#form-tambah').trigger('reset')
+            CKEDITOR.instances['form-soal'].setData('')
           }
           else {
             var errors = ''
