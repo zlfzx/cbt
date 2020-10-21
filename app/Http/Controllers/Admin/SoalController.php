@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Soal;
-use App\SoalJawaban;
+use App\Models\Soal;
+use App\Models\SoalJawaban;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
-use DataTables;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Gate;
 
 class SoalController extends Controller
@@ -135,7 +135,7 @@ class SoalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\Soal  $soal
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -151,7 +151,7 @@ class SoalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\Soal  $soal
+     * @param Soal $soal
      * @return \Illuminate\Http\Response
      */
     public function edit(Soal $soal)
@@ -174,7 +174,7 @@ class SoalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\Soal  $soal
+     * @param Soal $soal
      * @return \Illuminate\Http\Response
      */
     public function destroy(Soal $soal)

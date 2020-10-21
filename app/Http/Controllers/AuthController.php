@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        $siswa = \App\Siswa::where('nis', '=', $request->nis)->with('kelas:id,nama')->first();
+        $siswa = Siswa::where('nis', '=', $request->nis)->with('kelas:id,nama')->first();
         $status = 'error';
         $message = '';
         $data = null;
@@ -61,7 +62,7 @@ class AuthController extends Controller
             ], 200);
         }
 
-        $passwd = \App\Siswa::find(Auth::user()->id);
+        $passwd = Siswa::find(Auth::user()->id);
         $passwd->password = $request->password_baru;
         $passwd->save();
 

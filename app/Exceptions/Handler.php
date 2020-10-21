@@ -115,7 +115,7 @@ class Handler extends ExceptionHandler
                 'errors' => $errors
             ], $status_code);
         }
-        
+
         return parent::render($request, $exception);
     }
 

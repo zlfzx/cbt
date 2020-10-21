@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,14 +9,14 @@ class Ujian extends Model
     protected $table = 'ujian';
 
     public function kelas() {
-        return $this->belongsTo('App\Kelas');
+        return $this->belongsTo(Kelas::class);
     }
 
     public function paket_soal() {
-        return $this->belongsTo('App\PaketSoal');
+        return $this->belongsTo(PaketSoal::class);
     }
 
     public function ujian_siswa() {
-        return $this->hasMany('App\UjianSiswa');
+        return $this->hasMany(UjianSiswa::class);
     }
 }

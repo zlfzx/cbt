@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Pengaturan;
-use App\User;
+use App\Models\Pengaturan;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
 class PengaturanController extends Controller

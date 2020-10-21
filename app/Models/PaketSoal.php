@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,18 +11,18 @@ class PaketSoal extends Model
     protected $fillable = ['nama', 'keterangan', 'kelas_id', 'mapel_id'];
 
     public function kelas() {
-        return $this->belongsTo('App\Kelas');
+        return $this->belongsTo(Kelas::class);
     }
 
     public function mapel() {
-        return $this->belongsTo('App\Mapel');
+        return $this->belongsTo(Mapel::class);
     }
 
     public function soal() {
-        return $this->hasMany('App\Soal');
+        return $this->hasMany(Soal::class);
     }
 
     public function ujian() {
-        return $this->hasMany('App\Ujian');
+        return $this->hasMany(Ujian::class);
     }
 }

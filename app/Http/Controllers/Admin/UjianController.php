@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Ujian;
-use App\UjianSiswa;
+use App\Models\Ujian;
+use App\Models\UjianSiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DataTables;
-use Validator;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 
@@ -92,7 +92,7 @@ class UjianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\Ujian  $ujian
+     * @param Ujian $ujian
      * @return \Illuminate\Http\Response
      */
     public function show(Ujian $ujian)
@@ -103,7 +103,7 @@ class UjianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\Ujian  $ujian
+     * @param Ujian $ujian
      * @return \Illuminate\Http\Response
      */
     public function edit(Ujian $ujian)
@@ -115,7 +115,7 @@ class UjianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\Ujian  $ujian
+     * @param Ujian $ujian
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Ujian $ujian)
@@ -126,7 +126,7 @@ class UjianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\Ujian  $ujian
+     * @param Ujian $ujian
      * @return \Illuminate\Http\Response
      */
     public function destroy(Ujian $ujian)

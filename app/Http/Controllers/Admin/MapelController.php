@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Mapel;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Gate;
 
 class MapelController extends Controller
@@ -68,7 +68,7 @@ class MapelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Mapel  $mapel
+     * @param Mapel $mapel
      * @return \Illuminate\Http\Response
      */
     public function show(Mapel $mapel)
@@ -79,7 +79,7 @@ class MapelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Mapel  $mapel
+     * @param Mapel $mapel
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,7 +92,7 @@ class MapelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mapel  $mapel
+     * @param Mapel $mapel
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -110,7 +110,7 @@ class MapelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Mapel  $mapel
+     * @param Mapel $mapel
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

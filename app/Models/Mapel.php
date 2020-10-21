@@ -1,18 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kelas extends Model
+class Mapel extends Model
 {
-    protected $table = 'kelas';
+    protected $table = 'mata_pelajaran';
 
     protected $fillable = ['nama'];
-
-    public function siswa() {
-        return $this->hasMany('App\Siswa');
-    }
 
     public function paket_soal() {
         return $this->hasMany('App\PaketSoal');
@@ -20,9 +16,5 @@ class Kelas extends Model
 
     public function soal() {
         return $this->hasMany('App\Soal');
-    }
-
-    public function ujian() {
-        return hasMany('App\Ujian');
     }
 }

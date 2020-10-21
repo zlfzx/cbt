@@ -69,11 +69,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
         'siswa' => [
             'driver' => 'eloquent',
-            'model' => App\Siswa::class
+            'model' => App\Models\Siswa::class
         ]
 
         // 'users' => [

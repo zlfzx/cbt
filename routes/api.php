@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 /*
@@ -22,7 +23,7 @@ Route::middleware('auth:api')->group(function() {
 
     // check password siswa
     Route::get('password/check', function() {
-        $passwd = \App\Siswa::select('id', 'nis', 'password')->find(Auth::user()->id);
+        $passwd = Siswa::select('id', 'nis', 'password')->find(Auth::user()->id);
         if ($passwd['nis'] == $passwd['password']) {
             return response()->json([
                 'status' => TRUE,

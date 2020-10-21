@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\PaketSoal;
+use App\Models\PaketSoal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Gate;
 
 class PaketSoalController extends Controller
@@ -70,7 +70,7 @@ class PaketSoalController extends Controller
                 'message' => $validator->errors()->all()
             ], 200);
         }
-        
+
         $paket_soal = new PaketSoal;
         $paket_soal->kode_paket = strtoupper(Str::random(5));
         $paket_soal->nama = $request->nama;
@@ -88,7 +88,7 @@ class PaketSoalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\PaketSoal  $paketSoal
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -105,7 +105,7 @@ class PaketSoalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\PaketSoal  $paketSoal
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -120,8 +120,8 @@ class PaketSoalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\PaketSoal  $paketSoal
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -142,7 +142,7 @@ class PaketSoalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\PaketSoal  $paketSoal
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

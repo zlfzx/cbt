@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Kelas;
+use App\Models\Kelas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DataTables;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\Facades\DataTables;
 
 class KelasController extends Controller
 {
@@ -50,7 +50,7 @@ class KelasController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -79,7 +79,7 @@ class KelasController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Admin\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -91,8 +91,8 @@ class KelasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Kelas  $kelas
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
@@ -110,8 +110,8 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Kelas  $kelas
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function destroy($id)
     {

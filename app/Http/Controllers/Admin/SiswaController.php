@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Siswa;
+use App\Models\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DataTables;
-use Validator;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
 class SiswaController extends Controller
@@ -90,7 +90,7 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\Siswa  $siswa
+     * @param Siswa $siswa
      * @return \Illuminate\Http\Response
      */
     public function show(Siswa $siswa)
@@ -101,7 +101,7 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\Siswa  $siswa
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -113,8 +113,8 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\Siswa  $siswa
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -150,7 +150,7 @@ class SiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\Siswa  $siswa
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
