@@ -189,30 +189,30 @@
           }
         }
       })
-      
+
       // tambah siswa
       $('#form-tambah').on('submit', function(e) {
         e.preventDefault()
         var data = new FormData($('#form-tambah')[0])
         $.ajax({
-          processData: false, 
+          processData: false,
           contentType: false,
           type: 'POST',
           data: data,
           url: "{{ route('siswa.store') }}",
           success: function(data) {
-            if (data.status) {
-              swal.fire('Berhasil', data.message, 'success')
-              table.draw()
-              $('#form-tambah').trigger('reset')
-              $('#modal-tambah').modal('hide')
-            } else {
-              var errors = ''
-              data.message.forEach(function(d) {
-                errors += d + '\n'
-              })
-              swal.fire('Gagal', errors, 'error')
-            }
+            swal.fire('Berhasil', data.message, 'success')
+            table.draw()
+            $('#form-tambah').trigger('reset')
+            $('#modal-tambah').modal('hide')
+          },
+          error: function(res) {
+            let error = res.responseJSON
+            var errors = ''
+            error.messages.forEach(function(d) {
+              errors += d + '<br />'
+            })
+            swal.fire('Gagal', errors, 'error')
           }
         })
       })
@@ -246,17 +246,17 @@
           data: data,
           url: "{{ route('siswa.index') }}/"+id,
           success: function(data) {
-            if (data.status) {
-              swal.fire('Berhasil', data.message, 'success')
-              table.draw()
-              $('#modal-edit').modal('hide')
-            } else {
-              var errors = ''
-              data.message.forEach(function(d) {
-                errors += d + '\n'
-              })
-              swal.fire('Gagal', errors, 'error')
-            }
+            swal.fire('Berhasil', data.message, 'success')
+            table.draw()
+            $('#modal-edit').modal('hide')
+          },
+          error: function(res) {
+            let error = res.responseJSON
+            var errors = ''
+            error.messages.forEach(function(d) {
+              errors += d + '<br />'
+            })
+            swal.fire('Gagal', errors, 'error')
           }
         })
       })

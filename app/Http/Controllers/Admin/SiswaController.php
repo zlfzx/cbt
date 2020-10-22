@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Siswa\UpdateSiswa;
 use App\Models\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Siswa\StoreSiswa;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
 class SiswaController extends Controller
@@ -48,28 +49,14 @@ class SiswaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param StoreSiswa $request
+   * @return \Illuminate\Http\Response
+   */
+    public function store(StoreSiswa $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'nis' => 'required|unique:siswa',
-            'kelas' => 'required',
-            'password' => 'nullable'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ]);
-        }
-
         $siswa = new Siswa;
         $siswa->nama = $request->nama;
         $siswa->nis = $request->nis;
@@ -110,29 +97,15 @@ class SiswaController extends Controller
         return response()->json($siswa, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param UpdateSiswa $request
+   * @param $id
+   * @return \Illuminate\Http\Response
+   */
+    public function update(UpdateSiswa $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'nis' => 'required|unique:siswa,nis,'.$id,
-            'kelas' => 'required',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ]);
-        }
-
         $siswa = Siswa::findOrFail($id);
 
         $siswa->nama = $request->nama;
