@@ -33,7 +33,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/siswa/data', 'Admin\SiswaController@dataSiswa')->name('siswa.data');
     Route::post('/siswa/lihat_password', 'Admin\SiswaController@lihat_password')->name('siswa.lihat_password');
     Route::post('/siswa/reset_password', 'Admin\SiswaController@reset_password')->name('siswa.reset_password');
-    Route::resource('siswa', 'Admin\SiswaController');
+    Route::resource('siswa', 'Admin\SiswaController')->except('create', 'edit');
 
     Route::post('/soal/data', 'Admin\SoalController@dataSoal')->name('soal.data');
     Route::resource('soal', 'Admin\SoalController');
