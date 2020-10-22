@@ -61689,13 +61689,13 @@ var routes = [{
   path: '/login',
   name: 'Login',
   component: function component() {
-    return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
+    return Promise.all(/*! import() | about */[__webpack_require__.e(0), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Login.vue */ "./resources/js/views/Login.vue"));
   }
 }, {
   path: '/',
   name: 'Home',
   component: function component() {
-    return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home.vue */ "./resources/js/views/Home.vue"));
+    return Promise.all(/*! import() | about */[__webpack_require__.e(0), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home.vue */ "./resources/js/views/Home.vue"));
   },
   meta: {
     requiresAuth: true
@@ -61703,7 +61703,7 @@ var routes = [{
   children: [{
     path: '',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Home/Beranda.vue */ "./resources/js/views/Home/Beranda.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/Home/Beranda.vue */ "./resources/js/views/Home/Beranda.vue"));
     },
     meta: {
       title: 'Beranda'
@@ -61712,7 +61712,7 @@ var routes = [{
     path: 'pengaturan',
     name: 'pengaturan',
     component: function component() {
-      return Promise.all(/*! import() | about */[__webpack_require__.e(1), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home/Pengaturan.vue */ "./resources/js/views/Home/Pengaturan.vue"));
+      return Promise.all(/*! import() | about */[__webpack_require__.e(0), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Home/Pengaturan.vue */ "./resources/js/views/Home/Pengaturan.vue"));
     },
     meta: {
       title: 'Pengaturan'
@@ -61722,7 +61722,7 @@ var routes = [{
   path: '/ujian',
   name: 'Ujian',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../views/Ujian.vue */ "./resources/js/views/Ujian.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../views/Ujian.vue */ "./resources/js/views/Ujian.vue"));
   },
   meta: {
     requiresAuth: true
@@ -61925,8 +61925,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/cbt-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/cbt-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/cbt-laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/cbt-laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

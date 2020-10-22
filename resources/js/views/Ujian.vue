@@ -1,23 +1,27 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app dark color="blue" dense>
-      <v-toolbar-title>Ujian</v-toolbar-title>
+    <v-app-bar app dark color="blue">
+      <v-toolbar-title>Computer Based Test</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <h1>00:39:45</h1>
     </v-app-bar>
     <v-content class="grey lighten-4">
       <v-container class="pb-0">
         <v-row align="center" justify="center">
-          <v-col cols="6" sm="3" md="3">
+          <v-col cols="12">
             <v-card>
-              <h1 class="text-center">00:00:00</h1>
+              <v-card-title>Paket Soal Matematika</v-card-title>
+              <v-card-subtitle>Kelas 10 TKJ 2</v-card-subtitle>
+              <v-spacer></v-spacer>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-      <v-container class="pt-0">
+      <v-container class="pt-0 mb-5">
         <v-row>
           <v-col md="8" cols="12">
             <v-card>
-              <v-card-text>Soal</v-card-text>
+              <v-card-text>Soal 5</v-card-text>
               <v-divider></v-divider>
               <!-- <v-card-text>
                 <v-img src="https://picsum.photos/seed/picsum/300/200" width="500"></v-img>
@@ -29,25 +33,25 @@
               </v-card-text>
               <div class="mx-6">
                 <v-radio-group>
-                  <v-radio>
+                  <v-radio class="my-3">
                     <template v-slot:label>
-                      <b><i>Jawaban A</i></b>                     
+                      <b><i>Jawaban A</i></b>
                     </template>
                   </v-radio>
-                  <v-radio>
+                  <v-radio class="my-3">
                     <template v-slot:label>
                       <v-img src="https://picsum.photos/seed/picsum/300/200" width="100"></v-img>
                     </template>
                   </v-radio>
-                  <v-radio label="Jawaban A"></v-radio>
-                  <v-radio label="Jawaban A"></v-radio>
+                  <v-radio label="Jawaban A" class="my-3"></v-radio>
+                  <v-radio label="Jawaban A" class="my-3"></v-radio>
                 </v-radio-group>
               </div>
               <v-divider></v-divider>
               <v-card-actions class="d-flex justify-space-between">
-                <v-btn color="warning" class="pr-4" small rounded><v-icon dark small left>mdi-arrow-left</v-icon>Kembali</v-btn>
+                <v-btn color="warning" class="pr-4" rounded><v-icon dark small left>mdi-arrow-left</v-icon>Kembali</v-btn>
                 <v-checkbox :label="`Ragu-ragu`"></v-checkbox>
-                <v-btn color="warning" class="pl-4" small rounded>Lanjut<v-icon dark small right>mdi-arrow-right</v-icon></v-btn>
+                <v-btn color="warning" class="pl-4" rounded>Lanjut<v-icon dark small right>mdi-arrow-right</v-icon></v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -57,7 +61,7 @@
               <v-divider></v-divider>
               <v-row class="mx-1">
                 <v-flex v-for="soal in jml_soal" :key="soal" class="w-20 text-center pt-4">
-                  <v-btn small rounded color="success">1</v-btn>
+                  <v-btn color="success" :outlined="soal == 5" :disabled="soal == 5">{{ soal }}</v-btn>
                 </v-flex>
               </v-row>
               <v-card-actions class="mt-4">
@@ -81,7 +85,7 @@ export default {
   name: 'Ujian',
   data() {
     return {
-      jml_soal: 10
+      jml_soal: 25
     }
   }
 }

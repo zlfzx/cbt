@@ -27,7 +27,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        
+
         <v-list-item link to="/">
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
@@ -36,7 +36,7 @@
             <v-list-item-title>Beranda</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
+
         <v-list-item link to="pengaturan">
           <v-list-item-action>
             <v-icon>mdi-settings</v-icon>
@@ -65,7 +65,7 @@
     <v-content class="grey lighten-4">
       <v-container fluid>
         <router-view></router-view>
-      </v-container>
+      </v-container fluid>
     </v-content>
   </v-app>
 </template>
