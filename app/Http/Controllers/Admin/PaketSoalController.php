@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\PaketSoal\StorePaketSoal;
 use App\Models\PaketSoal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,28 +50,14 @@ class PaketSoalController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param StorePaketSoal $request
+   * @return \Illuminate\Http\Response
+   */
+    public function store(StorePaketSoal $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'keterangan' => 'nullable',
-            'kelas' => 'required',
-            'mapel' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ], 200);
-        }
-
         $paket_soal = new PaketSoal;
         $paket_soal->kode_paket = strtoupper(Str::random(5));
         $paket_soal->nama = $request->nama;
@@ -120,7 +107,7 @@ class PaketSoalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param $id
      * @return \Illuminate\Http\Response
      */

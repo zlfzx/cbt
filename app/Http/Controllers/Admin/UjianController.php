@@ -8,7 +8,6 @@ use App\Models\UjianSiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 

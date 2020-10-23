@@ -153,7 +153,7 @@
         columns: [
           {
             data: 'DT_RowIndex'
-          }, 
+          },
           {
             data: 'kelas.nama'
           },
@@ -238,18 +238,18 @@
           data: data,
           url: "{{ route('paket-soal.store') }}",
           success: function(data) {
-            if (data.status) {
-              $(this).trigger('reset')
-              table.draw()
-              swal.fire('Berhasil', data.message, 'success')
-              $('#modal-tambah').modal('hide')
-            } else {
-              var errors = ''
-              data.message.forEach(function(e) {
-                errors += e + "\n"
-              })
-              swal.fire('Gagal', errors, 'error')
-            }
+            $(this).trigger('reset')
+            table.draw()
+            swal.fire('Berhasil', data.message, 'success')
+            $('#modal-tambah').modal('hide')
+          },
+          error: function(err) {
+            let error = err.responseJSON
+            let errors = ''
+            error.messages.forEach(function(e) {
+              errors += e + '<br />'
+            })
+            swal.fire('Gagal', errors, 'error')
           }
         })
       })
@@ -280,7 +280,7 @@
         var id = $('#edit-id').val()
         var data = new FormData(this)
         $.ajax({
-          processData: false, 
+          processData: false,
           contentType: false,
           type: 'POST',
           data: data,
