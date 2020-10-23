@@ -137,11 +137,12 @@
         columns:[
           {
             data: 'DT_RowIndex'
-          },{
-            data: 'nama'
           },
           {
             data: 'nis'
+          },
+          {
+            data: 'nama'
           },
           {
             data: 'id', render: function(data) {
@@ -206,9 +207,9 @@
             $('#form-tambah').trigger('reset')
             $('#modal-tambah').modal('hide')
           },
-          error: function(res) {
-            let error = res.responseJSON
-            var errors = ''
+          error: function(err) {
+            let error = err.responseJSON
+            let errors = ''
             error.messages.forEach(function(d) {
               errors += d + '<br />'
             })

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Ujian\StoreUjian;
 use App\Models\Ujian;
 use App\Models\UjianSiswa;
 use App\Http\Controllers\Controller;
@@ -50,29 +51,14 @@ class UjianController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param StoreUjian $request
+   * @return \Illuminate\Http\Response
+   */
+    public function store(StoreUjian $request)
     {
-        $validator = Validator::make($request->all(), [
-            'kelas' => 'required',
-            'paket' => 'required',
-            'nama' => 'required',
-            'mulai' => 'required',
-            'waktu' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ], 200);
-        }
-
         $ujian = new Ujian;
         $ujian->kelas_id = $request->kelas;
         $ujian->paket_soal_id = $request->paket;
@@ -114,7 +100,7 @@ class UjianController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param Ujian $ujian
      * @return \Illuminate\Http\Response
      */

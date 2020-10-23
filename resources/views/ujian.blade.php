@@ -103,8 +103,8 @@
       var table = $('#table-ujian').DataTable({
         responsive: true,
         scrollX: true,
-        processing: true, 
-        serverSide: true, 
+        processing: true,
+        serverSide: true,
         ajax: {
           type: 'POST',
           url: "{{ route('ujian.data') }}"
@@ -224,29 +224,28 @@
       $('#tambah-ujian').on('submit', function(e) {
         e.preventDefault();
         var data = new FormData(this)
-        console.log(data)
         $.ajax({
-          processData: false, 
+          processData: false,
           contentType: false,
           type: 'POST',
           data: data,
           url: "{{ route('ujian.store') }}",
-          success: function(data) {
-            if (data.status) {
-              swal.fire('Berhasil', data.message, 'success')
-              $('.select-mapel').select2('val', '')
-              $('.select-kelas').select2('val', '')
-              $('.select-paket').select2('val', '')
-              $('#tambah-ujian').trigger('reset')
-              table.draw();
-              $('#modal-tambah').modal('hide')
-            } else {
-              var errors = ''
-              data.message.forEach(function(d) {
-                errors += d + '\n'
-              })
-              swal.fire('Gagal', errors, 'error')
-            }
+          success: function(res) {
+            swal.fire('Berhasil', res.message, 'success')
+            $('.select-mapel').select2('val', '')
+            $('.select-kelas').select2('val', '')
+            $('.select-paket').select2('val', '')
+            $('#tambah-ujian').trigger('reset')
+            table.draw();
+            $('#modal-tambah').modal('hide')
+          },
+          error: function(err) {
+            let error = err.responseJSON
+            let errors = ''
+            error.messages.forEach(function(d) {
+              errors += d + '<br />'
+            })
+            swal.fire('Gagal', errors, 'error')
           }
         })
       })
