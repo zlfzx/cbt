@@ -59,32 +59,31 @@ export default {
         })
         .then((response) => {
           let res = response.data
-          // console.log(res)
-          if (res.status) {
-            store.commit("SET_CHECK_PASSWORD", res.check)
-            store.dispatch('alert/set', {
-              status: true,
-              color: 'success',
-              text: res.message
-            })
-            this.password_lama = ''
-            this.password_baru = ''
-          } else {
-            let errors = ''
-            res.message.forEach(function(e) {
-              errors += e + "\n"
-            })
-            store.dispatch('alert/set', {
-              status: true,
-              color: 'error',
-              text: errors
-            })
-          }
+          store.commit("SET_CHECK_PASSWORD", res.check)
+          store.dispatch('alert/set', {
+            status: true,
+            color: 'success',
+            text: res.message
+          })
+          this.password_lama = ''
+          this.password_baru = ''
+        })
+        .catch((err) => {
+          let res = err.response.data
+          let errors = ''
+          res.messages.forEach(function(e) {
+            errors += e + "\n"
+          })
+          store.dispatch('alert/set', {
+            status: true,
+            color: 'error',
+            text: errors
+          })
         })
       } else {
         store.dispatch('alert/set', {
           status: true,
-          color: 'error', 
+          color: 'error',
           text: 'Form harus diisi'
         })
       }

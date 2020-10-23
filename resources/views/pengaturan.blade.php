@@ -131,7 +131,7 @@
       })
 
       var table_admin = $('#table-admin').DataTable({
-        processing: true, 
+        processing: true,
         serverSide: true,
         ajax: {
           type: 'POST',
@@ -166,24 +166,24 @@
         e.preventDefault()
         var data = new FormData(this)
         $.ajax({
-          processData: false, 
-          contentType: false, 
+          processData: false,
+          contentType: false,
           type: 'POST',
           data: data,
           url: "{{ route('pengaturan.tambah-admin') }}",
           success: function(res) {
-            if (res.status) {
-              swal.fire('Berhasil', res.message, 'success')
-              table_admin.draw()
-              $('#form-tambah-admin').trigger('reset')
-              $('#modal-tambah-admin').modal('hide')
-            } else {
-              var  errors = ''
-              res.message.forEach(function(e) {
-                errors += e + '<br>'
-              })
-              swal.fire('Gagal', errors, 'error')
-            }
+            swal.fire('Berhasil', res.message, 'success')
+            table_admin.draw()
+            $('#form-tambah-admin').trigger('reset')
+            $('#modal-tambah-admin').modal('hide')
+          },
+          error: function(err) {
+            let error = err.responseJSON
+            var  errors = ''
+            error.messages.forEach(function(e) {
+              errors += e + '<br />'
+            })
+            swal.fire('Gagal', errors, 'error')
           }
         })
       })

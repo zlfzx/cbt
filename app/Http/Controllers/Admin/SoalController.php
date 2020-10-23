@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Soal\StoreSoal;
 use App\Models\Soal;
 use App\Models\SoalJawaban;
 use App\Http\Controllers\Controller;
@@ -51,36 +52,14 @@ class SoalController extends Controller
         return view('soal_tambah');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param StoreSoal $request
+   * @return \Illuminate\Http\Response
+   */
+    public function store(StoreSoal $request)
     {
-        $validator = Validator::make($request->all(), [
-            'soal.kelas' => 'required',
-            'soal.mapel' => 'required',
-            'soal.paket' => 'required',
-            'soal.jenis' => 'required',
-            'soal.nama' => 'required',
-            'soal.soal' => 'required',
-            'soal.soal_media' => 'nullable|file|mimetypes:video/mp4,video/x-msvideo,video/3gpp',
-            'jawaban.essai' => 'required_if:soal.jenis,essai',
-            'soal.jumlah_pilihan' => 'required_if:soal.jenis,pilihan_ganda',
-            'jawaban.pilgan.*.jawaban' => 'required_if:soal.jenis,pilihan_ganda',
-            'jawaban.pilgan.*.media' => 'nullable|file|mimetypes:video/mp4,video/x-msvideo,video/3gpp',
-            'jawaban.benar' => 'required_if:soal.jenis,pilihan_ganda'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ], 200);
-        }
-
         $req = $request->all();
         $req_soal = $req['soal'];
 
@@ -162,7 +141,7 @@ class SoalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Admin\Soal  $soal
      * @return \Illuminate\Http\Response
      */

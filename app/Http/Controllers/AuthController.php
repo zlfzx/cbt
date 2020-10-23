@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthUser\ChangePassword;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -49,19 +49,12 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function changePassword(Request $request) {
-        $validator = \Validator::make($request->all(), [
-            'password_lama' => 'required|exists:siswa,password',
-            'password_baru' => 'required|different:password_lama'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ], 200);
-        }
-
+  /**
+   * @param ChangePassword $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+    public function changePassword(ChangePassword $request)
+    {
         $passwd = Siswa::find(Auth::user()->id);
         $passwd->password = $request->password_baru;
         $passwd->save();

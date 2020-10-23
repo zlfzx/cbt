@@ -312,28 +312,26 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'application/json'
           }
         }).then(function (response) {
-          var res = response.data; // console.log(res)
-
-          if (res.status) {
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("SET_CHECK_PASSWORD", res.check);
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
-              status: true,
-              color: 'success',
-              text: res.message
-            });
-            _this.password_lama = '';
-            _this.password_baru = '';
-          } else {
-            var errors = '';
-            res.message.forEach(function (e) {
-              errors += e + "\n";
-            });
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
-              status: true,
-              color: 'error',
-              text: errors
-            });
-          }
+          var res = response.data;
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit("SET_CHECK_PASSWORD", res.check);
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+            status: true,
+            color: 'success',
+            text: res.message
+          });
+          _this.password_lama = '';
+          _this.password_baru = '';
+        })["catch"](function (err) {
+          var res = err.response.data;
+          var errors = '';
+          res.messages.forEach(function (e) {
+            errors += e + "\n";
+          });
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
+            status: true,
+            color: 'error',
+            text: errors
+          });
         });
       } else {
         _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
@@ -1128,14 +1126,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/views/Home/Pengaturan.vue ***!
   \************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=template&id=fad7f1a8& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&");
 /* harmony import */ var _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=script&lang=js& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1165,7 +1164,7 @@ component.options.__file = "resources/js/views/Home/Pengaturan.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

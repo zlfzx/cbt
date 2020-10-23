@@ -308,6 +308,14 @@
             })
             swal.fire('Gagal', errors, 'error')
           }
+        },
+        error: function(err) {
+          let error = err.responseJSON
+          let errors = ''
+          error.messages.forEach(function(e) {
+            errors += e + "<br />"
+          })
+          swal.fire('Gagal', errors, 'error')
         }
       })
     })

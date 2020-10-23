@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Pengaturan\StoreAdmin;
 use App\Models\Pengaturan;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
 class PengaturanController extends Controller
@@ -32,6 +32,10 @@ class PengaturanController extends Controller
         return view('pengaturan');
     }
 
+  /**
+   * @return mixed
+   * @throws \Exception
+   */
     public function dataAdmin() {
         $data = User::get();
         $data = json_decode($data, true);
@@ -40,21 +44,11 @@ class PengaturanController extends Controller
                          ->make(true);
     }
 
-    public function tambah_admin(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-            'roles' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => FALSE,
-                'message' => $validator->errors()->all()
-            ]);
-        }
-
+  /**
+   * @param StoreAdmin $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+    public function tambah_admin(StoreAdmin $request) {
         $admin = new User;
         $admin->name = $request->name;
         $admin->email = $request->email;
