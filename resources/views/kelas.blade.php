@@ -38,7 +38,7 @@
             <form id="form-tambah">
               <div class="form-group">
                 <label for="form-kelas">Nama Kelas</label>
-                <input type="text" name="kelas" class="form-control" placeholder="Masukkan Nama Kelas" required>
+                <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Kelas" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success float-right">Tambah</button>
@@ -61,7 +61,7 @@
               <input type="hidden" id="edit-id" name="id">
               <div class="form-group">
                 <label for="form-kelas">Nama Kelas</label>
-                <input type="text" id="edit-kelas" name="kelas" class="form-control" placeholder="Masukkan Nama Kelas" required>
+                <input type="text" id="edit-kelas" name="nama" class="form-control" placeholder="Masukkan Nama Kelas" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success float-right">Simpan</button>
@@ -102,7 +102,7 @@
               var btn = `<button type="button" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `
               btn += `<button type="button" class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
               return btn
-            }, 
+            },
             orderable: false,
             searchable: false
           }
@@ -135,7 +135,7 @@
           }
         })
       })
-      
+
       // hapus kelas
       table.on('click', '.btn-hapus', function() {
         var id = $(this).attr('data-id')
@@ -191,7 +191,7 @@
             kelas = $('#edit-kelas').val()
         $.ajax({
           type: 'PUT',
-          data: {kelas: kelas},
+          data: {nama: kelas},
           url: "{{ route('kelas.index') }}/"+id,
           success: function(data) {
             if (data.status) {
@@ -201,7 +201,7 @@
             }
           }
         })
-      }) 
+      })
 
     </script>
 @endsection

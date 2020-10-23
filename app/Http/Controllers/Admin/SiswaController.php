@@ -57,17 +57,10 @@ class SiswaController extends Controller
    */
     public function store(StoreSiswa $request)
     {
-        $siswa = new Siswa;
-        $siswa->nama = $request->nama;
-        $siswa->nis = $request->nis;
-        if ($request->password) {
-            $siswa->password = $request->password;
-        } else {
-            $siswa->password =  $request->nis;
-        }
-        $siswa->kelas_id = $request->kelas;
+        $data = $request->all();
+        $data['password'] = $request->password ?? $request->nis;
+        $siswa = Siswa::create($data);
 
-        $siswa->save();
         return response()->json([
             'status' => TRUE,
             'message' => 'Siswa berhasil ditambahkan'
@@ -106,13 +99,7 @@ class SiswaController extends Controller
    */
     public function update(UpdateSiswa $request, $id)
     {
-        $siswa = Siswa::findOrFail($id);
-
-        $siswa->nama = $request->nama;
-        $siswa->nis = $request->nis;
-        $siswa->password = $request->password;
-        $siswa->kelas_id = $request->kelas;
-        $siswa->save();
+        $siswa = Siswa::findOrFail($id)->update($request->all());
 
         return response()->json([
             'status' => TRUE,
@@ -128,8 +115,7 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        $siswa->delete();
+        $siswa = Siswa::findOrFail($id)->delete();
 
         return response()->json([
             'status' => TRUE,

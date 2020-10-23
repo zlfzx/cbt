@@ -26,7 +26,7 @@ class StoreSiswa extends BaseRequest
         return [
             'nama' => 'required',
             'nis' => 'required|unique:siswa',
-            'kelas' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
             'password' => 'nullable'
         ];
     }

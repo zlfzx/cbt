@@ -7,7 +7,6 @@ use App\Models\Soal;
 use App\Models\SoalJawaban;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Gate;
 

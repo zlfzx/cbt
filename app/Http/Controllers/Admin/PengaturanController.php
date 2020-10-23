@@ -49,12 +49,9 @@ class PengaturanController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
     public function tambah_admin(StoreAdmin $request) {
-        $admin = new User;
-        $admin->name = $request->name;
-        $admin->email = $request->email;
-        $admin->password = Hash::make($request->password);
-        $admin->roles = $request->roles;
-        $admin->save();
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        $admin = User::create($data);
 
         return response()->json([
             'status' => TRUE,

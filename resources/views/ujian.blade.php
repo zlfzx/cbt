@@ -44,23 +44,23 @@
               </div>
               <div class="form-group">
                 <label for="kelas">Kelas</label>
-                <select name="kelas" id="kelas" class="form-control select-kelas" style="width: 100%;"></select>
+                <select name="kelas_id" id="kelas" class="form-control select-kelas" style="width: 100%;"></select>
               </div>
               <div class="form-group">
                 <label for="mapel">Mata Pelajaran</label>
-                <select name="mapel" id="mapel" class="form-control select-mapel"></select>
+                <select name="mapel_id" id="mapel" class="form-control select-mapel"></select>
               </div>
               <div class="form-group">
                 <label for="paket">Paket Soal</label>
-                <select name="paket" id="paket" class="form-control select-paket"></select>
+                <select name="paket_soal_id" id="paket" class="form-control select-paket"></select>
               </div>
               <div class="form-group">
                 <label for="mulai">Waktu Mulai</label>
-                <input type="text" name="mulai" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
+                <input type="text" name="waktu_mulai" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
               </div>
               <div class="form-group">
                 <label for="waktu">Waktu Ujian</label>
-                <input type="number" name="waktu" min="0" class="form-control" placeholder="Masukkan Waktu Ujian">
+                <input type="number" name="waktu_ujian" min="0" class="form-control" placeholder="Masukkan Waktu Ujian">
               </div>
             </div>
             <div class="modal-footer">

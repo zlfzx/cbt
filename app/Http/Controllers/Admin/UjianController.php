@@ -58,15 +58,9 @@ class UjianController extends Controller
    */
     public function store(StoreUjian $request)
     {
-        $ujian = new Ujian;
-        $ujian->kelas_id = $request->kelas;
-        $ujian->paket_soal_id = $request->paket;
-        $ujian->nama = $request->nama;
-        $ujian->keterangan = $request->keterangan;
-        $ujian->waktu_mulai = $request->mulai;
-        $ujian->waktu_ujian = $request->waktu;
-        $ujian->token = strtoupper(Str::random(8));
-        $ujian->save();
+        $data = $request->all();
+        $data['token'] = strtoupper(Str::random(8));
+        $ujian = Ujian::create($data);
 
         return response()->json([
             'status' => TRUE,

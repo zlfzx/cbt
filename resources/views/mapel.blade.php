@@ -38,7 +38,7 @@
             <form id="form-tambah">
               <div class="form-group">
                 <label for="form-mapel">Nama Mapel</label>
-                <input type="text" name="mapel" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
+                <input type="text" name="nama" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success float-right">Tambah</button>
@@ -61,7 +61,7 @@
               <input type="hidden" name="id" id="edit-id">
               <div class="form-group">
                 <label for="form-mapel">Nama Mapel</label>
-                <input type="text" name="mapel" id="edit-mapel" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
+                <input type="text" name="nama" id="edit-mapel" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success float-right">Simpan</button>
@@ -178,7 +178,7 @@
         var mapel = $('#edit-mapel').val()
         $.ajax({
           type: 'PUT',
-          data: {mapel: mapel},
+          data: {nama: mapel},
           url: "{{ route('mapel.index') }}/"+id,
           success: function(data) {
             if (data.status) {

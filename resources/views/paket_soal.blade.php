@@ -37,11 +37,11 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="form-kelas">Kelas</label>
-                <select name="kelas" id="form-kelas" class="form-control select-kelas"></select>
+                <select name="kelas_id" id="form-kelas" class="form-control select-kelas"></select>
               </div>
               <div class="form-group">
                 <label for="form-mapel">Mata Pelajaran</label>
-                <select name="mapel" id="form-mapel" class="form-control select-mapel"></select>
+                <select name="mapel_id" id="form-mapel" class="form-control select-mapel"></select>
               </div>
               <div class="form-group">
                 <label for="form-nama">Nama Paket</label>
@@ -74,11 +74,11 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="edit-kelas">Kelas</label>
-                <select name="kelas" id="edit-kelas" class="form-control select-kelas"></select>
+                <select name="kelas_id" id="edit-kelas" class="form-control select-kelas"></select>
               </div>
               <div class="form-group">
                 <label for="edit-mapel">Mata Pelajaran</label>
-                <select name="mapel" id="edit-mapel" class="form-control select-mapel"></select>
+                <select name="mapel_id" id="edit-mapel" class="form-control select-mapel"></select>
               </div>
               <div class="form-group">
                 <label for="edit-nama">Nama Paket</label>

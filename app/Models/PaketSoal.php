@@ -8,7 +8,7 @@ class PaketSoal extends Model
 {
     protected $table = 'paket_soal';
 
-    protected $fillable = ['nama', 'keterangan', 'kelas_id', 'mapel_id'];
+    protected $fillable = ['nama', 'keterangan', 'kelas_id', 'mapel_id', 'kode_paket'];
 
     public function kelas() {
         return $this->belongsTo(Kelas::class);

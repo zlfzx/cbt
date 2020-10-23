@@ -54,10 +54,8 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = new Kelas;
-        $kelas->nama = $request->kelas;
+        $kelas = Kelas::create($request->all());
 
-        $kelas->save();
         return response()->json([
             'status' => TRUE,
             'message' => 'Kelas berhasil ditambahkan'
@@ -96,10 +94,7 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kelas = Kelas::findOrFail($id);
-
-        $kelas->nama = $request->kelas;
-        $kelas->save();
+        $kelas = Kelas::findOrFail($id)->update($request->all());
 
         return response()->json([
             'status' => TRUE,
@@ -116,8 +111,7 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        $kelas = Kelas::findOrFail($id);
-        $kelas->delete();
+        $kelas = Kelas::findOrFail($id)->delete();
 
         return response()->json([
             'status' => TRUE,

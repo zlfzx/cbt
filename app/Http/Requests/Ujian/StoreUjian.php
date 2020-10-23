@@ -24,11 +24,11 @@ class StoreUjian extends BaseRequest
     public function rules()
     {
         return [
-            'kelas' => 'required|exists:kelas,id',
-            'paket' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
+            'paket_soal_id' => 'required|exists:paket_soal,id',
             'nama' => 'required',
-            'mulai' => 'required',
-            'waktu' => 'required'
+            'waktu_mulai' => 'required',
+            'waktu_ujian' => 'required'
         ];
     }
 }

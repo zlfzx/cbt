@@ -46,7 +46,7 @@
               </div>
               <div class="form-group">
                 <label for="form-kelas">Kelas</label>
-                <select name="kelas" class="select-kelas form-control"></select>
+                <select name="kelas_id" class="select-kelas form-control"></select>
               </div>
               <div class="form-group">
                 <label for="form-password">Password</label>
@@ -83,7 +83,7 @@
               </div>
               <div class="form-group">
                 <label for="form-kelas">Kelas</label>
-                <select name="kelas" id="edit-kelas" class="select-kelas form-control"></select>
+                <select name="kelas_id" id="edit-kelas" class="select-kelas form-control"></select>
               </div>
               <div class="form-group">
                 <label for="form-password">Password</label>

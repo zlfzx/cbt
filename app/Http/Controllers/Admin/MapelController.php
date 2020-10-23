@@ -55,9 +55,7 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        $mapel = new Mapel;
-        $mapel->nama = $request->mapel;
-        $mapel->save();
+        $mapel = Mapel::create($request->all());
 
         return response()->json([
             'status' => TRUE,
@@ -76,30 +74,28 @@ class MapelController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Mapel $mapel
-     * @return \Illuminate\Http\Response
-     */
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param $id
+   * @return \Illuminate\Http\Response
+   */
     public function edit($id)
     {
         $mapel = Mapel::select('id', 'nama')->findOrFail($id);
         return response()->json($mapel, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param Mapel $mapel
-     * @return \Illuminate\Http\Response
-     */
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param \Illuminate\Http\Request $request
+   * @param $id
+   * @return \Illuminate\Http\Response
+   */
     public function update(Request $request, $id)
     {
-        $mapel = Mapel::findOrFail($id);
-        $mapel->nama = $request->mapel;
-        $mapel->save();
+        $mapel = Mapel::findOrFail($id)->update($request->all());
 
         return response()->json([
             'status' => TRUE,
@@ -115,8 +111,7 @@ class MapelController extends Controller
      */
     public function destroy($id)
     {
-        $mapel = Mapel::findOrFail($id);
-        $mapel->delete();
+        $mapel = Mapel::findOrFail($id)->delete();
 
         return response()->json([
             'status' => TRUE,

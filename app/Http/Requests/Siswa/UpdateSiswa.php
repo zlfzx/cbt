@@ -26,7 +26,7 @@ class UpdateSiswa extends BaseRequest
         return [
             'nama' => 'required',
             'nis' => 'required|unique:siswa,nis,'.$this->route('siswa'),
-            'kelas' => 'required',
+            'kelas_id' => 'required|exists:kelas,id',
             'password' => 'required'
         ];
     }

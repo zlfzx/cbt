@@ -8,6 +8,8 @@ class Ujian extends Model
 {
     protected $table = 'ujian';
 
+    protected $fillable = ['kelas_id', 'paket_soal_id', 'nama', 'keterangan', 'waktu_mulai', 'waktu_ujian', 'token'];
+
     public function kelas() {
         return $this->belongsTo(Kelas::class);
     }

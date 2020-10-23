@@ -6,7 +6,6 @@ use App\Http\Requests\PaketSoal\StorePaketSoal;
 use App\Models\PaketSoal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Gate;
@@ -58,13 +57,9 @@ class PaketSoalController extends Controller
    */
     public function store(StorePaketSoal $request)
     {
-        $paket_soal = new PaketSoal;
-        $paket_soal->kode_paket = strtoupper(Str::random(5));
-        $paket_soal->nama = $request->nama;
-        $paket_soal->keterangan = $request->keterangan;
-        $paket_soal->kelas_id = $request->kelas;
-        $paket_soal->mapel_id = $request->mapel;
-        $paket_soal->save();
+        $data = $request->all();
+        $data['kode_paket'] = strtoupper(Str::random(5));
+        $paket_soal = PaketSoal::create($data);
 
         return response()->json([
             'status' => TRUE,
@@ -113,12 +108,7 @@ class PaketSoalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $paket_soal = PaketSoal::findOrFail($id);
-        $paket_soal->nama = $request->nama;
-        $paket_soal->keterangan = $request->keterangan;
-        $paket_soal->kelas_id = $request->kelas;
-        $paket_soal->mapel_id = $request->mapel;
-        $paket_soal->save();
+        $paket_soal = PaketSoal::findOrFail($id)->update($request->all());
 
         return response()->json([
             'status' => TRUE,
@@ -134,8 +124,7 @@ class PaketSoalController extends Controller
      */
     public function destroy($id)
     {
-        $paket_soal = PaketSoal::findOrFail($id);
-        $paket_soal->delete();
+        $paket_soal = PaketSoal::findOrFail($id)->delete();
 
         return response()->json([
             'status' => TRUE,
@@ -149,9 +138,10 @@ class PaketSoalController extends Controller
         $kelas = $request->get('kelas');
         $mapel = $request->get('mapel');
 
-        $data = PaketSoal::select('id', 'nama')->where('nama', 'LIKE', "%$search%")
-                                               ->where('kelas_id', $kelas)
-                                               ->where('mapel_id', $mapel)->get();
+        $data = PaketSoal::select('id', 'nama')
+                ->where('nama', 'LIKE', "%$search%")
+                ->where('kelas_id', $kelas)
+                ->where('mapel_id', $mapel)->get();
         return response()->json($data, 200);
     }
 }

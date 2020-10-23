@@ -26,8 +26,8 @@ class StorePaketSoal extends BaseRequest
         return [
             'nama' => 'required',
             'keterangan' => 'nullable',
-            'kelas' => 'required',
-            'mapel' => 'required'
+            'kelas_id' => 'required',
+            'mapel_id' => 'required'
         ];
     }
 }
