@@ -16,6 +16,7 @@
     "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
+    "@mdi/font": "^5.7.55",
     "axios": "^0.19.2",
     "bootstrap": "^4.0.0",
     "cross-env": "^7.0",

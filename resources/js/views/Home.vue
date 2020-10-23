@@ -39,7 +39,7 @@
 
         <v-list-item link to="pengaturan">
           <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
+            <v-icon>mdi-account-settings</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Pengaturan</v-list-item-title>

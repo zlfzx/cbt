@@ -279,6 +279,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -655,7 +657,7 @@ var render = function() {
                 [
                   _c(
                     "v-list-item-action",
-                    [_c("v-icon", [_vm._v("mdi-settings")])],
+                    [_c("v-icon", [_vm._v("mdi-account-settings")])],
                     1
                   ),
                   _vm._v(" "),
@@ -764,7 +766,12 @@ var render = function() {
                 { staticClass: "pa-5" },
                 [
                   _c("v-text-field", {
-                    attrs: { label: "Password Lama", outlined: "", dense: "" },
+                    attrs: {
+                      type: "password",
+                      label: "Password Lama",
+                      outlined: "",
+                      dense: ""
+                    },
                     model: {
                       value: _vm.password_lama,
                       callback: function($$v) {
@@ -775,7 +782,12 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("v-text-field", {
-                    attrs: { label: "Password Baru", outlined: "", dense: "" },
+                    attrs: {
+                      type: "password",
+                      label: "Password Baru",
+                      outlined: "",
+                      dense: ""
+                    },
                     model: {
                       value: _vm.password_baru,
                       callback: function($$v) {
@@ -1126,15 +1138,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/views/Home/Pengaturan.vue ***!
   \************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pengaturan_vue_vue_type_template_id_fad7f1a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=template&id=fad7f1a8& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=template&id=fad7f1a8&");
 /* harmony import */ var _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pengaturan.vue?vue&type=script&lang=js& */ "./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Pengaturan_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1164,7 +1175,7 @@ component.options.__file = "resources/js/views/Home/Pengaturan.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/views/Home/Pengaturan.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

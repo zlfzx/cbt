@@ -11,50 +11,47 @@
 |
 */
 
-//Route::get('/template', function () {
-//    return view('layouts.admin');
-//});
-
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return redirect('/admin/login');
-    });
-    Auth::routes();
+Route::group([
+  'prefix' => 'admin',
+  'namespace' => 'Admin',
+  'middleware' => 'auth'
+], function () {
+    Route::redirect('/', '/admin/login');
+    Auth::routes([
+      'register' => false, // Registration Routes...
+      'reset' => false, // Password Reset Routes...
+      'verify' => false, // Email Verification Routes...
+    ]);
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::post('/mapel/data', 'Admin\MapelController@dataMapel')->name('mapel.data');
-    Route::get('/mapel/select', 'Admin\MapelController@select')->name('mapel.select');
-    Route::resource('mapel', 'Admin\MapelController');
+    Route::post('/mapel/data', 'MapelController@dataMapel')->name('mapel.data');
+    Route::get('/mapel/select', 'MapelController@select')->name('mapel.select');
+    Route::resource('mapel', 'MapelController');
 
-    Route::post('/kelas/data', 'Admin\KelasController@dataKelas')->name('kelas.data'); // datatable
-    Route::get('/kelas/select', 'Admin\KelasController@select')->name('kelas.select'); // select2
-    Route::resource('kelas', 'Admin\KelasController');
+    Route::post('/kelas/data', 'KelasController@dataKelas')->name('kelas.data'); // datatable
+    Route::get('/kelas/select', 'KelasController@select')->name('kelas.select'); // select2
+    Route::resource('kelas', 'KelasController');
 
-    Route::post('/siswa/data', 'Admin\SiswaController@dataSiswa')->name('siswa.data');
-    Route::post('/siswa/lihat_password', 'Admin\SiswaController@lihat_password')->name('siswa.lihat_password');
-    Route::post('/siswa/reset_password', 'Admin\SiswaController@reset_password')->name('siswa.reset_password');
-    Route::resource('siswa', 'Admin\SiswaController')->except('create', 'edit');
+    Route::post('/siswa/data', 'SiswaController@dataSiswa')->name('siswa.data');
+    Route::post('/siswa/lihat_password', 'SiswaController@lihat_password')->name('siswa.lihat_password');
+    Route::post('/siswa/reset_password', 'SiswaController@reset_password')->name('siswa.reset_password');
+    Route::resource('siswa', 'SiswaController')->except('create', 'edit');
 
-    Route::post('/soal/data', 'Admin\SoalController@dataSoal')->name('soal.data');
-    Route::resource('soal', 'Admin\SoalController');
+    Route::post('/soal/data', 'SoalController@dataSoal')->name('soal.data');
+    Route::resource('soal', 'SoalController');
 
-    Route::post('/paket-soal/data', 'Admin\PaketSoalController@dataPaketSoal')->name('paket-soal.data');
-    Route::get('/paket-soal/select', 'Admin\PaketSoalController@select')->name('paket-soal.select');
-    Route::resource('paket-soal', 'Admin\PaketSoalController');
+    Route::post('/paket-soal/data', 'PaketSoalController@dataPaketSoal')->name('paket-soal.data');
+    Route::get('/paket-soal/select', 'PaketSoalController@select')->name('paket-soal.select');
+    Route::resource('paket-soal', 'PaketSoalController');
 
-    Route::get('/ujian/aktif', 'Admin\UjianController@aktif')->name('ujian.aktif');
-    Route::post('/ujian/data-aktif', 'Admin\UjianController@dataAktif')->name('ujian.data-aktif');
-    Route::post('/ujian/data', 'Admin\UjianController@dataUjian')->name('ujian.data');
-    Route::resource('ujian', 'Admin\UjianController');
+    Route::get('/ujian/aktif', 'UjianController@aktif')->name('ujian.aktif');
+    Route::post('/ujian/data-aktif', 'UjianController@dataAktif')->name('ujian.data-aktif');
+    Route::post('/ujian/data', 'UjianController@dataUjian')->name('ujian.data');
+    Route::resource('ujian', 'UjianController');
 
-    Route::post('/pengaturan/data-admin', 'Admin\PengaturanController@dataAdmin')->name('pengaturan.data-admin');
-    Route::post('/pengaturan/tambah-admin', 'Admin\PengaturanController@tambah_admin')->name('pengaturan.tambah-admin');
-    Route::resource('pengaturan', 'Admin\PengaturanController');
+    Route::post('/pengaturan/data-admin', 'PengaturanController@dataAdmin')->name('pengaturan.data-admin');
+    Route::post('/pengaturan/tambah-admin', 'PengaturanController@tambah_admin')->name('pengaturan.tambah-admin');
+    Route::resource('pengaturan', 'PengaturanController');
 });
 
 Route::view('/{any}', 'app')->where('any', '.*');
-
-// Auth::routes();
-// Route::match(['get', 'post'], '/register', function () {
-//     return redirect('/login');
-// })->name('register');

@@ -6,12 +6,14 @@
         <v-divider></v-divider>
         <v-form class="pa-5">
           <v-text-field
+            type="password"
             v-model="password_lama"
             label="Password Lama"
             outlined
             dense
           ></v-text-field>
           <v-text-field
+            type="password"
             v-model="password_baru"
             label="Password Baru"
             outlined
