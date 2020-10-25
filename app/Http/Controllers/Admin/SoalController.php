@@ -126,14 +126,21 @@ class SoalController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Soal $soal
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Soal $soal)
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param $id
+   * @return \Illuminate\Http\Response
+   */
+    public function edit($id)
     {
+        $soal = Soal::with([
+            'kelas:id,nama',
+            'mapel:id,nama',
+            'paket_soal:id,nama',
+            'soal_jawaban'
+        ])->findOrFail($id);
+//        dd($soal->toArray());
         return view('Soal.edit', compact('soal'));
     }
 
@@ -141,12 +148,38 @@ class SoalController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Admin\Soal  $soal
+     * @param Soal $soal
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Soal $soal)
     {
-        //
+        $dataSoal = $request->soal;
+        $dataJawaban = $request->jawaban;
+
+        // update soal
+        $soal->update($dataSoal);
+
+        // update jawaban
+        $dd = '';
+        if ($soal->jenis == 'essai') {
+          $dd = 'essai';
+        }
+        elseif ($soal->jenis == 'pilihan_ganda') {
+          foreach ($dataJawaban['pilgan'] as $key => $value) {
+            if ($dataJawaban['benar'] == $key) {
+              $value['status'] = '1';
+            } else {
+              $value['status'] = '0';
+            }
+            SoalJawaban::find($key)->update($value);
+          }
+        }
+
+        return response()->json([
+            'status' => TRUE,
+            'message' => 'Soal berhasil diperbarui'
+        ], 200);
+
     }
 
     /**

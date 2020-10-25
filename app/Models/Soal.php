@@ -8,6 +8,16 @@ class Soal extends Model
 {
     protected $table = 'soal';
 
+    protected $fillable = [
+      'kelas_id',
+      'mapel_id',
+      'paket_soal_id',
+      'jenis',
+      'nama',
+      'soal',
+      'media'
+    ];
+
     public function kelas() {
         return $this->belongsTo(Kelas::class);
     }

@@ -3,7 +3,8 @@
 @section('title', 'Edit Soal '.$soal['nama'])
 
 @section('content')
-  <form id="form-tambah" enctype="multipart/form-data">
+  <form id="form-edit" enctype="multipart/form-data">
+    @method('PUT')
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">Detail Soal</h4>
@@ -13,26 +14,32 @@
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="form-group">
               <label for="form-kelas">Kelas</label>
-              <select name="soal[kelas]" id="form-kelas" class="form-control select-kelas"></select>
+              <select name="soal[kelas_id]" id="form-kelas" class="form-control select-kelas">
+                <option value="{{ $soal['kelas']['id'] }}">{{ $soal['kelas']['nama'] }}</option>
+              </select>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="form-group">
               <label for="form-mapel">Mata Pelajaran</label>
-              <select name="soal[mapel]" id="form-mapel" class="form-control select-mapel"></select>
+              <select name="soal[mapel_id]" id="form-mapel" class="form-control select-mapel">
+                <option value="{{ $soal['mapel']['id'] }}">{{ $soal['mapel']['nama'] }}</option>
+              </select>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="form-group">
               <label for="form-paket">Paket Soal</label>
-              <select name="soal[paket]" id="form-paket" class="form-control select-paket"></select>
+              <select name="soal[paket_soal_id]" id="form-paket" class="form-control select-paket">
+                <option value="{{ $soal['paket_soal']['id'] }}">{{ $soal['paket_soal']['nama'] }}</option>
+              </select>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="form-group">
               <label for="form-jenis">Jenis Soal</label>
-              <select name="soal[jenis]" id="form-jenis" class="form-control">
-                <option value=""></option>
+              <select name="soal[jenis]" id="form-jenis" class="form-control" disabled>
+                <option value="{{ $soal['jenis'] }}">{{ $soal['jenis'] == 'essai' ? 'Essai' : 'Pilihan Ganda' }}</option>
               </select>
             </div>
           </div>
@@ -46,50 +53,61 @@
       <div class="card-body">
         <div class="form-group">
           <label for="form-nama">Nama <span class="text-muted">(informasi materi soal)</span></label>
-          <input type="text" name="soal[nama]" class="form-control" id="form-nama" placeholder="Masukkan Nama Soal">
+          <input type="text" name="soal[nama]" value="{{ $soal['nama'] }}" class="form-control" id="form-nama" placeholder="Masukkan Nama Soal">
         </div>
         <div class="form-group">
           <label for="form-soal">Soal</label>
-          <textarea name="soal[soal]" class="form-control" id="form-soal" cols="30" rows="10"></textarea>
+          <textarea name="soal[soal]" class="form-control" id="form-soal" cols="30" rows="10">
+            {{ $soal['soal'] }}
+          </textarea>
         </div>
         <div class="form-group">
           <label for="media-soal">Media Soal (opsional)</label>
           <input type="file" name="soal[soal_media]" id="" class="form-control">
           <small id="mediaHelp" class="form-text text-muted">File : MP3/MP4/3GP/AVI</small>
         </div>
+
+        {{-- Jawaban Essai --}}
+        @if($soal['jenis'] == 'essai')
         <div class="form-group" id="form-essai">
           <label for="form-jawaban">Jawaban Essai</label>
-          <input type="text" name="jawaban[essai]" class="form-control" id="form-jawaban" placeholder="Masukkan jawaban essai (huruf kecil)">
+          <input type="text" name="jawaban[essai]" value="{{ $soal['soal_jawaban'][0]['jawaban'] }}" class="form-control" id="form-jawaban" placeholder="Masukkan jawaban essai (huruf kecil)">
         </div>
+        @elseif($soal['jenis'] == 'pilihan_ganda')
+        {{-- Jawaban Pilihan Ganda --}}
         <div id="form-pilgan">
           <div class="form-group">
             <label for="">Jawaban Pilihan Ganda</label>
             <div class="row mt-1">
               <div class="col-lg-9 order-lg-1 order-sm-2" id="list-pg">
-                <h1 class="text-muted text-center"><span class="badge badge-danger">Pilih Jumlah Jawaban</span></h1>
-                <h2 class="text-center"><i class="fas fa-arrow-down"></i></h2>
-                <h1 class="text-muted text-center"><span class="badge badge-success">Pilih Jawaban Benar</span></h1>
+                {{-- List Jawaban --}}
+                @foreach($soal['soal_jawaban'] as $key => $value)
+                <div class="mb-4" id="jawaban-{{ $key + 1 }}">
+                  <h4><b>Pilihan {{ $key + 1 }}</b></h4>
+                  <textarea name="jawaban[pilgan][{{ $value['id'] }}][jawaban]" id="jawaban-pilgan-{{ $key + 1 }}" cols="30" rows="10" class="form-control jawaban-pilgan">
+                    {{ $value['jawaban'] }}
+                  </textarea>
+                  <h5 class="mt-2">Media Jawaban (opsional)</h5>
+                  <input type="file" name="jawaban[pilgan][{{ $value['id'] }}][media]" id="media-jawaban-{{ $key + 1 }}" class="form-control">
+                  <small class="form-text text-muted">File : MP3/MP4/3GP/AVI</small>
+                </div>
+                @endforeach
               </div>
               <div class="col-lg-3 order-lg-2 ordder-sm-1">
                 <div class="form-group">
-                  <label for="jumlah-pilihan">Jumlah Pilihan</label>
-                  <select name="soal[jumlah_pilihan]" id="jumlah-pilihan" class="form-control">
-                    <option value="">Pilihan</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </div>
-                <div class="form-group">
                   <label for="jawaban-benar">Jawaban Benar</label>
                   <select name="jawaban[benar]" id="jawaban-benar" class="form-control">
-                    <option value="">-- Kosong --</option>
+                    @foreach($soal['soal_jawaban'] as $key => $value)
+                    <option value="{{ $value['id'] }}" {{ $value['status'] == 1 ? 'selected' : '' }}>Pilihan {{ $key + 1 }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        @endif
+
         <div class="form-group">
           <button class="btn btn-success">Simpan</button>
         </div>
@@ -188,41 +206,6 @@
       }
     })
 
-    $('#form-jenis').select2({
-      theme: 'bootstrap4',
-      placeholder: 'Pilih Jenis Soal',
-      data: [
-        {
-          id: 'pilihan_ganda',
-          text: 'Pilihan Ganda'
-        },
-        {
-          id: 'essai',
-          text: 'Essai'
-        }
-      ]
-    })
-
-    $('#form-pilgan').hide()
-    $('#form-essai').hide()
-    $('#form-jenis').on('change', function() {
-      let jenis = $('#form-jenis').val()
-      if (jenis == 'pilihan_ganda') {
-        console.log(jenis)
-        $('#form-essai').hide()
-        $('#form-pilgan').show()
-      }
-      else if (jenis == 'essai') {
-        console.log(jenis)
-        $('#form-pilgan').hide()
-        $('#form-essai').show()
-      }
-      else {
-        $('#form-essai').hide()
-        $('#form-pilgan').hide()
-      }
-    })
-
     // soal
     CKEDITOR.replace('form-soal', {
       filebrowserImageBrowseUrl: '{{ url("/filemanager?type=Images") }}',
@@ -231,46 +214,18 @@
       filebrowserUploadUrl: '{{ url("/filemanager/upload?type=Files&_token") }}='
     })
 
-    // jumlah jawaban
-    $('#jumlah-pilihan').on('change', function(){
-      // console.log($(this).val())
-      let list = '';
-      let option = '<option value>-- Jawaban --</option>';
-      let jumlah = $(this).val()
-      for (let id = 1; id <= jumlah; id++) {
-        // console.log(id)
-        let pilihan = String.fromCharCode(64 + id)
-        list += `
-        <div class="mb-4" id="jawaban-${id}">
-          <h4><b>Pilihan ${pilihan}</b></h4>
-          <textarea name="jawaban[pilgan][${id}][jawaban]" id="jawaban-pilgan-${id}" cols="30" rows="10" class="form-control jawaban-pilgan"></textarea>
-          <h5 class="mt-2">Media Jawaban (opsional)</h5>
-          <input type="file" name="jawaban[pilgan][${id}][media]" id="media-jawaban-${id}" class="form-control">
-          <small class="form-text text-muted">File : MP3/MP4/3GP/AVI</small>
-        </div>`;
-
-        // option jawaban
-        option += `<option value="${id}">${pilihan}</option>`
-      }
-      $('#list-pg').html(list)
-
-      // CKEditor form jawaban
-      $('.jawaban-pilgan').each(function() {
-        CKEDITOR.replace($(this).attr('id'), {
-          height: '100px',
-          filebrowserImageBrowseUrl: '{{ url("/filemanager?type=Images") }}',
-          filebrowserImageUploadUrl: '{{ url("/filemanager/upload?type=Images&_token=") }}',
-          filebrowserBrowseUrl: '{{ url("/filemanager?type=Files") }}',
-          filebrowserUploadUrl: '{{ url("/filemanager/upload?type=Files&_token") }}='
-        })
-      })
-
-      // select jawaban benar
-      $('#jawaban-benar').html(option)
+    // Jawaban
+    @foreach($soal['soal_jawaban'] as $key => $value)
+    CKEDITOR.replace('jawaban-pilgan-{{ $key + 1 }}', {
+      filebrowserImageBrowseUrl: '{{ url("/filemanager?type=Images") }}',
+      filebrowserImageUploadUrl: '{{ url("/filemanager/upload?type=Images&_token=") }}',
+      filebrowserBrowseUrl: '{{ url("/filemanager?type=Files") }}',
+      filebrowserUploadUrl: '{{ url("/filemanager/upload?type=Files&_token") }}='
     })
+    @endforeach
 
     // simpan
-    $('#form-tambah').on('submit', function(e) {
+    $('#form-edit').on('submit', function(e) {
       e.preventDefault();
       var data = new FormData(this)
       // isi soal
@@ -286,28 +241,13 @@
         contentType: false,
         type: 'POST',
         data: data,
-        url: "{{ route('soal.store') }}",
+        url: "{{ route('soal.update', ['soal' => $soal['id']]) }}",
         success: function(data) {
-          if (data.status) {
-            swal.fire({
-              title: 'Berhasil',
-              text: data.message,
-              icon: 'success'
-            })
-            // $('.select-kelas').val('').trigger('change')
-            // $('.select-mapel').val('').trigger('change')
-            // $('.select-paket').val('').trigger('change')
-            // $('#form-jenis').val('').trigger('change')
-            $('#form-tambah').trigger('reset')
-            CKEDITOR.instances['form-soal'].setData('')
-          }
-          else {
-            var errors = ''
-            data.message.forEach(function(e) {
-              errors += e + "\n"
-            })
-            swal.fire('Gagal', errors, 'error')
-          }
+          swal.fire({
+            title: 'Berhasil',
+            text: data.message,
+            icon: 'success'
+          })
         },
         error: function(err) {
           let error = err.responseJSON
