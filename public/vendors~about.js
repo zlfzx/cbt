@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendors~about"],{
 
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\

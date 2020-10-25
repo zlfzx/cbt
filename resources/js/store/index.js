@@ -5,6 +5,7 @@ import VuexPersistence from 'vuex-persist'
 // import module
 import auth from './auth'
 import alert from './alert'
+import ujian from './ujian'
 
 const vuexPersist = new VuexPersistence({
   key: 'my-app',
@@ -17,7 +18,8 @@ export default new Vuex.Store({
   plugins: [vuexPersist.plugin],
   modules: {
     auth,
-    alert
+    alert,
+    ujian
   },
   state: {
     check_password: true,

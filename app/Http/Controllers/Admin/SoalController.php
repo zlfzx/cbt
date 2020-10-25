@@ -48,7 +48,7 @@ class SoalController extends Controller
      */
     public function create()
     {
-        return view('soal_tambah');
+        return view('Soal.create');
     }
 
   /**

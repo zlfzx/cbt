@@ -15,7 +15,9 @@ class Ujian extends Model
     }
 
     public function paket_soal() {
-        return $this->belongsTo(PaketSoal::class);
+        return $this->belongsTo(PaketSoal::class)
+          ->with('mapel:id,nama')
+          ->withCount('soal');
     }
 
     public function ujian_siswa() {

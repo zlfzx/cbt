@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
+    // name: 'Home',
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
     meta: {
       requiresAuth: true
@@ -30,7 +30,7 @@ const routes = [
       },
       {
         path: 'pengaturan',
-        name: 'pengaturan',
+        name: 'Pengaturan',
         component: () => import(/* webpackChunkName: "about" */ '../views/Home/Pengaturan.vue'),
         meta: {
           title: 'Pengaturan'

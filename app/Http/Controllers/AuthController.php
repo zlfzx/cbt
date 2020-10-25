@@ -42,6 +42,7 @@ class AuthController extends Controller
             $siswa->api_token = null;
             $siswa->save();
         }
+        Auth::logout();
         return response()->json([
             'status' => 'success',
             'message' => 'Logout Berhasil',
