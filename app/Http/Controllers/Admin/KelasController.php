@@ -26,7 +26,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('kelas');
+        return view('Kelas.index');
     }
 
     // DataTables

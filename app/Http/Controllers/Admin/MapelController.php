@@ -26,7 +26,7 @@ class MapelController extends Controller
      */
     public function index()
     {
-        return view('mapel');
+        return view('Mapel.index');
     }
 
     // datatable

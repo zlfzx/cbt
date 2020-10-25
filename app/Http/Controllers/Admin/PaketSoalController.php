@@ -28,7 +28,7 @@ class PaketSoalController extends Controller
      */
     public function index()
     {
-        return view('paket_soal');
+        return view('PaketSoal.index');
     }
 
     // datatable

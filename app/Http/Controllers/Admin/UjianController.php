@@ -29,7 +29,7 @@ class UjianController extends Controller
      */
     public function index()
     {
-        return view('ujian');
+        return view('Ujian.index');
     }
 
     public function dataUjian() {
@@ -115,7 +115,7 @@ class UjianController extends Controller
 
     // tambahan
     public function aktif() {
-        return view('ujian_aktif');
+        return view('Ujian.ujian_aktif');
     }
 
     public function dataAktif() {

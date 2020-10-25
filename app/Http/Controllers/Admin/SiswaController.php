@@ -28,7 +28,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('siswa');
+        return view('Siswa.index');
     }
 
     // datatable
