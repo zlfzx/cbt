@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title', 'Tambah Soal')
+@section('title', 'Edit Soal '.$soal['nama'])
 
 @section('content')
   <form id="form-tambah" enctype="multipart/form-data">
