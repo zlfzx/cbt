@@ -167,5 +167,36 @@
         }
       })
     })
+
+    // hapus soal
+    table.on('click', '.btn-hapus', function(e) {
+      e.preventDefault()
+      Swal.fire({
+        title: 'Hapus Soal',
+        text: "Anda yakin ingin menghapus soal tersebut?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        let id = $(this).data('id')
+        if (result.value) {
+          $.ajax({
+            type: 'DELETE',
+            url: "{{ route('soal.index') }}/" + id,
+            success: function(res) {
+              Swal.fire(
+                'Berhasil',
+                res.message,
+                'success'
+              )
+              table.draw()
+            }
+          })
+        }
+      })
+    })
   </script>
 @endsection

@@ -190,6 +190,11 @@ class SoalController extends Controller
      */
     public function destroy(Soal $soal)
     {
-        //
+        $soal->delete();
+
+        return response()->json([
+          'status' => TRUE,
+          'message' => 'Soal berhasil dihapus!'
+        ], 200);
     }
 }

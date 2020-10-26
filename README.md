@@ -32,7 +32,7 @@
     - Detail Soal
     - Tambah Soal
     - ~~Ubah Soal~~
-    - ~~Hapus Soal~~
+    - Hapus Soal
 - Ujian
     - Daftar Ujian
     - Tambah Ujian
