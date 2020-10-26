@@ -11,10 +11,10 @@ class Mapel extends Model
     protected $fillable = ['nama'];
 
     public function paket_soal() {
-        return $this->hasMany('App\PaketSoal');
+        return $this->hasMany(PaketSoal::class);
     }
 
     public function soal() {
-        return $this->hasMany('App\Soal');
+        return $this->hasMany(Soal::class);
     }
 }

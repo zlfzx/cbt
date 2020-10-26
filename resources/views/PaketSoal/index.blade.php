@@ -238,7 +238,9 @@
           data: data,
           url: "{{ route('paket-soal.store') }}",
           success: function(data) {
-            $(this).trigger('reset')
+            $('.select-kelas').val('').trigger('change')
+            $('.select-mapel').val('').trigger('change')
+            $('#form-tambah').trigger('reset')
             table.draw()
             swal.fire('Berhasil', data.message, 'success')
             $('#modal-tambah').modal('hide')

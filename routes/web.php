@@ -35,7 +35,7 @@ Route::group([
         Route::post('/siswa/data', 'SiswaController@dataSiswa')->name('siswa.data');
         Route::post('/siswa/lihat_password', 'SiswaController@lihat_password')->name('siswa.lihat_password');
         Route::post('/siswa/reset_password', 'SiswaController@reset_password')->name('siswa.reset_password');
-        Route::resource('siswa', 'SiswaController')->except('create', 'edit');
+        Route::resource('siswa', 'SiswaController')->except('create');
 
         Route::post('/soal/data', 'SoalController@dataSoal')->name('soal.data');
         Route::resource('soal', 'SoalController');

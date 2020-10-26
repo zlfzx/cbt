@@ -31,7 +31,7 @@ class KelasController extends Controller
 
     // DataTables
     public function dataKelas(Request $request) {
-        return DataTables::of(Kelas::select('id', 'nama')->get())
+        return DataTables::of(Kelas::select('id', 'nama')->withCount('siswa')->get())
                 ->addIndexColumn()
                 ->make(true);
     }

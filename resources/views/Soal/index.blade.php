@@ -113,7 +113,12 @@
           data: 'mapel.nama'
         },
         {
-          data: 'paket_soal.nama'
+          data: 'paket_soal.nama', render: function(data) {
+            if (data) {
+              return data
+            }
+            return '<i class="text-muted">Belum ada Paket Soal</i>'
+          }
         },
         {
           data: 'nama'
@@ -145,7 +150,7 @@
             $('#detail-jenis').html(d.jenis)
             $('#detail-kelas').html(d.kelas.nama)
             $('#detail-mapel').html(d.mapel.nama)
-            $('#detail-paket').html(d.paket_soal.nama)
+            $('#detail-paket').html(d.paket_soal != null ? d.paket_soal.nama : '<i>Belum ada Paket Soal</i>')
             $('#detail-soal').html(d.soal)
             // jawaban
             var jawaban = ''

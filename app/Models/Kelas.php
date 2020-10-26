@@ -11,18 +11,18 @@ class Kelas extends Model
     protected $fillable = ['nama'];
 
     public function siswa() {
-        return $this->hasMany('App\Siswa');
+        return $this->hasMany(Siswa::class);
     }
 
     public function paket_soal() {
-        return $this->hasMany('App\PaketSoal');
+        return $this->hasMany(PaketSoal::class);
     }
 
     public function soal() {
-        return $this->hasMany('App\Soal');
+        return $this->hasMany(Soal::class);
     }
 
     public function ujian() {
-        return hasMany('App\Ujian');
+        return hasMany(Ujian::class);
     }
 }

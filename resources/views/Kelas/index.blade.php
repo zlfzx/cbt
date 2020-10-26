@@ -18,6 +18,7 @@
                 <tr>
                   <th>No.</th>
                   <th>Nama Kelas</th>
+                  <th>Jumlah Siswa</th>
                   <th>#</th>
                 </tr>
               </thead>
@@ -95,6 +96,9 @@
           },
           {
             data: 'nama'
+          },
+          {
+            data: 'siswa_count'
           },
           {
             data: 'id',
