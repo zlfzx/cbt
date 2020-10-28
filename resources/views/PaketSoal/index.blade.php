@@ -321,10 +321,16 @@
               type: 'DELETE',
               url: "{{ route('paket-soal.index') }}/"+id,
               success: function(data) {
-                if (data.status) {
-                  swal.fire('Berhasil', data.message, 'success')
-                  table.draw()
-                }
+                swal.fire('Berhasil', data.message, 'success')
+                table.draw()
+              },
+              error: function(err) {
+                let error = err.responseJSON
+                let errors = ''
+                error.messages.forEach(function(e) {
+                  errors += e + "<br />"
+                })
+                swal.fire('Gagal', errors, 'error')
               }
             })
           } else {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\PaketSoal\StorePaketSoal;
 use App\Models\PaketSoal;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -124,7 +125,15 @@ class PaketSoalController extends Controller
      */
     public function destroy($id)
     {
-        $paket_soal = PaketSoal::findOrFail($id)->delete();
+        try {
+          $paket_soal = PaketSoal::findOrFail($id)->delete();
+        }
+        catch (QueryException $e) {
+          return response()->json([
+            'status' => FALSE,
+            'messages' => ['Paket Soal tidak bisa dihapus karena sudah diujikan']
+          ], 422);
+        }
 
         return response()->json([
             'status' => TRUE,
