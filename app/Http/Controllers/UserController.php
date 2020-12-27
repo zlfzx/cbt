@@ -7,14 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    // index user
-    public function index() {
-        return Auth::user();
-    }
-
     // check password siswa
     public function checkPassword() {
-        $passwd = Siswa::select('id', 'nis', 'password')->find(Auth::user()->id);
+        $passwd = Siswa::select('id', 'nis', 'password')->find(Auth::guard('api')->user()->id);
         if ($passwd['nis'] == $passwd['password']) {
             return response()->json([
                 'status' => TRUE,

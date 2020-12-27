@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::post('login', 'AuthController@login');
 
 Route::middleware('auth:api')->group(function() {
-    Route::get('user', 'UserController@index');
+    Route::get('user', 'AuthController@me');
 
     // check password siswa
     Route::get('password/check', 'UserController@checkPassword');
