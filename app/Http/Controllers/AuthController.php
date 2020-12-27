@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthUser\ChangePassword;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -13,7 +15,7 @@ class AuthController extends Controller
    */
   public function __construct()
   {
-    $this->middleware('auth:api', ['except' => ['login']]);
+    $this->middleware('auth:api', ['except' => ['login', 'refresh']]);
   }
 
   /**
@@ -26,7 +28,7 @@ class AuthController extends Controller
       $siswa = Siswa::where('nis', $credential['nis'])->with('kelas:id,nama')->first();
       if ($siswa) {
           if ($credential['password'] === $siswa->password) {
-              $token = auth()->guard('api')->login($siswa);
+              $token = auth('api')->login($siswa);
               return $this->respondWithToken($token);
           } else {
               $message = 'Login gagal, password salah!';
@@ -47,7 +49,7 @@ class AuthController extends Controller
    */
   public function me()
   {
-    return response()->json(auth()->guard('api')->user());
+    return response()->json(auth('api')->user());
   }
 
   /**
@@ -55,7 +57,7 @@ class AuthController extends Controller
    */
   public function logout()
   {
-    auth()->logout();
+    auth('api')->logout();
     return response()->json([
       'status' => 'success',
       'message' => 'Berhasil keluar'
@@ -67,7 +69,11 @@ class AuthController extends Controller
    */
   public function refresh()
   {
-    return $this->respondWithToken(auth()->refresh());
+
+    $token = JWTAuth::getToken();
+    $token = JWTAuth::refresh($token);
+
+    return $this->respondWithToken($token);
   }
 
   /**
@@ -79,8 +85,8 @@ class AuthController extends Controller
     return response()->json([
       'access_token' => $token,
       'token_type' => 'bearer',
-      'expires_in' => auth()->guard('api')->factory()->getTTL() * 60,
-      'data' => auth()->guard('api')->user()
+      'expires_in' => auth('api')->factory()->getTTL() * 60,
+      'data' => auth('api')->user()
     ]);
   }
 

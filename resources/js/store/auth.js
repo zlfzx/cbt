@@ -19,6 +19,10 @@ export default {
       state.kelas = payload.kelas,
       state.token = payload.token
     },
+    setToken: (state, payload) => {
+      localStorage.setItem('token', payload)
+      state.token = payload
+    },
     logout: (state, payload) => {
       localStorage.setItem('token', payload)
       state.nama = payload
@@ -30,6 +34,9 @@ export default {
   actions: {
     set: ({commit}, payload) => {
       commit('set', payload)
+    },
+    setToken: ({commit}, payload) => {
+      commit('setToken', payload)
     }
   }
 }

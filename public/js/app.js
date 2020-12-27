@@ -2108,18 +2108,81 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 //
 //
 //
 //
 //
 //
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   watch: {
     '$route': function $route(to) {
       document.title = to.meta.title || 'Computer Based Test';
     }
+  },
+  computed: {
+    token: function token() {
+      return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.auth.token;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function (response) {
+      // return response berhasil
+      return response;
+    }, function (error) {
+      // return error selain error auth
+      if (error.response.status !== 401) {
+        return new Promise(function (resolve, reject) {
+          reject(error);
+        });
+      } // logout user jika refresh token tidak berhasil
+
+
+      if (error.config.url === '/api/user/refresh') {
+        // TODO: hapus token di localStorage
+        _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('auth/logout', null); // TODO: push ke halaman login
+
+        _this.$router.push('/login');
+
+        return new Promise(function (resolve, reject) {
+          reject(error);
+        });
+      } // coba ulangi request dengan token baru
+
+
+      return new Promise(function (resolve, reject) {
+        return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/user/refresh', {}, {
+          headers: {
+            Authorization: "Bearer " + _this.token,
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+          var res = response.data;
+          _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('auth/setToken', res.access_token); // ulangi request
+
+          var config = error.config;
+          config.headers['Authorization'] = "Bearer ".concat(res.access_token);
+          return new Promise(function (resolve, reject) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default.a.request(config).then(function (response) {
+              console.log('berhasil request kembali');
+              resolve(response);
+            })["catch"](function (error) {
+              reject(error);
+            });
+          });
+        })["catch"](function (error) {
+          reject(error);
+        });
+      });
+    });
   }
 });
 
@@ -63782,6 +63845,10 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.setItem('token', payload.token);
       state.nama = payload.nama, state.nis = payload.nis, state.kelas = payload.kelas, state.token = payload.token;
     },
+    setToken: function setToken(state, payload) {
+      localStorage.setItem('token', payload);
+      state.token = payload;
+    },
     logout: function logout(state, payload) {
       localStorage.setItem('token', payload);
       state.nama = payload;
@@ -63794,6 +63861,10 @@ __webpack_require__.r(__webpack_exports__);
     set: function set(_ref, payload) {
       var commit = _ref.commit;
       commit('set', payload);
+    },
+    setToken: function setToken(_ref2, payload) {
+      var commit = _ref2.commit;
+      commit('setToken', payload);
     }
   }
 });
