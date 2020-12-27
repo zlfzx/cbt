@@ -214,8 +214,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
 
         if (res.status === 'success') {
-          // store.commit('SET_TOKEN', null)
-          // console.log('logout')
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('auth/logout', null);
 
           if (!_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/isAuth']) {
@@ -452,27 +450,23 @@ __webpack_require__.r(__webpack_exports__);
           'password': this.password
         };
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/login', formData).then(function (response) {
-          console.log(response);
+          // console.log(response)
           var res = response.data;
+          var user = res.data;
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('auth/set', {
+            nama: user.nama,
+            nis: user.nis,
+            kelas: user.kelas.nama,
+            token: res.access_token
+          });
 
-          if (res.status === 'success') {
-            // store.commit('SET_TOKEN', res.data.api_token)
-            var user = res.data;
-            _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('auth/set', {
-              nama: user.nama,
-              nis: user.nis,
-              kelas: user.kelas.nama,
-              token: user.api_token
-            });
-
-            if (_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/isAuth']) {
-              _this.$router.push('/');
-            }
+          if (_store__WEBPACK_IMPORTED_MODULE_0__["default"].getters['auth/isAuth']) {
+            _this.$router.push('/');
           }
         })["catch"](function (error) {
           var res = error.response.data;
-          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_ERRORS', res.message);
-          console.log(_store__WEBPACK_IMPORTED_MODULE_0__["default"].state.errors);
+          _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_ERRORS', res.message); // console.log(store.state.errors)
+
           _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('alert/set', {
             status: true,
             color: 'error',
@@ -585,7 +579,10 @@ var render = function() {
                 [
                   _c("v-list-item-avatar", [
                     _c("img", {
-                      attrs: { src: "http://cbt.local/dist/img/avatar04.png" }
+                      attrs: {
+                        src: "http://cbt.local/dist/img/avatar04.png",
+                        alt: ""
+                      }
                     })
                   ]),
                   _vm._v(" "),

@@ -8,7 +8,7 @@ export default {
   },
   getters: {
     isAuth: state => {
-      return state.token !== 'null' && state.token !== null
+      return state.token ?? false
     }
   },
   mutations: {

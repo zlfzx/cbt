@@ -63772,7 +63772,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   getters: {
     isAuth: function isAuth(state) {
-      return state.token !== 'null' && state.token !== null;
+      var _state$token;
+
+      return (_state$token = state.token) !== null && _state$token !== void 0 ? _state$token : false;
     }
   },
   mutations: {
@@ -63836,12 +63838,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     check_password: true,
     errors: null
-  },
-  getters: {
-    // cek state token
-    isAuth: function isAuth(state) {
-      return state.token !== 'null' && state.token !== null;
-    }
   },
   mutations: {
     SET_CHECK_PASSWORD: function SET_CHECK_PASSWORD(state, payload) {

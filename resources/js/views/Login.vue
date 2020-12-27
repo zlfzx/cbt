@@ -89,28 +89,24 @@ export default {
         }
         axios.post('/api/login', formData)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
           let res = response.data
-          if (res.status === 'success') {
-            // store.commit('SET_TOKEN', res.data.api_token)
-            
-            let user = res.data
-            store.dispatch('auth/set', {
-              nama: user.nama,
-              nis: user.nis,
-              kelas: user.kelas.nama,
-              token: user.api_token
-            })
+          let user = res.data
+          store.dispatch('auth/set', {
+            nama: user.nama,
+            nis: user.nis,
+            kelas: user.kelas.nama,
+            token: res.access_token
+          })
 
-            if(store.getters['auth/isAuth']) {
-              this.$router.push('/')
-            }
+          if(store.getters['auth/isAuth']) {
+            this.$router.push('/')
           }
         })
         .catch((error) => {
           let res = error.response.data
           store.commit('SET_ERRORS', res.message)
-          console.log(store.state.errors)
+          // console.log(store.state.errors)
           store.dispatch('alert/set', {
             status: true,
             color: 'error',

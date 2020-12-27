@@ -25,12 +25,6 @@ export default new Vuex.Store({
     check_password: true,
     errors: null
   },
-  getters: {
-    // cek state token
-    isAuth: state => {
-      return state.token !== 'null' && state.token !== null
-    }
-  },
   mutations: {
     SET_CHECK_PASSWORD (state, payload) {
       state.check_password = payload

@@ -14,7 +14,7 @@
       <v-list dense nav>
         <v-list-item two-line :class="'px-0'">
           <v-list-item-avatar>
-            <img src="http://cbt.local/dist/img/avatar04.png">
+            <img src="http://cbt.local/dist/img/avatar04.png" alt="">
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -120,9 +120,6 @@
           let res = response.data
           console.log(res)
           if (res.status === 'success') {
-            // store.commit('SET_TOKEN', null)
-
-            // console.log('logout')
             store.commit('auth/logout', null)
             if(!store.getters['auth/isAuth']) {
               store.dispatch('alert/set', {
