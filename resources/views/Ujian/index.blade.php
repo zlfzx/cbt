@@ -55,12 +55,12 @@
                 <select name="paket_soal_id" id="paket" class="form-control select-paket"></select>
               </div>
               <div class="form-group">
-                <label for="mulai">Waktu Mulai</label>
+                <label for="waktu-mulai">Waktu Mulai</label>
                 <input type="text" name="waktu_mulai" class="form-control" id="waktu-mulai" placeholder="Masukkan Waktu Mulai Ujian">
               </div>
               <div class="form-group">
-                <label for="waktu">Waktu Ujian</label>
-                <input type="number" name="waktu_ujian" min="0" class="form-control" placeholder="Masukkan Waktu Ujian">
+                <label for="waktu-ujian">Waktu Ujian</label>
+                <input type="number" name="waktu_ujian" id="waktu-ujian" min="0" class="form-control" placeholder="Masukkan Waktu Ujian">
               </div>
             </div>
             <div class="modal-footer">
@@ -94,13 +94,7 @@
 
 @section('script')
     <script>
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      })
-
-      var table = $('#table-ujian').DataTable({
+      const table = $('#table-ujian').DataTable({
         responsive: true,
         scrollX: true,
         processing: true,
@@ -115,19 +109,20 @@
           {data: 'kelas.nama'},
           {data: 'paket_soal.nama'},
           {data: 'waktu_mulai'},
-          {data: 'waktu_ujian', render: function(data) {
-            return data + ' Menit'
-          }},
+          {
+            data: 'waktu_ujian', render: function (data) {
+              return data + ' Menit'
+            }
+          },
           {data: 'token'},
           {
             data: 'id', searchable: false,
-            render: function(data) {
-              var html = `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
-              return html
+            render: function (data) {
+              return `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
             }
           }
         ]
-      })
+      });
 
       $('#table-ujian-terlaksana').DataTable()
 
@@ -188,7 +183,7 @@
         ajax: {
           delay: 250,
           url: "{{ route('paket-soal.select') }}",
-          data: function(params) {
+          data: function() {
             return {
               kelas: $('.select-kelas').val(),
               mapel: $('.select-mapel').val()
@@ -223,7 +218,7 @@
 
       $('#tambah-ujian').on('submit', function(e) {
         e.preventDefault();
-        var data = new FormData(this)
+        const data = new FormData(this);
         $.ajax({
           processData: false,
           contentType: false,

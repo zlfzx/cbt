@@ -136,13 +136,7 @@
 
 @section('script')
     <script>
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      })
-
-      var table = $('#table-paket').DataTable({
+      const table = $('#table-paket').DataTable({
         processing: true,
         serverSide: true,
         scrollX: true,
@@ -167,15 +161,15 @@
             data: 'kode_paket'
           },
           {
-            data: 'id', render: function(data) {
-              var btn = `<button class="btn btn-xs btn-info btn-detail" data-id="${data}"><i class="fas fa-eye"></i></button> `
+            data: 'id', render: function (data) {
+              let btn = `<button class="btn btn-xs btn-info btn-detail" data-id="${data}"><i class="fas fa-eye"></i></button> `;
               btn += `<button class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `
               btn += `<button class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
               return btn
             }
           }
         ]
-      })
+      });
 
       // cari kelas (select2)
       $('.select-kelas').select2({
@@ -230,7 +224,7 @@
       // simpan paket soal
       $('#form-tambah').on('submit', function(e) {
         e.preventDefault();
-        var data = new FormData(this)
+        const data = new FormData(this);
         $.ajax({
           processData: false,
           contentType: false,
@@ -258,7 +252,7 @@
 
       // edit paket soal
       table.on('click', '.btn-edit', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         $.ajax({
           type: 'GET',
           url: "{{ route('paket-soal.index') }}/"+id+"/edit",
@@ -279,8 +273,8 @@
       // update paket soal
       $('#form-edit').on('submit', function(e) {
         e.preventDefault()
-        var id = $('#edit-id').val()
-        var data = new FormData(this)
+        const id = $('#edit-id').val();
+        const data = new FormData(this);
         $.ajax({
           processData: false,
           contentType: false,
@@ -293,7 +287,7 @@
               swal.fire('Berhasil', data.message, 'success')
               $('#modal-edit').modal('hide')
             } else {
-              var errors = ''
+              let errors = '';
               data.message.forEach(function(e) {
                 errors += e + "\n"
               })
@@ -305,7 +299,7 @@
 
       // hapus paket soal
       table.on('click', '.btn-hapus', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         swal.fire({
           title: 'Hapus Paket Soal?',
           text: 'Semua data yang terkait akan ikut terhapus!',
@@ -341,26 +335,26 @@
 
       // detail paket soal
       table.on('click', '.btn-detail', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         $.ajax({
           type: 'GET',
           url: "{{ route('paket-soal.index') }}/"+id,
           success: function(data) {
             if (data.status) {
-              var d = data.message
+              const d = data.message;
               $('#detail-nama').html(d.nama)
               $('#detail-kode').html(d.kode_paket)
               $('#detail-mapel').html(d.mapel.nama)
               $('#detail-kelas').html(d.kelas.nama)
-              var s = ''
+              let s = '';
               d.soal.forEach(function(soal) {
                 console.log(soal)
                 s += `<li class="list-soal">${soal.soal}
                   <ul>`
                 soal.soal_jawaban.forEach(function(j) {
                   // console.log(j)
-                  var benar = ''
-                  if (j.status == 1) benar = " text-danger"
+                  let benar = '';
+                  if (j.status === 1) benar = " text-danger"
                   s += `<li class="list-jawaban ${benar}">${j.jawaban}</li>`
                 })
                 s += '</ul></li>'

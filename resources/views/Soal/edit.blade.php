@@ -119,12 +119,6 @@
 @section('script')
   <script src="{{ asset('dist/plugins/ckeditor/ckeditor.js') }}"></script>
   <script>
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    })
-
     // cari kelas (select2)
     $('.select-kelas').select2({
       theme: 'bootstrap4',

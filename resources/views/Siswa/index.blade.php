@@ -38,19 +38,19 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="form-nama">Nama</label>
-                <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Siswa">
+                <input type="text" id="form-nama" name="nama" class="form-control" placeholder="Masukkan Nama Siswa">
               </div>
               <div class="form-group">
                 <label for="form-nis">NIS</label>
-                <input type="text" name="nis" class="form-control" placeholder="Masukkan NIS Siswa">
+                <input type="text" id="form-nis" name="nis" class="form-control" placeholder="Masukkan NIS Siswa">
               </div>
               <div class="form-group">
                 <label for="form-kelas">Kelas</label>
-                <select name="kelas_id" class="select-kelas form-control"></select>
+                <select name="kelas_id" id="form-kelas" class="select-kelas form-control"></select>
               </div>
               <div class="form-group">
                 <label for="form-password">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Kosongkan untuk menggenerate password default">
+                <input type="password" id="form-password" name="password" class="form-control" placeholder="Kosongkan untuk menggenerate password default">
               </div>
             </div>
             <div class="modal-footer">
@@ -82,11 +82,11 @@
                 <input type="text" id="edit-nis" name="nis" class="form-control" placeholder="Masukkan NIS Siswa">
               </div>
               <div class="form-group">
-                <label for="form-kelas">Kelas</label>
+                <label for="edit-kelas">Kelas</label>
                 <select name="kelas_id" id="edit-kelas" class="select-kelas form-control"></select>
               </div>
               <div class="form-group">
-                <label for="form-password">Password</label>
+                <label for="edit-password">Password</label>
                 <input type="password" id="edit-password" name="password" class="form-control" placeholder="Kosongkan untuk menggenerate password default">
               </div>
             </div>
@@ -121,20 +121,14 @@
 @section('script')
     <script src="{{ asset('dist/js/qrcode.min.js') }}"></script>
     <script>
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      })
-
-      var table = $('#table-siswa').DataTable({
+      const table = $('#table-siswa').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
           type: 'POST',
           url: "{{ route('siswa.data') }}"
         },
-        columns:[
+        columns: [
           {
             data: 'DT_RowIndex'
           },
@@ -145,8 +139,8 @@
             data: 'nama'
           },
           {
-            data: 'id', render: function(data) {
-              var btn = `
+            data: 'id', render: function (data) {
+              let btn = `
                 <button type="button" class="btn btn-info btn-xs lihat-password" data-id="${data}"><i class="fas fa-eye"></i> Lihat Password</button> `
               btn += `
                 <button type="button" class="btn btn-xs btn-warning reset-password" data-id="${data}"><i class="fas fa-undo"></i> Reset Password</button>`
@@ -157,14 +151,14 @@
             data: 'kelas.nama'
           },
           {
-            data: 'id', render: function(data) {
-              var btn = `<button type="button" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `
+            data: 'id', render: function (data) {
+              let btn = `<button type="button" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `;
               btn += `<button type="button" class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
               return btn
             }, orderable: false, searchable: false
           }
         ]
-      })
+      });
 
       // cari kelas (select2)
       $('.select-kelas').select2({
@@ -194,7 +188,7 @@
       // tambah siswa
       $('#form-tambah').on('submit', function(e) {
         e.preventDefault()
-        var data = new FormData($('#form-tambah')[0])
+        const data = new FormData($('#form-tambah')[0])
         $.ajax({
           processData: false,
           contentType: false,
@@ -220,7 +214,7 @@
 
       // edit siswa
       table.on('click', '.btn-edit', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id')
         $.ajax({
           type: 'GET',
           url: "{{ route('siswa.index') }}/"+id+"/edit",
@@ -238,8 +232,8 @@
       // update siswa
       $('#form-edit').on('submit', function(e) {
         e.preventDefault()
-        var id = $('#edit-id').val()
-        var data = new FormData(this)
+        const id = $('#edit-id').val()
+        const data = new FormData(this)
         $.ajax({
           processData: false,
           contentType: false,
@@ -264,7 +258,7 @@
 
       // hapus siswa
       table.on('click', '.btn-hapus', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id')
         swal.fire({
           title: 'Hapus Siswa?',
           text: 'Semua data yang terkait akan ikut terhapus!',
@@ -298,7 +292,7 @@
 
       // lihat password
       table.on('click', '.lihat-password', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         $.ajax({
           type: 'POST',
           data: {id: id},
@@ -306,7 +300,7 @@
           success: function(data) {
             $('#password-user').html(data.nama)
             $('#passwd').empty()
-            var qrcode = new QRCode(document.getElementById('passwd'))
+            const qrcode = new QRCode(document.getElementById('passwd'));
             // qrcode.clear()
             qrcode.makeCode(data.password)
           }
@@ -317,7 +311,7 @@
 
       // reset password
       table.on('click', '.reset-password', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         swal.fire({
           title: 'Reset Password?',
           icon: 'warning',

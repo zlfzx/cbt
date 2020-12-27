@@ -38,7 +38,7 @@
             <form id="form-tambah">
               <div class="form-group">
                 <label for="form-mapel">Nama Mapel</label>
-                <input type="text" name="nama" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
+                <input type="text" id="form-mapel" name="nama" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success float-right">Tambah</button>
@@ -60,7 +60,7 @@
             <form id="form-edit">
               <input type="hidden" name="id" id="edit-id">
               <div class="form-group">
-                <label for="form-mapel">Nama Mapel</label>
+                <label for="edit-mapel">Nama Mapel</label>
                 <input type="text" name="nama" id="edit-mapel" class="form-control" placeholder="Masukkan Mata Pelajaran" required>
               </div>
               <div class="form-group">
@@ -75,13 +75,7 @@
 
 @section('script')
     <script>
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      })
-
-      var table = $('#table-mapel').DataTable({
+      const table = $('#table-mapel').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
@@ -97,19 +91,19 @@
           },
           {
             data: 'id',
-            render: function(data) {
-              var btn = `<button type="button" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `
-                  btn += `<button type="button" class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
+            render: function (data) {
+              let btn = `<button type="button" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></button> `;
+              btn += `<button type="button" class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
               return btn
             }
           }
         ]
-      })
+      });
 
       // tambah kelas
       $('#form-tambah').on('submit', function(e) {
         e.preventDefault();
-        var data = new FormData($('#form-tambah')[0])
+        const data = new FormData($('#form-tambah')[0]);
         $.ajax({
           processData: false,
           contentType: false,
@@ -129,7 +123,7 @@
 
       // hapus mapel
       table.on('click', '.btn-hapus', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         swal.fire({
           title: 'Hapus Mata Pelajaran?',
           text: 'Semua data terkait akan ikut terhapus!',
@@ -159,7 +153,7 @@
 
       // edit mapel
       table.on('click', '.btn-edit', function() {
-        var id = $(this).attr('data-id')
+        const id = $(this).attr('data-id');
         $.ajax({
           type: 'GET',
           url: "{{ route('mapel.index') }}/"+id+"/edit",
@@ -174,8 +168,8 @@
       // update mapel
       $('#form-edit').on('submit', function(e) {
         e.preventDefault()
-        var id = $('#edit-id').val()
-        var mapel = $('#edit-mapel').val()
+        const id = $('#edit-id').val();
+        const mapel = $('#edit-mapel').val();
         $.ajax({
           type: 'PUT',
           data: {nama: mapel},

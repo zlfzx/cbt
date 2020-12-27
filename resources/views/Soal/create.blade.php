@@ -101,14 +101,8 @@
 @section('script')
   <script src="{{ asset('dist/plugins/ckeditor/ckeditor.js') }}"></script>
   <script>
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    })
-
     // cari kelas (select2)
-    $('.select-kelas').select2({
+    const selectKelas = $('.select-kelas').select2({
       theme: 'bootstrap4',
       placeholder: 'Cari kelas...',
       ajax: {
@@ -133,7 +127,7 @@
     })
 
     // cari mapel (select2)
-    $('.select-mapel').select2({
+    const selectMapel = $('.select-mapel').select2({
       theme: 'bootstrap4',
       placeholder: 'Cari Mata Pelajaran...',
       ajax: {
@@ -158,13 +152,13 @@
     })
 
     // cari paket soal (select2)
-    $('.select-paket').select2({
+    const selectPaket = $('.select-paket').select2({
       theme: 'bootstrap4',
       placeholder: 'Cari Paket Soal...',
       ajax: {
         delay: 250,
         url: "{{ route('paket-soal.select') }}",
-        data: function(params) {
+        data: function() {
           return {
             kelas: $('.select-kelas').val(),
             mapel: $('.select-mapel').val()
@@ -188,7 +182,7 @@
       }
     })
 
-    $('#form-jenis').select2({
+    const selectJenis = $('#form-jenis').select2({
       theme: 'bootstrap4',
       placeholder: 'Pilih Jenis Soal',
       data: [
@@ -205,14 +199,14 @@
 
     $('#form-pilgan').hide()
     $('#form-essai').hide()
-    $('#form-jenis').on('change', function() {
-      let jenis = $('#form-jenis').val()
-      if (jenis == 'pilihan_ganda') {
+    selectJenis.on('change', function() {
+      let jenis = selectJenis.val()
+      if (jenis === 'pilihan_ganda') {
         console.log(jenis)
         $('#form-essai').hide()
         $('#form-pilgan').show()
       }
-      else if (jenis == 'essai') {
+      else if (jenis === 'essai') {
         console.log(jenis)
         $('#form-pilgan').hide()
         $('#form-essai').show()
@@ -272,10 +266,10 @@
     // simpan
     $('#form-tambah').on('submit', function(e) {
       e.preventDefault();
-      var data = new FormData(this)
+      let data = new FormData(this)
       // isi soal
       data.append('soal[soal]', CKEDITOR.instances['form-soal'].getData())
-      var jumlah_pilihan = $('#jumlah-pilihan').val()
+      const jumlah_pilihan = $('#jumlah-pilihan').val();
       // console.log(jumlah_pilihan)
       for (let i = 1; i <= jumlah_pilihan; i++) {
         // console.log('jawaban ' + i)
@@ -294,15 +288,11 @@
               text: data.message,
               icon: 'success'
             })
-            // $('.select-kelas').val('').trigger('change')
-            // $('.select-mapel').val('').trigger('change')
-            // $('.select-paket').val('').trigger('change')
-            // $('#form-jenis').val('').trigger('change')
             $('#form-tambah').trigger('reset')
             CKEDITOR.instances['form-soal'].setData('')
           }
           else {
-            var errors = ''
+            let errors = '';
             data.message.forEach(function(e) {
               errors += e + "\n"
             })

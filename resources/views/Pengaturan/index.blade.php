@@ -15,11 +15,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="form-judul">Title <small>(Judul Aplikasi)</small></label>
-                <input type="text" class="form-control" placeholder="Masukkan Title Aplikasi">
+                <input type="text" id="form-judul" class="form-control" placeholder="Masukkan Title Aplikasi">
               </div>
               <div class="form-group">
                 <label for="form-deskripsi">Deskripsi</label>
-                <input type="text" class="form-control" placeholder="Masukkan Deskripsi Aplikasi">
+                <input type="text" id="form-deskripsi" class="form-control" placeholder="Masukkan Deskripsi Aplikasi">
               </div>
               <div class="form-group">
                 <label for="form-logo">Logo Aplikasi</label>
@@ -43,7 +43,7 @@
             <h4 class="card-title">Informasi Ujian</h4>
           </div>
           <div class="card-body">
-            <textarea name="informasi_ujian" id="info-ujian" cols="30" rows="10"></textarea>
+            <label for="info-ujian"></label><textarea name="informasi_ujian" id="info-ujian" cols="30" rows="10"></textarea>
           </div>
           <div class="card-footer">
             <button class="btn btn-sm btn-success">Simpan</button>
@@ -85,15 +85,15 @@
           <form id="form-tambah-admin">
             <div class="modal-body">
               <div class="form-group">
-                <label for="form-nama">Nama</label>
+                <label for="tambah_nama">Nama</label>
                 <input type="text" name="name" id="tambah_nama" class="form-control" placeholder="Masukkan Nama Admin">
               </div>
               <div class="form-group">
-                <label for="form-email">Email</label>
+                <label for="tambah_email">Email</label>
                 <input type="email" name="email" id="tambah_email" class="form-control" placeholder="Masukkan Email Admin">
               </div>
               <div class="form-group">
-                <label for="form-password">Password</label>
+                <label for="tambah_password">Password</label>
                 <input type="password" name="password" id="tambah_password" class="form-control" placeholder="Masukkan Password Admin">
               </div>
               <div class="form-group">
@@ -144,20 +144,18 @@
           {data: 'roles', render: function(data) {
             var html = ''
             data.forEach(function(d) {
-              if (d == 'admin') {
+              if (d === 'admin') {
                 html += `<span class="badge badge-danger">Admin</span> `
-              } else if (d == 'petugas_soal') {
+              } else if (d === 'petugas_soal') {
                 html += `<span class="badge badge-warning">Petugas Soal</span> `
-              } else if (d == 'petugas_ujian') {
+              } else if (d === 'petugas_ujian') {
                 html += `<span class="badge badge-info">Petugas Ujian</span>`
               }
             })
             return html
           }, searchable: false, orderable: false},
           {data: 'id', render: function(data) {
-            var html = `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
-
-            return html
+              return `<button class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></button>`
           }}
         ]
       })

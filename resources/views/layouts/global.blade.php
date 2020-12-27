@@ -134,6 +134,13 @@
 <script src="{{ asset('dist/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+<script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  })
+</script>
 @yield('script')
 </body>
 </html>

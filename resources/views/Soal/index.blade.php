@@ -87,13 +87,7 @@
 
 @section('script')
   <script>
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    })
-
-    var table = $('#table-soal').DataTable({
+    const table = $('#table-soal').DataTable({
       responsive: true,
       scrollX: true,
       processing: true,
@@ -113,7 +107,7 @@
           data: 'mapel.nama'
         },
         {
-          data: 'paket_soal.nama', render: function(data) {
+          data: 'paket_soal.nama', render: function (data) {
             if (data) {
               return data
             }
@@ -128,18 +122,18 @@
         },
         {
           data: 'id', orderable: false, searchable: false,
-          render: function(data) {
-            var btn = `<button class="btn btn-xs btn-info btn-detail" data-id="${data}"><i class="fas fa-eye"></i></button> `
+          render: function (data) {
+            let btn = `<button class="btn btn-xs btn-info btn-detail" data-id="${data}"><i class="fas fa-eye"></i></button> `;
             btn += `<a href="{{ route('soal.index') }}/${data}/edit" class="btn btn-xs btn-warning btn-edit" data-id="${data}"><i class="fas fa-edit"></i></a> `
             btn += `<button class="btn btn-xs btn-danger btn-hapus" data-id="${data}"><i class="fas fa-trash"></i></button>`
             return btn
           }
         }
       ]
-    })
+    });
 
     table.on('click', '.btn-detail', function() {
-      var id = $(this).attr('data-id')
+      const id = $(this).attr('data-id');
       $.ajax({
         type: 'GET',
         url: "{{ route('soal.index') }}/"+id,
