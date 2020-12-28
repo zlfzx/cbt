@@ -31,5 +31,6 @@ Route::middleware('auth:api')->group(function() {
 
     // Ujian
     Route::get('ujian', 'UjianController@index');
+    Route::post('ujian/cek-token', 'UjianController@checkToken');
 
 });
