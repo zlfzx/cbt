@@ -25,19 +25,14 @@
         </v-form>
       </v-card>
     </v-col>
-  <Alert></Alert>
   </v-row>
 </template>
 
 <script>
 import store from './../../store'
 import axios from 'axios'
-import Alert from './../../components/Alert'
 export default {
   name: 'Pengaturan',
-  components: {
-    Alert
-  },
   data() {
     return {
       password_lama: '',

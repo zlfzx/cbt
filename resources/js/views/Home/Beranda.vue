@@ -30,7 +30,7 @@
             {{ item.paket_soal.soal_count }} Soal
           </template>
           <template v-slot:item.id="{ item }">
-            <v-btn small color="success">Mulai</v-btn>
+            <ModalMulaiUjian :ujian="item"/>
           </template>
         </v-data-table>
       </v-card>
@@ -41,8 +41,12 @@
 <script>
 import store from './../../store'
 import axios from 'axios'
+import ModalMulaiUjian from "../../components/ModalMulaiUjian";
 export default {
   name: 'Beranda',
+  components: {
+    ModalMulaiUjian
+  },
   data () {
     return {
       headers: [
@@ -60,12 +64,12 @@ export default {
     token: () => store.state.auth.token,
     check_password: () => store.state.check_password,
     // datatable
-    ujian: () => store.getters["ujian/ujian"],
-    page: () => store.getters["ujian/page"],
-    totalItems: () => store.getters["ujian/totalItems"],
+    ujian: () => store.getters["daftarUjian/items"],
+    page: () => store.getters["daftarUjian/page"],
+    totalItems: () => store.getters["daftarUjian/totalItems"],
     options: {
-      get: () => store.getters["ujian/options"],
-      set: (value) => store.dispatch('ujian/getUjian', value)
+      get: () => store.getters["daftarUjian/options"],
+      set: (value) => store.dispatch('daftarUjian/getItems', value)
     }
   },
   mounted() {
@@ -84,7 +88,7 @@ export default {
     options: {
       handler() {
         this.loading = true
-        store.dispatch('ujian/getUjian', this.page)
+        store.dispatch('daftarUjian/getItems', this.page)
         .then(result => {
           this.loading = false
         })
@@ -93,7 +97,7 @@ export default {
       update() {
         console.log('update')
         this.loading = true
-        store.dispatch('ujian/getUjian', this.page)
+        store.dispatch('daftarUjian/getItems', this.page)
         .then(result => {
           this.loading = false
         })

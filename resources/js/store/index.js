@@ -5,7 +5,8 @@ import VuexPersistence from 'vuex-persist'
 // import module
 import auth from './auth'
 import alert from './alert'
-import ujian from './ujian'
+import daftarUjian from './daftarUjian'
+import ujian from "./ujian";
 
 const vuexPersist = new VuexPersistence({
   key: 'my-app',
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     alert,
+    daftarUjian,
     ujian
   },
   state: {

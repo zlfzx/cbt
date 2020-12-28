@@ -43,6 +43,7 @@ const routes = [
     name: 'Ujian',
     component: () => import('../views/Ujian.vue'),
     meta: {
+      title: "Ujian Matematika",
       requiresAuth: true
     }
   }

@@ -67,14 +67,18 @@
         <router-view></router-view>
       </v-container fluid>
     </v-content>
+    <Alert></Alert>
   </v-app>
 </template>
 
 <script>
   import store from '../store'
   import axios from 'axios'
-  // import { mapState } from 'vuex'
+  import Alert from '../components/Alert'
   export default {
+    components: {
+      Alert
+    },
     data: () => ({
       drawer: null,
       checkPassword: true

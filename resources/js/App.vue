@@ -18,6 +18,15 @@ export default {
     token: () => store.state.auth.token
   },
   created: function () {
+    axios.interceptors.request.use( (config) => {
+      // auth token
+      const token = this.token
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`
+      }
+
+      return config
+    })
     axios.interceptors.response.use( (response) => {
       // return response berhasil
       return response
