@@ -13,20 +13,9 @@ import store from '../store'
 export default {
   name: 'Alert',
   computed: {
-    // ...mapGetters({
-    //   status: 'alert/status',
-    //   color: 'alert/color',
-    //   text: 'alert/text'
-    // }),
-    status: function() {
-      return store.state.alert.status
-    },
-    color: function() {
-      return store.state.alert.color
-    },
-    text: function() {
-      return store.state.alert.text
-    },
+    status: () => store.getters['alert/status'],
+    color: () => store.getters['alert/color'],
+    text: () => store.getters['alert/text'],
     alert: {
       get () {
         return this.status

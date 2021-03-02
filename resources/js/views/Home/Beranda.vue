@@ -11,29 +11,10 @@
         </v-row>
       </v-alert>
       <!-- ./ Alert Ganti Password -->
-      <v-card v-else>
-        <v-toolbar dense flat color="blue" dark>
-          <v-toolbar-title>Daftar Ujian</v-toolbar-title>
-        </v-toolbar>
-        <v-data-table
-          :headers="headers"
-          :items="ujian"
-          :options.sync="options"
-          :server-items-length="totalItems"
-          :loading="loading"
-          loading-text="Mengambil Data..."
-        >
-          <template v-slot:item.waktu_ujian="{ item }">
-            {{ item.waktu_ujian }} Menit
-          </template>
-          <template v-slot:item.paket_soal.soal_count="{ item }">
-            {{ item.paket_soal.soal_count }} Soal
-          </template>
-          <template v-slot:item.id="{ item }">
-            <ModalMulaiUjian :ujian="item"/>
-          </template>
-        </v-data-table>
-      </v-card>
+      <div v-else>
+        <CekUjian></CekUjian>
+        <TabelUjian></TabelUjian>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -41,70 +22,24 @@
 <script>
 import store from './../../store'
 import axios from 'axios'
-import ModalMulaiUjian from "../../components/ModalMulaiUjian";
+import CekUjian from "../../components/Beranda/CekUjian";
+import TabelUjian from "../../components/Beranda/TabelUjian";
 export default {
   name: 'Beranda',
   components: {
-    ModalMulaiUjian
-  },
-  data () {
-    return {
-      headers: [
-        {text: 'Nama Ujian', value: 'nama', align: 'center'},
-        {text: 'Mata Pelajaran', value: 'paket_soal.mapel.nama', align: 'center'},
-        {text: 'Waktu', value: 'waktu_ujian', align: 'center'},
-        {text: 'Jumlah Soal', value: 'paket_soal.soal_count', align: 'center'},
-        {text: 'Status', value: 'id', align: 'center'}
-      ],
-      loading: false,
-    }
+    CekUjian,
+    TabelUjian
   },
   computed: {
     // check password
-    token: () => store.state.auth.token,
-    check_password: () => store.state.check_password,
-    // datatable
-    ujian: () => store.getters["daftarUjian/items"],
-    page: () => store.getters["daftarUjian/page"],
-    totalItems: () => store.getters["daftarUjian/totalItems"],
-    options: {
-      get: () => store.getters["daftarUjian/options"],
-      set: (value) => store.dispatch('daftarUjian/getItems', value)
-    }
+    check_password: () => store.getters['checkPassword'],
   },
   mounted() {
-    axios.get('/api/password/check', {
-      headers: {
-        Authorization: "Bearer " + this.token,
-        'Content-Type': 'application/json'
-      }
-    }).then((response) => {
+    axios.get('/api/password/check').then((response) => {
       let res = response.data
       store.commit("SET_CHECK_PASSWORD", res.status)
       // console.log(res)
     })
-  },
-  watch: {
-    options: {
-      handler() {
-        this.loading = true
-        store.dispatch('daftarUjian/getItems', this.page)
-        .then(result => {
-          this.loading = false
-        })
-      },
-
-      update() {
-        console.log('update')
-        this.loading = true
-        store.dispatch('daftarUjian/getItems', this.page)
-        .then(result => {
-          this.loading = false
-        })
-      },
-
-      deep: true
-    }
   }
 }
 </script>

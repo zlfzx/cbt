@@ -27,20 +27,18 @@ export default new Vuex.Store({
     check_password: true,
     errors: null
   },
+  getters: {
+    checkPassword: state => state.check_password
+  },
   mutations: {
     SET_CHECK_PASSWORD (state, payload) {
       state.check_password = payload
     },
     SET_ERRORS(state, payload) {
       state.errors = payload
-    },
-    CLEAR_ERRORS(state, payload) {
-      state.errors = null
     }
   },
   actions: {
-    coba: ({commit}, payload) => {
-      commit('SET_ERRORS', payload)
-    }
+    //
   }
 })

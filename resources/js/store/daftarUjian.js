@@ -33,15 +33,10 @@ export default {
         params: {
           page: page_number,
           per_page: itemsPerPage
-        },
-        headers: {
-          Authorization: 'Bearer ' + store.state.auth.token,
-          'Content-Type': 'application/json'
         }
+      }).then((response) => {
+        context.commit('updateItems', response.data.data)
       })
-        .then((response) => {
-          context.commit('updateItems', response.data.data)
-        })
     }
   }
 }

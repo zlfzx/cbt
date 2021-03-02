@@ -11,6 +11,7 @@
             color="success"
             v-bind="attrs"
             v-on="on"
+            :disabled="checkUjian"
           >Mulai</v-btn>
         </template>
         <template v-slot:default="dialog">
@@ -72,6 +73,7 @@
                       ref="formToken"
                       v-model="validToken"
                       lazy-validation
+                      v-on:submit.prevent="mulai"
                     >
                       <v-text-field
                         label="Token"
@@ -121,6 +123,9 @@ export default {
       }
     }
   },
+  computed: {
+    checkUjian: () => store.getters['ujian/aktif']
+  },
   methods: {
     mulai() {
       if (this.$refs.formToken.validate()) {
@@ -128,8 +133,33 @@ export default {
           id: this.ujian.id,
           token: this.token
         }).then(response => {
-          if (response.data.status) {
+          let res = response.data
+          if (res.status) {
             // lanjut ke ujian
+            store.dispatch('ujian/setAktif', true)
+            store.dispatch('ujian/setDetail', {
+              'id': this.ujian.id,
+              'nama': this.ujian.nama,
+              'keterangan': this.ujian.keterangan,
+              'kode_paket': this.ujian.paket_soal.kode_paket,
+              'kelas': {
+                id: this.ujian.paket_soal.kelas.id,
+                nama: this.ujian.paket_soal.kelas.nama
+              },
+              'paket_soal': {
+                id: this.ujian.paket_soal.id,
+                nama: this.ujian.paket_soal.nama,
+                keterangan: this.ujian.paket_soal.keterangan,
+                mapel: {
+                  id: this.ujian.paket_soal.mapel.id,
+                  nama: this.ujian.paket_soal.mapel.nama
+                }
+              },
+              'waktu_mulai': res.waktu_mulai,
+              'waktu_selesai': res.waktu_selesai
+            })
+            store.dispatch('ujian/ambilSoal', res.data)
+            this.$router.push('/ujian')
           } else {
             store.dispatch('alert/set', {
               status: true,
@@ -143,7 +173,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

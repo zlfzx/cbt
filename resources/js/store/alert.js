@@ -5,6 +5,11 @@ export default {
     color: 'error',
     text: ''
   },
+  getters: {
+    status: state => state.status,
+    color: state => state.color,
+    text: state => state.text
+  },
   mutations: {
     set: (state, payload) => {
       state.status = payload.status
@@ -16,10 +21,5 @@ export default {
     set: ({commit}, payload) => {
       commit('set', payload)
     }
-  },
-  getters: {
-    status: state => state.status,
-    color: state => state.color,
-    text: state => state.text
   }
 }
